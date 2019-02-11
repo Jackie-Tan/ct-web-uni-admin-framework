@@ -1,0 +1,32 @@
+<template name="f_keyCustom">
+  <div class="ibox">
+      <div class="ibox-title">
+          <h5>All Keys</h5>
+          <div class="ibox-tools">
+              <a class="btn-action" data-modal="f_keyAddData" data-action="add">
+                  <i class="fa fa-plus"></i>
+              </a>
+              <a id="removeall" class="close-link">
+                  <i class="fa fa-times"></i>
+              </a>
+          </div>
+      </div>
+      <div class="ibox-content">
+          <div class="feed-activity-list">
+              {{#unless tData.length}}
+                Have no available keys
+              {{/unless}}
+              {{#each tData}}
+              <div class="feed-element">
+                  <div>
+                      <strong>{{this}}</strong>
+                      <a id="remove" data-key="{{this}}" class="close-link">
+                        <i class="fa fa-times"></i>
+                      </a>
+                  </div>
+              </div>
+              {{/each}}
+          </div>
+      </div>
+  </div>
+</template>

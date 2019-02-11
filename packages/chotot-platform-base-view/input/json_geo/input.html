@@ -1,0 +1,13 @@
+<template name="json.geoInput">
+  <div class="form-control">
+    {{#if isOptional}}
+      {{#each Ref}}
+        {{this}}: <input type="number" data-name="{{key}}" value={{value}} step="0.000000001"/>
+      {{/each}}
+    {{else}}
+      {{#each Ref}}
+        {{this}}: <input required type="number" data-name="{{key}}" value={{value}} step="0.000000001"/>
+      {{/each}}
+    {{/if}}
+  </div>
+</template>

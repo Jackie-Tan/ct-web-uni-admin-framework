@@ -1,0 +1,11 @@
+<template name="ctWrap">
+    <div {{attr}}>
+    {{#baseSchema name=schema_name schema_id=schema_id data=data opt=opt schemaAttr=schema_attr}}
+        {{#if usingSchema}}
+            {{> inputSchema key=key}}
+        {{else}}
+            {{> Template.dynamic template=template data=templateData}}
+        {{/if}}
+    {{/baseSchema}}
+    </div>
+</template>

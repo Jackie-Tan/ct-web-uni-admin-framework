@@ -1,0 +1,10 @@
+<template name="visibilityCol">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      <i class="fa fa-wrench"></i>
+  </a>
+  <ul class="dropdown-menu dropdown-user">
+    {{#each heads}}
+      <li><a href="#" class="{{activedClass}} table-col" data-index="{{index}}">{{text}}</a></li>
+    {{/each}}
+  </ul>
+</template>

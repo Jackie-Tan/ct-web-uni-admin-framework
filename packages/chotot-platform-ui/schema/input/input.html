@@ -1,0 +1,53 @@
+<template name="labelOfInput">
+    {{#if text}}
+      {{#if labelClass}}
+      <div class="{{labelClass}}">
+        <label>{{text}} {{#unless isOptional}} <span class="font-red">(*)</span> {{/unless}}</label>
+      </div>
+      {{else}}
+      <label>{{text}} {{#unless isOptional}} <span class="font-red">(*)</span> {{/unless}}</label>
+      {{/if}}
+    {{/if}}
+  </template>
+<template name="inputByDynamic">
+      {{> Template.dynamic template=template data=this}}
+</template>
+<template name="inputByHelpers">
+    <div class="{{displayClass}} {{hiddenClass}}">
+      {{> labelOfInput}}
+      <div class="{{boundClass}} {{actionClass}}">
+      {{> inputByDynamic}}
+      {{#if input.action}}
+        {{> inputActionSpan}}
+      {{/if}}
+    </div>
+    </div>
+</template>
+
+<template name="inputByView">
+  {{#if same_input}}
+    <div class="{{displayClass}} {{hiddenClass}}">
+      {{> labelOfInput}}
+      <div class="{{boundClass}}">
+      {{> viewSchema key=originKey}}
+      </div>
+    </div>
+  {{else}}
+    {{> viewSchema key=originKey}}
+  {{/if}}
+</template>
+
+<template name="inputSchema">
+  <span class="input-bound {{rootClass}}" style="{{style}}" data-key="{{key}}">
+    {{#if enable}}
+      {{#if schemaName}}
+        {{#baseSchema name=schemaName opt=schemaOpt}}
+          {{> Template.dynamic template=inputByTemplate data=inputConfig}}
+        {{/baseSchema}}
+      {{else}}
+        {{> Template.dynamic template=inputByTemplate data=inputConfig}}
+      {{/if}}
+    {{/if}}
+  </span>
+ 
+</template>

@@ -1,0 +1,11 @@
+<template name="viewSchema">
+  <span class="view-bound {{rootClass}}" data-key="{{key}}" style="{{style}}">
+    {{#if show}}
+      {{#if is_block}}
+        {{> Template.contentBlock value=value text=text type=type input=input displayClass=displayClass boundClass=boundClass}}
+      {{else}}
+        {{value}}
+      {{/if}}
+    {{/if}}
+  </span>
+</template>

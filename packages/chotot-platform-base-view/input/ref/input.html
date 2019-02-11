@@ -1,0 +1,16 @@
+<template name="selectRefOptions">
+  {{#each data}}
+  <option {{selected}} value="{{value}}" {{disabled}} style="{{css}}">{{display}}</option>
+  {{/each}}
+</template>
+<template name="refInput">
+  {{#if isOptional}}
+  <select class="form-control select2" data-name="{{key}}" data-subtype="{{input.subtype}}">
+    {{> selectRefOptions}}
+  </select>
+  {{else}}
+  <select required class="form-control select2" data-name="{{key}}" data-subtype="{{input.subtype}}">
+    {{> selectRefOptions}}
+  </select>
+  {{/if}}
+</template>

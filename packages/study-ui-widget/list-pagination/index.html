@@ -1,0 +1,43 @@
+<template name="cbPagination">
+    <nav class="text-right">
+        <ul class="pagination">
+            <li>
+                {{#if previousIndex}}
+                    <a href="#" aria-label="Previous" class="cb-pagination"
+                       data-index="{{previousIndex}}">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                {{/if}}
+            </li>
+            {{#each getPagination}}
+                <li><a href="#" class="{{isSelected index}} cb-pagination"
+                       data-index="{{index}}">{{getNumByIndex}}</a></li>
+            {{/each}}
+            <li>
+                {{#if nextIndex}}
+                    <a href="#" aria-label="Next" class="cb-pagination"
+                       data-index="{{nextIndex}}">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                {{/if}}
+            </li>
+        </ul>
+    </nav>
+</template>
+<template name="cbPaginationShow">
+    {{#if isUp}}
+        {{>cbPagination num=getLengthData max=max}}
+    {{/if}}
+    <ul id="og-grid" class="og-grid">
+        {{#if getData}}
+            {{#each getData}}
+                {{> Template.contentBlock this}}
+            {{/each}}
+        {{else}}
+            No data.
+        {{/if}}
+    </ul>
+    {{#unless isUp}}
+        {{>cbPagination num=getLengthData max=max}}
+    {{/unless}}
+</template>

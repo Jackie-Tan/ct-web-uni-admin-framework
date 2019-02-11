@@ -1,0 +1,524 @@
+<template name="vCampaignDetail">
+  <div class="row wrapper border-bottom white-bg page-heading">
+      <div class="col-sm-4">
+          <h2>Campaign detail</h2>
+          <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                  <a href="/">Home</a>
+              </li>
+              <li class="breadcrumb-item active">
+                  <a href="/campaigns">Campaign</a>
+              </li>
+              <li class="breadcrumb-item active">
+                  <strong>{{data.name}}</strong>
+              </li>
+          </ol>
+      </div>
+  </div>
+  <div class="row">
+
+      <div class="col-lg-12">
+        <div class="wrapper wrapper-content animated fadeInUpUp">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="m-b-md">
+                                <h2>{{data.name}}</h2>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <dl class="row mb-0">
+                                <div class="col-sm-4 text-sm-right"><dt>Tình Trạng:</dt> </div>
+                                <div class="col-sm-8 text-sm-left">
+                                  <dd class="mb-1">
+                                    {{#if isActive}}
+                                      <span class="label label-success">Đang chạy</span>
+                                    {{else}}
+                                      <span class="label label-warning">Chưa chạy</span>
+                                    {{/if}}
+                                  </dd>
+                                </div>
+                            </dl>
+                            <dl class="row mb-0">
+                                <div class="col-sm-4 text-sm-right"><dt>Mô Tả:</dt> </div>
+                                <div class="col-sm-8 text-sm-left"><dd class="mb-1">{{data.description}}</dd> </div>
+                            </dl>
+                            <dl class="row mb-0">
+                                <div class="col-sm-4 text-sm-right"><dt>Messages:</dt> </div>
+                                <div class="col-sm-8 text-sm-left"> <dd class="mb-1">{{data.message}}</dd></div>
+                            </dl>
+                        </div>
+                        <div class="col-lg-6" id="cluster_info">
+                            <dl class="row mb-0">
+                                <div class="col-sm-4 text-sm-right"><dt>UserGroup:</dt> </div>
+                                <div class="col-sm-8 text-sm-left"> <dd class="mb-1"><a href="#" class="text-navy">{{data.user_group}}</a> </dd></div>
+                            </dl>
+                            <dl class="row mb-0">
+                                <div class="col-sm-4 text-sm-right">
+                                    <dt>Ngày Bắt Đầu:</dt>
+                                </div>
+                                <div class="col-sm-8 text-sm-left">
+                                    <dd class="mb-1">{{data.start_date}}</dd>
+                                </div>
+                            </dl>
+                            <dl class="row mb-0">
+                                <div class="col-sm-4 text-sm-right">
+                                    <dt>Ngày Kết Thúc:</dt>
+                                </div>
+                                <div class="col-sm-8 text-sm-left">
+                                    <dd class="mb-1">{{data.end_date}}</dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="row text-right">
+                      <div class="col-lg-12">
+                        <button type="button" class="btn btn-success btn-accept-all-price">
+                          <i class="fa fa-thumbs-up"></i>
+                          Accept All
+                        </button>
+                        <button type="button" class="btn btn-warning btn-reject-all-price">
+                          <i class="fa fa-thumbs-down"></i>
+                          Reject All
+                        </button>
+                        <button type="button" class="btn btn-info btn-accept-campaign">
+                          <i class="fa fa-plane"></i>
+                          Publish Price
+                        </button>
+                        {{#if isActive}}
+                          <button type="button" class="btn btn-danger btn-stop-campaign">
+                            <i class="fa fa-pause"></i>
+                            Stop
+                          </button>
+                        {{else}}
+                          <button type="button" class="btn btn-success btn-start-campaign">
+                            <i class="fa fa-play"></i>
+                            Start
+                          </button>
+                        {{/if}}
+                      </div>
+                    </div>
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12">
+                          <div class="panel blank-panel">
+                            <div class="panel-heading">
+                              <div class="panel-options">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a class="nav-link active" href="#tab-1" data-toggle="tab">Danh Sách Giá</a></li>
+                                </ul>
+                              </div>
+                            </div>
+
+                            <div class="panel-body">
+                              <div class="tab-content">
+                                <div class="tab-pane active" id="tab-1">
+                                  <table class="table table-bordered text-center table-detail-campaign-price">
+                                      <thead>
+                                        <tr>
+                                            <th class="text-center">Service Name</th>
+                                            <th class="text-center">Category Id</th>
+                                            <th class="text-center">Region Id</th>
+                                            <th class="text-center">Duration</th>
+                                            <th class="text-center">Feature</th>
+                                            <th class="text-center">Bump Type</th>
+                                            <th class="text-center">Price VND</th>
+                                            <th class="text-center">Price Credit</th>
+                                            <th class="text-center">Price Promotion</th>
+                                            <th class="text-center">Action</th>
+                                            <th class="text-center">Status</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                      {{#if hasBump}}
+                                        {{#each priceItem in data.price_list.bump}}
+                                        <tr id="item_table_{{priceItem.id}}">
+                                            <td><span class="label label-success">BUMP</span></td>
+                                            <td>{{priceItem.category_id}}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>{{priceItem.bump_type}}</td>
+                                            <td>
+                                              <span class="text-success font-bold" id="price_vnd_{{priceItem.id}}">{{priceItem.price_vnd}}</span>
+                                              <small class="text-muted todo-completed">{{priceItem.price_promotion}}</small>
+                                            </td>
+                                            <td>
+                                              <span class="text-success font-bold" id="price_credit_{{priceItem.id}}">{{priceItem.price_credit}}</span>
+                                              <small class="text-muted todo-completed">{{priceItem.price_promotion}}</small>
+                                            </td>
+                                            <td></td>
+                                            <td>
+                                              <button class="btn btn-primary btn-edit-price-campaign" type="button" data-id="{{priceItem.id}}" data-service="sticky_ads" data-toggle="modal" data-target="#modal{{priceItem.id}}">
+                                                <i class="fa fa-pencil-square-o"></i>
+                                              </button>
+                                              {{#if priceItem.status}}
+                                              <button class="btn btn-default" type="button" data-price_id="{{priceItem.id}}" data-service_type="sticky_ads">
+                                                <i class="fa fa-thumbs-up"></i>
+                                              </button>
+                                              {{else}}
+                                              <button class="btn btn-success btn-approve-price-campaign" type="button" data-price_id="{{priceItem.id}}" data-service_type="sticky_ads">
+                                                <i class="fa fa-thumbs-up"></i>
+                                              </button>
+                                              {{/if}}
+                                              {{#if priceItem.status}}
+                                              <button class="btn btn-warning btn-reject-price-campaign" type="button" data-price_id="{{priceItem.id}}" data-service_type="sticky_ads">
+                                                <i class="fa fa-thumbs-down"></i>
+                                              </button>
+                                              {{else}}
+                                              <button class="btn btn-default" type="button" data-price_id="{{priceItem.id}}" data-service_type="sticky_ads">
+                                                <i class="fa fa-thumbs-down"></i>
+                                              </button>
+                                              {{/if}}
+                                              <button class="btn btn-danger btn-delete-price-campaign" type="button" data-price_id="{{priceItem.id}}" data-service_type="sticky_ads">
+                                                <i class="fa fa-trash"></i>
+                                              </button>
+                                              <div class="modal inmodal fade" id="modal{{priceItem.id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                  <div class="modal-dialog">
+                                                      <div class="modal-content">
+                                                          <div class="modal-header">
+                                                              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                              <h4 class="modal-title">Chỉnh sửa giá Bump</h4>
+                                                              <small class="font-bold">Sau khi chỉnh giá, thì giá này phải được review lại trước khi được đưa lên chạy go live nha mọi người!</small>
+                                                          </div>
+                                                          <div class="modal-body">
+                                                            <form id="price-form-{{priceItem.id}}" role="form" data-toggle="validator" class="row">
+                                                              <div class="form-group">
+                                                                <label>Giá VNĐ</label>
+                                                                <input type="text" required="required" class="form-control" value="{{priceItem.price.vnd}}" name="price_vnd" />
+                                                              </div>
+                                                              <div class="form-group">
+                                                                <label>Giá Credit</label>
+                                                                <input type="text" required="required" class="form-control" value="{{priceItem.price.credit}}" name="price_credit" />
+                                                              </div>
+                                                              <input type="hidden" name="price_id" value="{{priceItem.id}}" />
+                                                              <input type="hidden" name="service_type" value="bump" />
+                                                            </form>
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                              <button type="button" class="btn btn-white btn-close-modal" data-dismiss="modal">Đóng</button>
+                                                              <button form="price-form-{{priceItem.id}}" type="submit" class="btn btn-success">Lưu thay đổi</button>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                            </td>
+                                            <td>
+                                              {{#if priceItem.is_approved}}
+                                                <span class="label label-success">Đã publish</span>
+                                              {{else}}
+                                                {{#if priceItem.status}}
+                                                <span class="label label-info">Đang đợi publish</span>
+                                                {{else}}
+                                                <span class="label label-warning">Đang đợi duyệt</span>
+                                                {{/if}}
+                                              {{/if}}
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                      {{/if}}
+
+                                      {{#if hasStickyAds}}
+                                        {{#each priceItem in data.price_list.sticky_ads}}
+                                        <tr id="item_table_{{priceItem.id}}">
+                                            <td><span class="label label-success">STICKY_ADS</span></td>
+                                            <td>{{priceItem.category_id}}</td>
+                                            <td>{{priceItem.region_id}}</td>
+                                            <td>{{priceItem.duration}}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                              <span class="text-success font-bold" id="price_vnd_{{priceItem.id}}">{{priceItem.price_vnd}}</span>
+                                              <small class="text-muted todo-completed">{{priceItem.price_old_vnd}}</small>
+                                            </td>
+                                            <td>
+                                              <span class="text-success font-bold" id="price_credit_{{priceItem.id}}">{{priceItem.price_credit}}</span>
+                                              <small class="text-muted todo-completed">{{priceItem.price_old_vnd}}</small>
+                                            </td>
+                                            <td>
+                                              <span class="text-success font-bold" id="price_credit_{{priceItem.id}}">{{priceItem.price_promotion}}</span>
+                                            </td>
+                                            <td>
+                                              <button class="btn btn-primary btn-edit-price-campaign" type="button" data-id="{{priceItem.id}}" data-service="sticky_ads" data-toggle="modal" data-target="#modal{{priceItem.id}}">
+                                                <i class="fa fa-pencil-square-o"></i>
+                                              </button>
+                                              {{#if priceItem.status}}
+                                              <button class="btn btn-default" type="button" data-price_id="{{priceItem.id}}" data-service_type="sticky_ads">
+                                                <i class="fa fa-thumbs-up"></i>
+                                              </button>
+                                              {{else}}
+                                              <button class="btn btn-success btn-approve-price-campaign" type="button" data-price_id="{{priceItem.id}}" data-service_type="sticky_ads">
+                                                <i class="fa fa-thumbs-up"></i>
+                                              </button>
+                                              {{/if}}
+                                              {{#if priceItem.status}}
+                                              <button class="btn btn-warning btn-reject-price-campaign" type="button" data-price_id="{{priceItem.id}}" data-service_type="sticky_ads">
+                                                <i class="fa fa-thumbs-down"></i>
+                                              </button>
+                                              {{else}}
+                                              <button class="btn btn-default" type="button" data-price_id="{{priceItem.id}}" data-service_type="sticky_ads">
+                                                <i class="fa fa-thumbs-down"></i>
+                                              </button>
+                                              {{/if}}
+                                              <button class="btn btn-danger btn-delete-price-campaign" type="button" data-price_id="{{priceItem.id}}" data-service_type="sticky_ads">
+                                                <i class="fa fa-trash"></i>
+                                              </button>
+                                              <div class="modal inmodal fade" id="modal{{priceItem.id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                  <div class="modal-dialog">
+                                                      <div class="modal-content">
+                                                          <div class="modal-header">
+                                                              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                              <h4 class="modal-title">Chỉnh sửa giá Sticky Ads</h4>
+                                                              <small class="font-bold">Sau khi chỉnh giá, thì giá này phải được review lại trước khi được đưa lên chạy go live nha mọi người!</small>
+                                                          </div>
+                                                          <div class="modal-body">
+                                                            <form id="price-form-{{priceItem.id}}" role="form" data-toggle="validator" class="row">
+                                                              <div class="form-group">
+                                                                <label>Giá VNĐ</label>
+                                                                <input type="text" required="required" class="form-control" value="{{priceItem.price.vnd}}" name="price_vnd" />
+                                                              </div>
+                                                              <div class="form-group">
+                                                                <label>Giá Credit</label>
+                                                                <input type="text" required="required" class="form-control" value="{{priceItem.price.credit}}" name="price_credit" />
+                                                              </div>
+                                                              <div class="form-group">
+                                                                <label>Giá Promotion</label>
+                                                                <input type="text" required="required" class="form-control" value="{{priceItem.price.promotion}}" name="price_credit" />
+                                                              </div>
+                                                              <input type="hidden" name="price_id" value="{{priceItem.id}}" />
+                                                              <input type="hidden" name="service_type" value="sticky_ads" />
+                                                            </form>
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                              <button type="button" class="btn btn-white btn-close-modal" data-dismiss="modal">Đóng</button>
+                                                              <button form="price-form-{{priceItem.id}}" type="submit" class="btn btn-success">Lưu thay đổi</button>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                            </td>
+                                            <td>
+                                              {{#if priceItem.is_approved}}
+                                                <span class="label label-success">Đã publish</span>
+                                              {{else}}
+                                                {{#if priceItem.status}}
+                                                <span class="label label-info">Đang đợi publish</span>
+                                                {{else}}
+                                                <span class="label label-warning">Đang đợi duyệt</span>
+                                                {{/if}}
+                                              {{/if}}
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                      {{/if}}
+
+                                      {{#if hasGalleyAds}}
+                                        {{#each priceItem in data.price_list.gallery_ads}}
+                                        <tr id="item_table_{{priceItem.id}}">
+                                            <td><span class="label label-info">GALLERY_ADS</span></td>
+                                            <td>{{priceItem.category_id}}</td>
+                                            <td>{{priceItem.region_id}}</td>
+                                            <td>{{priceItem.duration}}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                              <span class="text-success font-bold" id="price_vnd_{{priceItem.id}}">{{priceItem.price_vnd}}</span>
+                                              <small class="text-muted todo-completed">{{priceItem.price_old_vnd}}</small>
+                                            </td>
+                                            <td>
+                                              <span class="text-success font-bold" id="price_credit_{{priceItem.id}}">{{priceItem.price_credit}}</span>
+                                              <small class="text-muted todo-completed">{{priceItem.price_old_vnd}}</small>
+                                            </td>
+                                            <td>
+                                              <span class="text-success font-bold" id="price_credit_{{priceItem.id}}">{{priceItem.price_promotion}}</span>
+                                            </td>
+                                            <td>
+                                              <button class="btn btn-primary btn-edit-price-campaign" type="button" data-id="{{priceItem.id}}" data-service="gallery_ads" data-toggle="modal" data-target="#modal{{priceItem.id}}">
+                                                <i class="fa fa-pencil-square-o"></i>
+                                              </button>
+                                              {{#if priceItem.status}}
+                                              <button class="btn btn-default" type="button" data-price_id="{{priceItem.id}}" data-service_type="gallery_ads">
+                                                <i class="fa fa-thumbs-up"></i>
+                                              </button>
+                                              {{else}}
+                                              <button class="btn btn-success btn-approve-price-campaign" type="button" data-price_id="{{priceItem.id}}" data-service_type="gallery_ads">
+                                                <i class="fa fa-thumbs-up"></i>
+                                              </button>
+                                              {{/if}}
+                                              {{#if priceItem.status}}
+                                              <button class="btn btn-warning btn-reject-price-campaign" type="button" data-price_id="{{priceItem.id}}" data-service_type="gallery_ads">
+                                                <i class="fa fa-thumbs-down"></i>
+                                              </button>
+                                              {{else}}
+                                              <button class="btn btn-default" type="button" data-price_id="{{priceItem.id}}" data-service_type="gallery_ads">
+                                                <i class="fa fa-thumbs-down"></i>
+                                              </button>
+                                              {{/if}}
+                                              <button class="btn btn-danger btn-delete-price-campaign" type="button" data-price_id="{{priceItem.id}}" data-service_type="gallery_ads">
+                                                <i class="fa fa-trash"></i>
+                                              </button>
+                                              <div class="modal inmodal fade" id="modal{{priceItem.id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                  <div class="modal-dialog">
+                                                      <div class="modal-content">
+                                                          <div class="modal-header">
+                                                              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                              <h4 class="modal-title">Chỉnh sửa giá Gallery Ads</h4>
+                                                              <small class="font-bold">Sau khi chỉnh giá, thì giá này phải được review lại trước khi được đưa lên chạy go live nha mọi người!</small>
+                                                          </div>
+                                                          <div class="modal-body">
+                                                            <form id="price-form-{{priceItem.id}}" role="form" data-toggle="validator" class="row">
+                                                              <div class="form-group">
+                                                                <label>Giá VNĐ</label>
+                                                                <input type="text" required="required" class="form-control" value="{{priceItem.price.vnd}}" name="price_vnd" />
+                                                              </div>
+                                                              <div class="form-group">
+                                                                <label>Giá Credit</label>
+                                                                <input type="text" required="required" class="form-control" value="{{priceItem.price.credit}}" name="price_credit" />
+                                                              </div>
+                                                              <div class="form-group">
+                                                                <label>Giá Promotion</label>
+                                                                <input type="text" required="required" class="form-control" value="{{priceItem.price.promotion}}" name="price_credit" />
+                                                              </div>
+                                                              <input type="hidden" name="price_id" value="{{priceItem.id}}" />
+                                                              <input type="hidden" name="service_type" value="gallery_ads" />
+                                                            </form>
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                              <button type="button" class="btn btn-white btn-close-modal" data-dismiss="modal">Đóng</button>
+                                                              <button form="price-form-{{priceItem.id}}" type="submit" class="btn btn-success">Lưu thay đổi</button>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                            </td>
+                                            <td>
+                                              {{#if priceItem.is_approved}}
+                                                <span class="label label-success">Đã publish</span>
+                                              {{else}}
+                                                {{#if priceItem.status}}
+                                                <span class="label label-info">Đang đợi publish</span>
+                                                {{else}}
+                                                <span class="label label-warning">Đang đợi duyệt</span>
+                                                {{/if}}
+                                              {{/if}}
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                      {{/if}}
+
+                                      {{#if hasAdFeatures}}
+                                        {{#each priceItem in data.price_list.ad_features}}
+                                        <tr id="item_table_{{priceItem.id}}">
+                                            <td><span class="label label-danger">AD_FEATURES</span></td>
+                                            <td>{{priceItem.category_id}}</td>
+                                            <td></td>
+                                            <td>{{priceItem.duration}}</td>
+                                            <td><span class="text-warning font-bold">{{priceItem.feature}}</span></td>
+                                            <td></td>
+                                            <td>
+                                              <span class="text-success font-bold" id="price_vnd_{{priceItem.id}}">{{priceItem.price_vnd}}</span>
+                                              <small class="text-muted todo-completed">{{priceItem.price_old_vnd}}</small>
+                                            </td>
+                                            <td>
+                                              <span class="text-success font-bold" id="price_credit_{{priceItem.id}}">{{priceItem.price_credit}}</span>
+                                              <small class="text-muted todo-completed">{{priceItem.price_old_vnd}}</small>
+                                            </td>
+                                            <td>
+                                              <span class="text-success font-bold" id="price_credit_{{priceItem.id}}">{{priceItem.price_promotion}}</span>
+                                            </td>
+                                            <td>
+                                              <button class="btn btn-primary btn-edit-price-campaign" type="button" data-id="{{priceItem.id}}" data-service="ad_features" data-toggle="modal" data-target="#modal{{priceItem.id}}">
+                                                <i class="fa fa-pencil-square-o"></i>
+                                              </button>
+                                              {{#if priceItem.status}}
+                                              <button class="btn btn-default" type="button" data-price_id="{{priceItem.id}}" data-service_type="ad_features">
+                                                <i class="fa fa-thumbs-up"></i>
+                                              </button>
+                                              {{else}}
+                                              <button class="btn btn-success btn-approve-price-campaign" type="button" data-price_id="{{priceItem.id}}" data-service_type="ad_features">
+                                                <i class="fa fa-thumbs-up"></i>
+                                              </button>
+                                              {{/if}}
+                                              {{#if priceItem.status}}
+                                              <button class="btn btn-warning btn-reject-price-campaign" type="button" data-price_id="{{priceItem.id}}" data-service_type="ad_features">
+                                                <i class="fa fa-thumbs-down"></i>
+                                              </button>
+                                              {{else}}
+                                              <button class="btn btn-default" type="button" data-price_id="{{priceItem.id}}" data-service_type="ad_features">
+                                                <i class="fa fa-thumbs-down"></i>
+                                              </button>
+                                              {{/if}}
+                                              <button class="btn btn-danger btn-delete-price-campaign" type="button" data-price_id="{{priceItem.id}}" data-service_type="ad_features">
+                                                <i class="fa fa-trash"></i>
+                                              </button>
+                                              <div class="modal inmodal fade" id="modal{{priceItem.id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                  <div class="modal-dialog">
+                                                      <div class="modal-content">
+                                                          <div class="modal-header">
+                                                              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                              <h4 class="modal-title">Chỉnh sửa giá Ad Features</h4>
+                                                              <small class="font-bold">Sau khi chỉnh giá, thì giá này phải được review lại trước khi được đưa lên chạy go live nha mọi người!</small>
+                                                          </div>
+                                                          <div class="modal-body">
+                                                            <form id="price-form-{{priceItem.id}}" role="form" data-toggle="validator" class="row">
+                                                              <div class="form-group">
+                                                                <label>Giá VNĐ</label>
+                                                                <input type="text" required="required" class="form-control" value="{{priceItem.price.vnd}}" name="price_vnd" />
+                                                              </div>
+                                                              <div class="form-group">
+                                                                <label>Giá Credit</label>
+                                                                <input type="text" required="required" class="form-control" value="{{priceItem.price.credit}}" name="price_credit" />
+                                                              </div>
+                                                              <div class="form-group">
+                                                                <label>Giá Promotion</label>
+                                                                <input type="text" required="required" class="form-control" value="{{priceItem.price.promotion}}" name="price_credit" />
+                                                              </div>
+                                                              <input type="hidden" name="price_id" value="{{priceItem.id}}" />
+                                                              <input type="hidden" name="service_type" value="ad_features" />
+                                                            </form>
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                              <button type="button" class="btn btn-white btn-close-modal" data-dismiss="modal">Đóng</button>
+                                                              <button form="price-form-{{priceItem.id}}" type="submit" class="btn btn-success">Lưu thay đổi</button>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                            </td>
+                                            <td>
+                                              {{#if priceItem.is_approved}}
+                                                <span class="label label-success">Đã publish</span>
+                                              {{else}}
+                                                {{#if priceItem.status}}
+                                                <span class="label label-info">Đang đợi publish</span>
+                                                {{else}}
+                                                <span class="label label-warning">Đang đợi duyệt</span>
+                                                {{/if}}
+                                              {{/if}}
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                      {{/if}}
+
+                                      {{#if noPriceList}}
+                                        <tr>
+                                          <td colspan="11">Chưa có thông tin giá được cập nhật cho campaign này!</td>
+                                        </tr>
+                                      {{/if}}
+                                      </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</template>

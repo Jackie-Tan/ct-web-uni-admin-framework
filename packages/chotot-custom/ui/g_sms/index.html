@@ -1,0 +1,71 @@
+<template name="g_smsCustom">
+  <div class="row  border-bottom white-bg dashboard-header base-template g_sms_bound">
+    <div class="ibox">
+      <div class="ibox-title">
+        <h2>SMS center</h2>
+        <div class="ibox-tools">
+          <a class="btn-action" data-modal="baseActionLog" data-action="log">
+            <i class="fa fa-book"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="ibox-content">
+      <div class="outer">
+        <div class="middle">
+          <div class="inner" style="width: 70%">
+            <form id="send-sms-form" role="form" data-toggle="validator" class="row">
+              <label>Choose type</label>
+              <div class="form-group row">
+                {{#if isMultiple}}
+                  <div class="col-md-6">
+                    <input class="form-control input-type" type="radio" name="type" value="1"> Normal
+                  </div>
+                  <div class="col-md-6">
+                    <input class="form-control input-type" type="radio" name="type" value="2" checked> Multiple
+                  </div>
+                {{else}}
+                  <div class="col-md-6">
+                    <input class="form-control input-type" type="radio" name="type" value="1" checked> Normal
+                  </div>
+                  <div class="col-md-6">
+                    <input class="form-control input-type" type="radio" name="type" value="2"> Multiple
+                  </div>
+                {{/if}}
+              </div>
+              {{#if isMultiple}}
+                <div class="row sms-bound">
+                {{#cbPaginationShow list=getData max=20 isUp=true menuSort="outside"}}
+                  <div class="col-md-3 sms-bound">
+                    <div class="form-group">
+                      <label>Message Content</label>
+                      <textarea class="form-control" required="">{{message}}</textarea>
+                    </div>
+                    <div class="form-group">
+                      <label>Phone</label>
+                      <input required="" type="text" class="form-control" value="{{phone}}">
+                    </div>
+                  </div>
+                {{/cbPaginationShow}}
+                </div>
+                {{#each headsActive}}
+                  <div class="form-group {{displayClass}}">
+                    {{> inputSchema }}
+                  </div>
+                {{/each}}
+              {{else}}
+                <div class="row">
+                  {{> baseHeads heads=headsNormal type="isEdit" data=getData}}
+                </div>
+              {{/if}}
+            </form>
+            <label>Import Accounts by CSV </label><input type="file" data-kind="csv">
+          </div>
+          <div class="form-group col-md-12">
+            <button id="submit" form="send-sms-form" type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

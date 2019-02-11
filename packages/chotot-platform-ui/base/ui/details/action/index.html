@@ -1,0 +1,17 @@
+<template name="baseDetailAction">
+  <div class="base-detail-action">
+  {{#if enable}}
+
+    {{>Template.dynamic template=getTemplate}}
+  {{/if}}
+  </div>
+</template>
+
+<template name="defaultBtnDetailAction">
+  <button class="btn btn-primary" type="button" data-daction="{{action}}">
+    <i class="fa {{icon}}"></i>
+  </button>
+</template>
+<template name="submitBtnDetailAction">
+  <button id="submit" form="over-view-form" type="submit" class="btn btn-primary">Submit</button>
+</template>

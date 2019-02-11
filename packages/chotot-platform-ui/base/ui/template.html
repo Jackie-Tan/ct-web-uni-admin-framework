@@ -1,0 +1,59 @@
+<template name="baseTemplate">
+  {{#baseSchema}}
+    {{>Template.dynamic template=getTemplate data=data}}
+  {{/baseSchema}}
+</template>
+<template name="baseTemplateCustom">
+      {{>inputSchema key=key}}
+</template>
+<template name="BaseTemplateProject">
+
+  <div class="row  border-bottom white-bg dashboard-header base-template">
+    <div class="ibox">
+      <div class="ibox-title">
+        <h5>{{Name}} List</h5>
+        <div class="ibox-tools">
+          <a class="btn-action" data-modal="baseActionLog" data-action="log">
+              <i class="fa fa-book"></i>
+          </a>
+          {{> visibilityCol}}
+      </div>
+    </div>
+
+      <div class="ibox-content">
+        <div class="table-responsive {{dtConfig}}">
+          {{> datatable id=IdTable name=name class="" heads=heads}}
+        </div>
+      </div>
+
+      <div class="actions-list">
+        {{> buttonAction actions=actionButtons}}
+      </div>
+    </div>
+  </div>
+
+</template>
+
+<template name="baseActionLog">
+  <div id="base-action-log" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">
+            <i class="fa fa-plus"></i>
+              Action Log
+          </h4>
+        </div>
+        <div class="modal-body">
+            {{#each LogData}}
+              {{{this}}}
+            {{/each}}
+            {{#unless LogData.length}}
+              No available log data!
+            {{/unless}}
+            <!-- /.box-body -->
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

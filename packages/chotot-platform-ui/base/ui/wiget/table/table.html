@@ -1,0 +1,16 @@
+<template name="datatable">
+  <table id="{{id}}" class="display {{class}} datatable" cellspacing="0" width="100%">
+      <thead>
+          <tr>
+            {{#each heads}}
+              <th class="th-search">{{> searchInput instanceName=instanceName}}</th>
+            {{/each}}
+          </tr>
+          <tr>
+            {{#each heads}}
+              <th>{{text}}</th>
+            {{/each}}
+          </tr>
+      </thead>
+  </table>
+</template>

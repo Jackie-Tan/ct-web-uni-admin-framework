@@ -1,0 +1,31 @@
+<template name="f_hammerCustom">
+  <div id="base-add-data" class="row">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">
+            <i class="fa fa-plus"></i>
+              Ban User
+          </h4>
+        </div>
+        <div class="modal-body">
+          <form id="base-add-data-form" role="form" data-toggle="validator" class="row">
+            {{#each heads}}
+              <div class="form-group {{displayClass}}">
+                {{> inputForm }}
+              </div>
+            {{/each}}
+            <!-- /.box-body -->
+          </form>
+        </div>
+        <div class="modal-footer">
+          <div class="form-group col-md-12">
+            <button id="ban"  form="base-add-data-form" type="submit" class="btn btn-primary">Ban</button>
+            <button id="unban"  form="base-add-data-form" type="submit" class="btn btn-primary">Unban</button>
+            <button class="hide-modal" data-dismiss="modal" style="display:none"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

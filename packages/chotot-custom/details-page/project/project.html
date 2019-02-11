@@ -1,0 +1,19 @@
+<template name="p_projectDetails">
+  <div class="project-details-page">
+  {{> baseDetailsPage}}
+  {{> p_projectlinkTableList}}
+  </div>
+</template>
+<template name="p_projectlinkTableList">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="wrapper wrapper-content">
+        {{#each linkTableConfig}}
+          {{#each linkTable}}
+            {{> linkView}}
+          {{/each}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</template>

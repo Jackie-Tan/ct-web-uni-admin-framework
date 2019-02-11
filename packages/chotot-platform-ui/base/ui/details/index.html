@@ -1,0 +1,32 @@
+<template name="baseDetailsPage">
+  <div id="over-view-page" class="row  border-bottom white-bg dashboard-header base-details-page">
+    <h2> Over View </h2>
+    {{#baseSchema name=name data=data}}
+    <form id="over-view-form" role="form" data-toggle="validator" class="row">
+        {{#if isEditing}}
+          {{#each heads}}
+            {{>inputSchema key=key}}
+          {{/each}}
+        {{else}}
+          {{#each heads}}
+            {{#viewSchema key=key is_block=true}}
+              {{#if value}}
+                <div class="form-group {{displayClass}}">
+                  <label>{{text}}</label>
+                  {{> cellOutput type=type data=value input=input}}
+                </div>
+              {{/if}}
+            {{/viewSchema}}
+          {{/each}}
+        {{/if}}
+    </form>
+    <div class="row ibox-footer">
+      <div class="form-group col-md-12 ">
+        {{#each actions}}
+          {{> baseDetailAction}}
+        {{/each}}
+      </div>
+    </div>
+    {{/baseSchema}}
+  </div>
+</template>

@@ -1,0 +1,7 @@
+<template name="inputActionSpan">
+  <span class="input-group-addon ">
+    {{#each this.input.action}}
+      <span class="fa {{icon}} input-action-span hover-cursor {{class}}"  data-method="{{method}}" data-client="{{client}}" data-sfalse="{{sFalse}}" data-strue="{{sTrue}}"></span>
+    {{/each}}
+  </span>
+</template>

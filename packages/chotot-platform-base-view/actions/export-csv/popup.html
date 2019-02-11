@@ -1,0 +1,31 @@
+<template name="baseExportCSVData">
+  <div id="base-export-csv-data" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">
+            <i class="fa fa-plus"></i>
+              Export CSV
+          </h4>
+        </div>
+        <div class="modal-body">
+          <form id="base-export-csv-form" role="form" data-toggle="validator" class="row" name="baseExportCSVData">
+            {{#each heads}}
+                <div class="form-group {{displayClass}}">
+                  <input type="checkbox" class="col-check" name="col-check" value={{key}}>
+                  <label> {{text}} </label>
+                </div>
+            {{/each}}
+            <!-- /.box-body -->
+          </form>
+        </div>
+        <div class="modal-footer">
+          <div class="form-group col-md-12">
+            <button id="submit" form="base-export-csv-form" type="submit" class="btn btn-primary">Submit</button>
+            <button class="hide-modal" data-dismiss="modal" style="display:none"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

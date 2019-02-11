@@ -1,0 +1,26 @@
+<template name="linkView">
+  <div class="link-view-item {{linkTableClass}}">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>{{display}}</h5>
+            <div class="ibox-tools">
+              <a class="btn-remove" data-modal="confirmModal" data-action="log">
+                  <i class="fa fa-times"></i>
+              </a>
+          </div>
+        </div>
+        <div class="ibox-content">
+          <form id="over-view-form" role="form" data-toggle="validator" class="row">
+              {{#each heads}}
+                {{#if getValue}}
+                  <div class="form-group {{displayClass}}">
+                    {{> cellOutput type=input.type data=getValue input=input}}
+                  </div>
+                {{/if}}
+              {{/each}}
+          </form>
+          <button class="hide-modal" data-dismiss="modal" style="display:none"></button>
+        </div>
+    </div>
+  </div>
+</template>

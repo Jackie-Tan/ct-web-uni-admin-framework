@@ -1,0 +1,1317 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '-g',
+1 verbose cli   'mocha' ]
+2 info using npm@3.10.10
+3 info using node@v6.9.4
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readGlobalPackageData
+7 silly fetchPackageMetaData mocha
+8 silly fetchNamedPackageData mocha
+9 silly mapToRegistry name mocha
+10 silly mapToRegistry using default registry
+11 silly mapToRegistry registry https://registry.npmjs.com/
+12 silly mapToRegistry data Result {
+12 silly mapToRegistry   raw: 'mocha',
+12 silly mapToRegistry   scope: null,
+12 silly mapToRegistry   escapedName: 'mocha',
+12 silly mapToRegistry   name: 'mocha',
+12 silly mapToRegistry   rawSpec: '',
+12 silly mapToRegistry   spec: 'latest',
+12 silly mapToRegistry   type: 'tag' }
+13 silly mapToRegistry uri https://registry.npmjs.com/mocha
+14 verbose get https://registry.npmjs.com/mocha not expired, no request
+15 silly install normalizeTree
+16 silly loadCurrentTree Finishing
+17 silly loadIdealTree Starting
+18 silly install loadIdealTree
+19 silly cloneCurrentTree Starting
+20 silly install cloneCurrentTreeToIdealTree
+21 silly cloneCurrentTree Finishing
+22 silly loadShrinkwrap Starting
+23 silly install loadShrinkwrap
+24 silly loadShrinkwrap Finishing
+25 silly loadAllDepsIntoIdealTree Starting
+26 silly install loadAllDepsIntoIdealTree
+27 silly resolveWithNewModule mocha@5.0.0 checking installable status
+28 silly cache add args [ 'mocha', null ]
+29 verbose cache add spec mocha
+30 silly cache add parsed spec Result {
+30 silly cache add   raw: 'mocha',
+30 silly cache add   scope: null,
+30 silly cache add   escapedName: 'mocha',
+30 silly cache add   name: 'mocha',
+30 silly cache add   rawSpec: '',
+30 silly cache add   spec: 'latest',
+30 silly cache add   type: 'tag' }
+31 silly addNamed mocha@latest
+32 verbose addNamed "latest" is being treated as a dist-tag for mocha
+33 info addNameTag [ 'mocha', 'latest' ]
+34 silly mapToRegistry name mocha
+35 silly mapToRegistry using default registry
+36 silly mapToRegistry registry https://registry.npmjs.com/
+37 silly mapToRegistry data Result {
+37 silly mapToRegistry   raw: 'mocha',
+37 silly mapToRegistry   scope: null,
+37 silly mapToRegistry   escapedName: 'mocha',
+37 silly mapToRegistry   name: 'mocha',
+37 silly mapToRegistry   rawSpec: '',
+37 silly mapToRegistry   spec: 'latest',
+37 silly mapToRegistry   type: 'tag' }
+38 silly mapToRegistry uri https://registry.npmjs.com/mocha
+39 verbose addNameTag registry:https://registry.npmjs.com/mocha not in flight; fetching
+40 verbose get https://registry.npmjs.com/mocha not expired, no request
+41 silly addNameTag next cb for mocha with tag latest
+42 silly addNamed mocha@5.0.0
+43 verbose addNamed "5.0.0" is a plain semver version for mocha
+44 silly cache afterAdd mocha@5.0.0
+45 verbose afterAdd /Users/hocnguyen/.npm/mocha/5.0.0/package/package.json not in flight; writing
+46 verbose correctMkdir /Users/hocnguyen/.npm correctMkdir not in flight; initializing
+47 verbose afterAdd /Users/hocnguyen/.npm/mocha/5.0.0/package/package.json written
+48 silly fetchNamedPackageData browser-stdout
+49 silly mapToRegistry name browser-stdout
+50 silly mapToRegistry using default registry
+51 silly mapToRegistry registry https://registry.npmjs.com/
+52 silly mapToRegistry data Result {
+52 silly mapToRegistry   raw: 'browser-stdout',
+52 silly mapToRegistry   scope: null,
+52 silly mapToRegistry   escapedName: 'browser-stdout',
+52 silly mapToRegistry   name: 'browser-stdout',
+52 silly mapToRegistry   rawSpec: '',
+52 silly mapToRegistry   spec: 'latest',
+52 silly mapToRegistry   type: 'tag' }
+53 silly mapToRegistry uri https://registry.npmjs.com/browser-stdout
+54 silly fetchNamedPackageData commander
+55 silly mapToRegistry name commander
+56 silly mapToRegistry using default registry
+57 silly mapToRegistry registry https://registry.npmjs.com/
+58 silly mapToRegistry data Result {
+58 silly mapToRegistry   raw: 'commander',
+58 silly mapToRegistry   scope: null,
+58 silly mapToRegistry   escapedName: 'commander',
+58 silly mapToRegistry   name: 'commander',
+58 silly mapToRegistry   rawSpec: '',
+58 silly mapToRegistry   spec: 'latest',
+58 silly mapToRegistry   type: 'tag' }
+59 silly mapToRegistry uri https://registry.npmjs.com/commander
+60 silly fetchNamedPackageData debug
+61 silly mapToRegistry name debug
+62 silly mapToRegistry using default registry
+63 silly mapToRegistry registry https://registry.npmjs.com/
+64 silly mapToRegistry data Result {
+64 silly mapToRegistry   raw: 'debug',
+64 silly mapToRegistry   scope: null,
+64 silly mapToRegistry   escapedName: 'debug',
+64 silly mapToRegistry   name: 'debug',
+64 silly mapToRegistry   rawSpec: '',
+64 silly mapToRegistry   spec: 'latest',
+64 silly mapToRegistry   type: 'tag' }
+65 silly mapToRegistry uri https://registry.npmjs.com/debug
+66 silly fetchNamedPackageData diff
+67 silly mapToRegistry name diff
+68 silly mapToRegistry using default registry
+69 silly mapToRegistry registry https://registry.npmjs.com/
+70 silly mapToRegistry data Result {
+70 silly mapToRegistry   raw: 'diff',
+70 silly mapToRegistry   scope: null,
+70 silly mapToRegistry   escapedName: 'diff',
+70 silly mapToRegistry   name: 'diff',
+70 silly mapToRegistry   rawSpec: '',
+70 silly mapToRegistry   spec: 'latest',
+70 silly mapToRegistry   type: 'tag' }
+71 silly mapToRegistry uri https://registry.npmjs.com/diff
+72 silly fetchNamedPackageData escape-string-regexp
+73 silly mapToRegistry name escape-string-regexp
+74 silly mapToRegistry using default registry
+75 silly mapToRegistry registry https://registry.npmjs.com/
+76 silly mapToRegistry data Result {
+76 silly mapToRegistry   raw: 'escape-string-regexp',
+76 silly mapToRegistry   scope: null,
+76 silly mapToRegistry   escapedName: 'escape-string-regexp',
+76 silly mapToRegistry   name: 'escape-string-regexp',
+76 silly mapToRegistry   rawSpec: '',
+76 silly mapToRegistry   spec: 'latest',
+76 silly mapToRegistry   type: 'tag' }
+77 silly mapToRegistry uri https://registry.npmjs.com/escape-string-regexp
+78 silly fetchNamedPackageData glob
+79 silly mapToRegistry name glob
+80 silly mapToRegistry using default registry
+81 silly mapToRegistry registry https://registry.npmjs.com/
+82 silly mapToRegistry data Result {
+82 silly mapToRegistry   raw: 'glob',
+82 silly mapToRegistry   scope: null,
+82 silly mapToRegistry   escapedName: 'glob',
+82 silly mapToRegistry   name: 'glob',
+82 silly mapToRegistry   rawSpec: '',
+82 silly mapToRegistry   spec: 'latest',
+82 silly mapToRegistry   type: 'tag' }
+83 silly mapToRegistry uri https://registry.npmjs.com/glob
+84 silly fetchNamedPackageData growl
+85 silly mapToRegistry name growl
+86 silly mapToRegistry using default registry
+87 silly mapToRegistry registry https://registry.npmjs.com/
+88 silly mapToRegistry data Result {
+88 silly mapToRegistry   raw: 'growl',
+88 silly mapToRegistry   scope: null,
+88 silly mapToRegistry   escapedName: 'growl',
+88 silly mapToRegistry   name: 'growl',
+88 silly mapToRegistry   rawSpec: '',
+88 silly mapToRegistry   spec: 'latest',
+88 silly mapToRegistry   type: 'tag' }
+89 silly mapToRegistry uri https://registry.npmjs.com/growl
+90 silly fetchNamedPackageData he
+91 silly mapToRegistry name he
+92 silly mapToRegistry using default registry
+93 silly mapToRegistry registry https://registry.npmjs.com/
+94 silly mapToRegistry data Result {
+94 silly mapToRegistry   raw: 'he',
+94 silly mapToRegistry   scope: null,
+94 silly mapToRegistry   escapedName: 'he',
+94 silly mapToRegistry   name: 'he',
+94 silly mapToRegistry   rawSpec: '',
+94 silly mapToRegistry   spec: 'latest',
+94 silly mapToRegistry   type: 'tag' }
+95 silly mapToRegistry uri https://registry.npmjs.com/he
+96 silly fetchNamedPackageData mkdirp
+97 silly mapToRegistry name mkdirp
+98 silly mapToRegistry using default registry
+99 silly mapToRegistry registry https://registry.npmjs.com/
+100 silly mapToRegistry data Result {
+100 silly mapToRegistry   raw: 'mkdirp',
+100 silly mapToRegistry   scope: null,
+100 silly mapToRegistry   escapedName: 'mkdirp',
+100 silly mapToRegistry   name: 'mkdirp',
+100 silly mapToRegistry   rawSpec: '',
+100 silly mapToRegistry   spec: 'latest',
+100 silly mapToRegistry   type: 'tag' }
+101 silly mapToRegistry uri https://registry.npmjs.com/mkdirp
+102 silly fetchNamedPackageData supports-color
+103 silly mapToRegistry name supports-color
+104 silly mapToRegistry using default registry
+105 silly mapToRegistry registry https://registry.npmjs.com/
+106 silly mapToRegistry data Result {
+106 silly mapToRegistry   raw: 'supports-color',
+106 silly mapToRegistry   scope: null,
+106 silly mapToRegistry   escapedName: 'supports-color',
+106 silly mapToRegistry   name: 'supports-color',
+106 silly mapToRegistry   rawSpec: '',
+106 silly mapToRegistry   spec: 'latest',
+106 silly mapToRegistry   type: 'tag' }
+107 silly mapToRegistry uri https://registry.npmjs.com/supports-color
+108 verbose get https://registry.npmjs.com/browser-stdout not expired, no request
+109 silly resolveWithNewModule browser-stdout@1.3.0 checking installable status
+110 silly cache add args [ 'browser-stdout@1.3.0', null ]
+111 verbose cache add spec browser-stdout@1.3.0
+112 silly cache add parsed spec Result {
+112 silly cache add   raw: 'browser-stdout@1.3.0',
+112 silly cache add   scope: null,
+112 silly cache add   escapedName: 'browser-stdout',
+112 silly cache add   name: 'browser-stdout',
+112 silly cache add   rawSpec: '1.3.0',
+112 silly cache add   spec: '1.3.0',
+112 silly cache add   type: 'version' }
+113 silly addNamed browser-stdout@1.3.0
+114 verbose addNamed "1.3.0" is a plain semver version for browser-stdout
+115 silly mapToRegistry name browser-stdout
+116 silly mapToRegistry using default registry
+117 silly mapToRegistry registry https://registry.npmjs.com/
+118 silly mapToRegistry data Result {
+118 silly mapToRegistry   raw: 'browser-stdout',
+118 silly mapToRegistry   scope: null,
+118 silly mapToRegistry   escapedName: 'browser-stdout',
+118 silly mapToRegistry   name: 'browser-stdout',
+118 silly mapToRegistry   rawSpec: '',
+118 silly mapToRegistry   spec: 'latest',
+118 silly mapToRegistry   type: 'tag' }
+119 silly mapToRegistry uri https://registry.npmjs.com/browser-stdout
+120 verbose addNameVersion registry:https://registry.npmjs.com/browser-stdout not in flight; fetching
+121 verbose get https://registry.npmjs.com/debug not expired, no request
+122 silly resolveWithNewModule debug@3.1.0 checking installable status
+123 silly cache add args [ 'debug@3.1.0', null ]
+124 verbose cache add spec debug@3.1.0
+125 silly cache add parsed spec Result {
+125 silly cache add   raw: 'debug@3.1.0',
+125 silly cache add   scope: null,
+125 silly cache add   escapedName: 'debug',
+125 silly cache add   name: 'debug',
+125 silly cache add   rawSpec: '3.1.0',
+125 silly cache add   spec: '3.1.0',
+125 silly cache add   type: 'version' }
+126 silly addNamed debug@3.1.0
+127 verbose addNamed "3.1.0" is a plain semver version for debug
+128 silly mapToRegistry name debug
+129 silly mapToRegistry using default registry
+130 silly mapToRegistry registry https://registry.npmjs.com/
+131 silly mapToRegistry data Result {
+131 silly mapToRegistry   raw: 'debug',
+131 silly mapToRegistry   scope: null,
+131 silly mapToRegistry   escapedName: 'debug',
+131 silly mapToRegistry   name: 'debug',
+131 silly mapToRegistry   rawSpec: '',
+131 silly mapToRegistry   spec: 'latest',
+131 silly mapToRegistry   type: 'tag' }
+132 silly mapToRegistry uri https://registry.npmjs.com/debug
+133 verbose addNameVersion registry:https://registry.npmjs.com/debug not in flight; fetching
+134 verbose get https://registry.npmjs.com/escape-string-regexp not expired, no request
+135 silly resolveWithNewModule escape-string-regexp@1.0.5 checking installable status
+136 silly cache add args [ 'escape-string-regexp@1.0.5', null ]
+137 verbose cache add spec escape-string-regexp@1.0.5
+138 silly cache add parsed spec Result {
+138 silly cache add   raw: 'escape-string-regexp@1.0.5',
+138 silly cache add   scope: null,
+138 silly cache add   escapedName: 'escape-string-regexp',
+138 silly cache add   name: 'escape-string-regexp',
+138 silly cache add   rawSpec: '1.0.5',
+138 silly cache add   spec: '1.0.5',
+138 silly cache add   type: 'version' }
+139 silly addNamed escape-string-regexp@1.0.5
+140 verbose addNamed "1.0.5" is a plain semver version for escape-string-regexp
+141 silly mapToRegistry name escape-string-regexp
+142 silly mapToRegistry using default registry
+143 silly mapToRegistry registry https://registry.npmjs.com/
+144 silly mapToRegistry data Result {
+144 silly mapToRegistry   raw: 'escape-string-regexp',
+144 silly mapToRegistry   scope: null,
+144 silly mapToRegistry   escapedName: 'escape-string-regexp',
+144 silly mapToRegistry   name: 'escape-string-regexp',
+144 silly mapToRegistry   rawSpec: '',
+144 silly mapToRegistry   spec: 'latest',
+144 silly mapToRegistry   type: 'tag' }
+145 silly mapToRegistry uri https://registry.npmjs.com/escape-string-regexp
+146 verbose addNameVersion registry:https://registry.npmjs.com/escape-string-regexp not in flight; fetching
+147 verbose get https://registry.npmjs.com/diff not expired, no request
+148 silly resolveWithNewModule diff@3.3.1 checking installable status
+149 silly cache add args [ 'diff@3.3.1', null ]
+150 verbose cache add spec diff@3.3.1
+151 silly cache add parsed spec Result {
+151 silly cache add   raw: 'diff@3.3.1',
+151 silly cache add   scope: null,
+151 silly cache add   escapedName: 'diff',
+151 silly cache add   name: 'diff',
+151 silly cache add   rawSpec: '3.3.1',
+151 silly cache add   spec: '3.3.1',
+151 silly cache add   type: 'version' }
+152 silly addNamed diff@3.3.1
+153 verbose addNamed "3.3.1" is a plain semver version for diff
+154 silly mapToRegistry name diff
+155 silly mapToRegistry using default registry
+156 silly mapToRegistry registry https://registry.npmjs.com/
+157 silly mapToRegistry data Result {
+157 silly mapToRegistry   raw: 'diff',
+157 silly mapToRegistry   scope: null,
+157 silly mapToRegistry   escapedName: 'diff',
+157 silly mapToRegistry   name: 'diff',
+157 silly mapToRegistry   rawSpec: '',
+157 silly mapToRegistry   spec: 'latest',
+157 silly mapToRegistry   type: 'tag' }
+158 silly mapToRegistry uri https://registry.npmjs.com/diff
+159 verbose addNameVersion registry:https://registry.npmjs.com/diff not in flight; fetching
+160 verbose get https://registry.npmjs.com/glob not expired, no request
+161 silly resolveWithNewModule glob@7.1.2 checking installable status
+162 silly cache add args [ 'glob@7.1.2', null ]
+163 verbose cache add spec glob@7.1.2
+164 silly cache add parsed spec Result {
+164 silly cache add   raw: 'glob@7.1.2',
+164 silly cache add   scope: null,
+164 silly cache add   escapedName: 'glob',
+164 silly cache add   name: 'glob',
+164 silly cache add   rawSpec: '7.1.2',
+164 silly cache add   spec: '7.1.2',
+164 silly cache add   type: 'version' }
+165 silly addNamed glob@7.1.2
+166 verbose addNamed "7.1.2" is a plain semver version for glob
+167 silly mapToRegistry name glob
+168 silly mapToRegistry using default registry
+169 silly mapToRegistry registry https://registry.npmjs.com/
+170 silly mapToRegistry data Result {
+170 silly mapToRegistry   raw: 'glob',
+170 silly mapToRegistry   scope: null,
+170 silly mapToRegistry   escapedName: 'glob',
+170 silly mapToRegistry   name: 'glob',
+170 silly mapToRegistry   rawSpec: '',
+170 silly mapToRegistry   spec: 'latest',
+170 silly mapToRegistry   type: 'tag' }
+171 silly mapToRegistry uri https://registry.npmjs.com/glob
+172 verbose addNameVersion registry:https://registry.npmjs.com/glob not in flight; fetching
+173 verbose get https://registry.npmjs.com/commander not expired, no request
+174 silly resolveWithNewModule commander@2.11.0 checking installable status
+175 silly cache add args [ 'commander@2.11.0', null ]
+176 verbose cache add spec commander@2.11.0
+177 silly cache add parsed spec Result {
+177 silly cache add   raw: 'commander@2.11.0',
+177 silly cache add   scope: null,
+177 silly cache add   escapedName: 'commander',
+177 silly cache add   name: 'commander',
+177 silly cache add   rawSpec: '2.11.0',
+177 silly cache add   spec: '2.11.0',
+177 silly cache add   type: 'version' }
+178 silly addNamed commander@2.11.0
+179 verbose addNamed "2.11.0" is a plain semver version for commander
+180 silly mapToRegistry name commander
+181 silly mapToRegistry using default registry
+182 silly mapToRegistry registry https://registry.npmjs.com/
+183 silly mapToRegistry data Result {
+183 silly mapToRegistry   raw: 'commander',
+183 silly mapToRegistry   scope: null,
+183 silly mapToRegistry   escapedName: 'commander',
+183 silly mapToRegistry   name: 'commander',
+183 silly mapToRegistry   rawSpec: '',
+183 silly mapToRegistry   spec: 'latest',
+183 silly mapToRegistry   type: 'tag' }
+184 silly mapToRegistry uri https://registry.npmjs.com/commander
+185 verbose addNameVersion registry:https://registry.npmjs.com/commander not in flight; fetching
+186 verbose get https://registry.npmjs.com/growl not expired, no request
+187 silly resolveWithNewModule growl@1.10.3 checking installable status
+188 silly cache add args [ 'growl@1.10.3', null ]
+189 verbose cache add spec growl@1.10.3
+190 silly cache add parsed spec Result {
+190 silly cache add   raw: 'growl@1.10.3',
+190 silly cache add   scope: null,
+190 silly cache add   escapedName: 'growl',
+190 silly cache add   name: 'growl',
+190 silly cache add   rawSpec: '1.10.3',
+190 silly cache add   spec: '1.10.3',
+190 silly cache add   type: 'version' }
+191 silly addNamed growl@1.10.3
+192 verbose addNamed "1.10.3" is a plain semver version for growl
+193 silly mapToRegistry name growl
+194 silly mapToRegistry using default registry
+195 silly mapToRegistry registry https://registry.npmjs.com/
+196 silly mapToRegistry data Result {
+196 silly mapToRegistry   raw: 'growl',
+196 silly mapToRegistry   scope: null,
+196 silly mapToRegistry   escapedName: 'growl',
+196 silly mapToRegistry   name: 'growl',
+196 silly mapToRegistry   rawSpec: '',
+196 silly mapToRegistry   spec: 'latest',
+196 silly mapToRegistry   type: 'tag' }
+197 silly mapToRegistry uri https://registry.npmjs.com/growl
+198 verbose addNameVersion registry:https://registry.npmjs.com/growl not in flight; fetching
+199 verbose get https://registry.npmjs.com/he not expired, no request
+200 silly resolveWithNewModule he@1.1.1 checking installable status
+201 silly cache add args [ 'he@1.1.1', null ]
+202 verbose cache add spec he@1.1.1
+203 silly cache add parsed spec Result {
+203 silly cache add   raw: 'he@1.1.1',
+203 silly cache add   scope: null,
+203 silly cache add   escapedName: 'he',
+203 silly cache add   name: 'he',
+203 silly cache add   rawSpec: '1.1.1',
+203 silly cache add   spec: '1.1.1',
+203 silly cache add   type: 'version' }
+204 silly addNamed he@1.1.1
+205 verbose addNamed "1.1.1" is a plain semver version for he
+206 silly mapToRegistry name he
+207 silly mapToRegistry using default registry
+208 silly mapToRegistry registry https://registry.npmjs.com/
+209 silly mapToRegistry data Result {
+209 silly mapToRegistry   raw: 'he',
+209 silly mapToRegistry   scope: null,
+209 silly mapToRegistry   escapedName: 'he',
+209 silly mapToRegistry   name: 'he',
+209 silly mapToRegistry   rawSpec: '',
+209 silly mapToRegistry   spec: 'latest',
+209 silly mapToRegistry   type: 'tag' }
+210 silly mapToRegistry uri https://registry.npmjs.com/he
+211 verbose addNameVersion registry:https://registry.npmjs.com/he not in flight; fetching
+212 verbose get https://registry.npmjs.com/mkdirp not expired, no request
+213 silly resolveWithNewModule mkdirp@0.5.1 checking installable status
+214 silly cache add args [ 'mkdirp@0.5.1', null ]
+215 verbose cache add spec mkdirp@0.5.1
+216 silly cache add parsed spec Result {
+216 silly cache add   raw: 'mkdirp@0.5.1',
+216 silly cache add   scope: null,
+216 silly cache add   escapedName: 'mkdirp',
+216 silly cache add   name: 'mkdirp',
+216 silly cache add   rawSpec: '0.5.1',
+216 silly cache add   spec: '0.5.1',
+216 silly cache add   type: 'version' }
+217 silly addNamed mkdirp@0.5.1
+218 verbose addNamed "0.5.1" is a plain semver version for mkdirp
+219 silly mapToRegistry name mkdirp
+220 silly mapToRegistry using default registry
+221 silly mapToRegistry registry https://registry.npmjs.com/
+222 silly mapToRegistry data Result {
+222 silly mapToRegistry   raw: 'mkdirp',
+222 silly mapToRegistry   scope: null,
+222 silly mapToRegistry   escapedName: 'mkdirp',
+222 silly mapToRegistry   name: 'mkdirp',
+222 silly mapToRegistry   rawSpec: '',
+222 silly mapToRegistry   spec: 'latest',
+222 silly mapToRegistry   type: 'tag' }
+223 silly mapToRegistry uri https://registry.npmjs.com/mkdirp
+224 verbose addNameVersion registry:https://registry.npmjs.com/mkdirp not in flight; fetching
+225 verbose get https://registry.npmjs.com/supports-color not expired, no request
+226 silly resolveWithNewModule supports-color@4.4.0 checking installable status
+227 silly cache add args [ 'supports-color@4.4.0', null ]
+228 verbose cache add spec supports-color@4.4.0
+229 silly cache add parsed spec Result {
+229 silly cache add   raw: 'supports-color@4.4.0',
+229 silly cache add   scope: null,
+229 silly cache add   escapedName: 'supports-color',
+229 silly cache add   name: 'supports-color',
+229 silly cache add   rawSpec: '4.4.0',
+229 silly cache add   spec: '4.4.0',
+229 silly cache add   type: 'version' }
+230 silly addNamed supports-color@4.4.0
+231 verbose addNamed "4.4.0" is a plain semver version for supports-color
+232 silly mapToRegistry name supports-color
+233 silly mapToRegistry using default registry
+234 silly mapToRegistry registry https://registry.npmjs.com/
+235 silly mapToRegistry data Result {
+235 silly mapToRegistry   raw: 'supports-color',
+235 silly mapToRegistry   scope: null,
+235 silly mapToRegistry   escapedName: 'supports-color',
+235 silly mapToRegistry   name: 'supports-color',
+235 silly mapToRegistry   rawSpec: '',
+235 silly mapToRegistry   spec: 'latest',
+235 silly mapToRegistry   type: 'tag' }
+236 silly mapToRegistry uri https://registry.npmjs.com/supports-color
+237 verbose addNameVersion registry:https://registry.npmjs.com/supports-color not in flight; fetching
+238 verbose get https://registry.npmjs.com/debug not expired, no request
+239 verbose get https://registry.npmjs.com/browser-stdout not expired, no request
+240 verbose get https://registry.npmjs.com/escape-string-regexp not expired, no request
+241 verbose get https://registry.npmjs.com/diff not expired, no request
+242 verbose get https://registry.npmjs.com/growl not expired, no request
+243 verbose get https://registry.npmjs.com/supports-color not expired, no request
+244 verbose get https://registry.npmjs.com/mkdirp not expired, no request
+245 verbose get https://registry.npmjs.com/glob not expired, no request
+246 verbose get https://registry.npmjs.com/he not expired, no request
+247 verbose get https://registry.npmjs.com/commander not expired, no request
+248 silly cache afterAdd browser-stdout@1.3.0
+249 verbose afterAdd /Users/hocnguyen/.npm/browser-stdout/1.3.0/package/package.json not in flight; writing
+250 verbose correctMkdir /Users/hocnguyen/.npm correctMkdir not in flight; initializing
+251 silly cache afterAdd debug@3.1.0
+252 verbose afterAdd /Users/hocnguyen/.npm/debug/3.1.0/package/package.json not in flight; writing
+253 verbose correctMkdir /Users/hocnguyen/.npm correctMkdir not in flight; initializing
+254 silly cache afterAdd escape-string-regexp@1.0.5
+255 verbose afterAdd /Users/hocnguyen/.npm/escape-string-regexp/1.0.5/package/package.json not in flight; writing
+256 verbose correctMkdir /Users/hocnguyen/.npm correctMkdir not in flight; initializing
+257 silly cache afterAdd diff@3.3.1
+258 verbose afterAdd /Users/hocnguyen/.npm/diff/3.3.1/package/package.json not in flight; writing
+259 verbose correctMkdir /Users/hocnguyen/.npm correctMkdir not in flight; initializing
+260 silly cache afterAdd growl@1.10.3
+261 verbose afterAdd /Users/hocnguyen/.npm/growl/1.10.3/package/package.json not in flight; writing
+262 verbose correctMkdir /Users/hocnguyen/.npm correctMkdir not in flight; initializing
+263 silly cache afterAdd supports-color@4.4.0
+264 verbose afterAdd /Users/hocnguyen/.npm/supports-color/4.4.0/package/package.json not in flight; writing
+265 verbose correctMkdir /Users/hocnguyen/.npm correctMkdir not in flight; initializing
+266 silly cache afterAdd glob@7.1.2
+267 verbose afterAdd /Users/hocnguyen/.npm/glob/7.1.2/package/package.json not in flight; writing
+268 verbose correctMkdir /Users/hocnguyen/.npm correctMkdir not in flight; initializing
+269 silly cache afterAdd commander@2.11.0
+270 verbose afterAdd /Users/hocnguyen/.npm/commander/2.11.0/package/package.json not in flight; writing
+271 verbose correctMkdir /Users/hocnguyen/.npm correctMkdir not in flight; initializing
+272 silly cache afterAdd mkdirp@0.5.1
+273 verbose afterAdd /Users/hocnguyen/.npm/mkdirp/0.5.1/package/package.json not in flight; writing
+274 verbose correctMkdir /Users/hocnguyen/.npm correctMkdir not in flight; initializing
+275 silly cache afterAdd he@1.1.1
+276 verbose afterAdd /Users/hocnguyen/.npm/he/1.1.1/package/package.json not in flight; writing
+277 verbose correctMkdir /Users/hocnguyen/.npm correctMkdir not in flight; initializing
+278 verbose afterAdd /Users/hocnguyen/.npm/escape-string-regexp/1.0.5/package/package.json written
+279 verbose afterAdd /Users/hocnguyen/.npm/debug/3.1.0/package/package.json written
+280 verbose afterAdd /Users/hocnguyen/.npm/browser-stdout/1.3.0/package/package.json written
+281 verbose afterAdd /Users/hocnguyen/.npm/supports-color/4.4.0/package/package.json written
+282 verbose afterAdd /Users/hocnguyen/.npm/growl/1.10.3/package/package.json written
+283 verbose afterAdd /Users/hocnguyen/.npm/glob/7.1.2/package/package.json written
+284 verbose afterAdd /Users/hocnguyen/.npm/diff/3.3.1/package/package.json written
+285 verbose afterAdd /Users/hocnguyen/.npm/commander/2.11.0/package/package.json written
+286 verbose afterAdd /Users/hocnguyen/.npm/mkdirp/0.5.1/package/package.json written
+287 verbose afterAdd /Users/hocnguyen/.npm/he/1.1.1/package/package.json written
+288 silly fetchNamedPackageData ms
+289 silly mapToRegistry name ms
+290 silly mapToRegistry using default registry
+291 silly mapToRegistry registry https://registry.npmjs.com/
+292 silly mapToRegistry data Result {
+292 silly mapToRegistry   raw: 'ms',
+292 silly mapToRegistry   scope: null,
+292 silly mapToRegistry   escapedName: 'ms',
+292 silly mapToRegistry   name: 'ms',
+292 silly mapToRegistry   rawSpec: '',
+292 silly mapToRegistry   spec: 'latest',
+292 silly mapToRegistry   type: 'tag' }
+293 silly mapToRegistry uri https://registry.npmjs.com/ms
+294 verbose get https://registry.npmjs.com/ms not expired, no request
+295 silly resolveWithNewModule ms@2.0.0 checking installable status
+296 silly cache add args [ 'ms@2.0.0', null ]
+297 verbose cache add spec ms@2.0.0
+298 silly cache add parsed spec Result {
+298 silly cache add   raw: 'ms@2.0.0',
+298 silly cache add   scope: null,
+298 silly cache add   escapedName: 'ms',
+298 silly cache add   name: 'ms',
+298 silly cache add   rawSpec: '2.0.0',
+298 silly cache add   spec: '2.0.0',
+298 silly cache add   type: 'version' }
+299 silly addNamed ms@2.0.0
+300 verbose addNamed "2.0.0" is a plain semver version for ms
+301 silly mapToRegistry name ms
+302 silly mapToRegistry using default registry
+303 silly mapToRegistry registry https://registry.npmjs.com/
+304 silly mapToRegistry data Result {
+304 silly mapToRegistry   raw: 'ms',
+304 silly mapToRegistry   scope: null,
+304 silly mapToRegistry   escapedName: 'ms',
+304 silly mapToRegistry   name: 'ms',
+304 silly mapToRegistry   rawSpec: '',
+304 silly mapToRegistry   spec: 'latest',
+304 silly mapToRegistry   type: 'tag' }
+305 silly mapToRegistry uri https://registry.npmjs.com/ms
+306 verbose addNameVersion registry:https://registry.npmjs.com/ms not in flight; fetching
+307 verbose get https://registry.npmjs.com/ms not expired, no request
+308 silly cache afterAdd ms@2.0.0
+309 verbose afterAdd /Users/hocnguyen/.npm/ms/2.0.0/package/package.json not in flight; writing
+310 verbose correctMkdir /Users/hocnguyen/.npm correctMkdir not in flight; initializing
+311 verbose afterAdd /Users/hocnguyen/.npm/ms/2.0.0/package/package.json written
+312 silly fetchNamedPackageData fs.realpath
+313 silly mapToRegistry name fs.realpath
+314 silly mapToRegistry using default registry
+315 silly mapToRegistry registry https://registry.npmjs.com/
+316 silly mapToRegistry data Result {
+316 silly mapToRegistry   raw: 'fs.realpath',
+316 silly mapToRegistry   scope: null,
+316 silly mapToRegistry   escapedName: 'fs.realpath',
+316 silly mapToRegistry   name: 'fs.realpath',
+316 silly mapToRegistry   rawSpec: '',
+316 silly mapToRegistry   spec: 'latest',
+316 silly mapToRegistry   type: 'tag' }
+317 silly mapToRegistry uri https://registry.npmjs.com/fs.realpath
+318 silly fetchNamedPackageData inflight
+319 silly mapToRegistry name inflight
+320 silly mapToRegistry using default registry
+321 silly mapToRegistry registry https://registry.npmjs.com/
+322 silly mapToRegistry data Result {
+322 silly mapToRegistry   raw: 'inflight',
+322 silly mapToRegistry   scope: null,
+322 silly mapToRegistry   escapedName: 'inflight',
+322 silly mapToRegistry   name: 'inflight',
+322 silly mapToRegistry   rawSpec: '',
+322 silly mapToRegistry   spec: 'latest',
+322 silly mapToRegistry   type: 'tag' }
+323 silly mapToRegistry uri https://registry.npmjs.com/inflight
+324 silly fetchNamedPackageData inherits
+325 silly mapToRegistry name inherits
+326 silly mapToRegistry using default registry
+327 silly mapToRegistry registry https://registry.npmjs.com/
+328 silly mapToRegistry data Result {
+328 silly mapToRegistry   raw: 'inherits',
+328 silly mapToRegistry   scope: null,
+328 silly mapToRegistry   escapedName: 'inherits',
+328 silly mapToRegistry   name: 'inherits',
+328 silly mapToRegistry   rawSpec: '',
+328 silly mapToRegistry   spec: 'latest',
+328 silly mapToRegistry   type: 'tag' }
+329 silly mapToRegistry uri https://registry.npmjs.com/inherits
+330 silly fetchNamedPackageData minimatch
+331 silly mapToRegistry name minimatch
+332 silly mapToRegistry using default registry
+333 silly mapToRegistry registry https://registry.npmjs.com/
+334 silly mapToRegistry data Result {
+334 silly mapToRegistry   raw: 'minimatch',
+334 silly mapToRegistry   scope: null,
+334 silly mapToRegistry   escapedName: 'minimatch',
+334 silly mapToRegistry   name: 'minimatch',
+334 silly mapToRegistry   rawSpec: '',
+334 silly mapToRegistry   spec: 'latest',
+334 silly mapToRegistry   type: 'tag' }
+335 silly mapToRegistry uri https://registry.npmjs.com/minimatch
+336 silly fetchNamedPackageData once
+337 silly mapToRegistry name once
+338 silly mapToRegistry using default registry
+339 silly mapToRegistry registry https://registry.npmjs.com/
+340 silly mapToRegistry data Result {
+340 silly mapToRegistry   raw: 'once',
+340 silly mapToRegistry   scope: null,
+340 silly mapToRegistry   escapedName: 'once',
+340 silly mapToRegistry   name: 'once',
+340 silly mapToRegistry   rawSpec: '',
+340 silly mapToRegistry   spec: 'latest',
+340 silly mapToRegistry   type: 'tag' }
+341 silly mapToRegistry uri https://registry.npmjs.com/once
+342 silly fetchNamedPackageData path-is-absolute
+343 silly mapToRegistry name path-is-absolute
+344 silly mapToRegistry using default registry
+345 silly mapToRegistry registry https://registry.npmjs.com/
+346 silly mapToRegistry data Result {
+346 silly mapToRegistry   raw: 'path-is-absolute',
+346 silly mapToRegistry   scope: null,
+346 silly mapToRegistry   escapedName: 'path-is-absolute',
+346 silly mapToRegistry   name: 'path-is-absolute',
+346 silly mapToRegistry   rawSpec: '',
+346 silly mapToRegistry   spec: 'latest',
+346 silly mapToRegistry   type: 'tag' }
+347 silly mapToRegistry uri https://registry.npmjs.com/path-is-absolute
+348 verbose get https://registry.npmjs.com/inherits not expired, no request
+349 silly resolveWithNewModule inherits@2.0.3 checking installable status
+350 silly cache add args [ 'inherits@2', null ]
+351 verbose cache add spec inherits@2
+352 silly cache add parsed spec Result {
+352 silly cache add   raw: 'inherits@2',
+352 silly cache add   scope: null,
+352 silly cache add   escapedName: 'inherits',
+352 silly cache add   name: 'inherits',
+352 silly cache add   rawSpec: '2',
+352 silly cache add   spec: '>=2.0.0 <3.0.0',
+352 silly cache add   type: 'range' }
+353 silly addNamed inherits@>=2.0.0 <3.0.0
+354 verbose addNamed ">=2.0.0 <3.0.0" is a valid semver range for inherits
+355 silly addNameRange { name: 'inherits', range: '>=2.0.0 <3.0.0', hasData: false }
+356 silly mapToRegistry name inherits
+357 silly mapToRegistry using default registry
+358 silly mapToRegistry registry https://registry.npmjs.com/
+359 silly mapToRegistry data Result {
+359 silly mapToRegistry   raw: 'inherits',
+359 silly mapToRegistry   scope: null,
+359 silly mapToRegistry   escapedName: 'inherits',
+359 silly mapToRegistry   name: 'inherits',
+359 silly mapToRegistry   rawSpec: '',
+359 silly mapToRegistry   spec: 'latest',
+359 silly mapToRegistry   type: 'tag' }
+360 silly mapToRegistry uri https://registry.npmjs.com/inherits
+361 verbose addNameRange registry:https://registry.npmjs.com/inherits not in flight; fetching
+362 verbose get https://registry.npmjs.com/inflight not expired, no request
+363 silly resolveWithNewModule inflight@1.0.6 checking installable status
+364 silly cache add args [ 'inflight@^1.0.4', null ]
+365 verbose cache add spec inflight@^1.0.4
+366 silly cache add parsed spec Result {
+366 silly cache add   raw: 'inflight@^1.0.4',
+366 silly cache add   scope: null,
+366 silly cache add   escapedName: 'inflight',
+366 silly cache add   name: 'inflight',
+366 silly cache add   rawSpec: '^1.0.4',
+366 silly cache add   spec: '>=1.0.4 <2.0.0',
+366 silly cache add   type: 'range' }
+367 silly addNamed inflight@>=1.0.4 <2.0.0
+368 verbose addNamed ">=1.0.4 <2.0.0" is a valid semver range for inflight
+369 silly addNameRange { name: 'inflight', range: '>=1.0.4 <2.0.0', hasData: false }
+370 silly mapToRegistry name inflight
+371 silly mapToRegistry using default registry
+372 silly mapToRegistry registry https://registry.npmjs.com/
+373 silly mapToRegistry data Result {
+373 silly mapToRegistry   raw: 'inflight',
+373 silly mapToRegistry   scope: null,
+373 silly mapToRegistry   escapedName: 'inflight',
+373 silly mapToRegistry   name: 'inflight',
+373 silly mapToRegistry   rawSpec: '',
+373 silly mapToRegistry   spec: 'latest',
+373 silly mapToRegistry   type: 'tag' }
+374 silly mapToRegistry uri https://registry.npmjs.com/inflight
+375 verbose addNameRange registry:https://registry.npmjs.com/inflight not in flight; fetching
+376 verbose get https://registry.npmjs.com/path-is-absolute not expired, no request
+377 silly resolveWithNewModule path-is-absolute@1.0.1 checking installable status
+378 silly cache add args [ 'path-is-absolute@^1.0.0', null ]
+379 verbose cache add spec path-is-absolute@^1.0.0
+380 silly cache add parsed spec Result {
+380 silly cache add   raw: 'path-is-absolute@^1.0.0',
+380 silly cache add   scope: null,
+380 silly cache add   escapedName: 'path-is-absolute',
+380 silly cache add   name: 'path-is-absolute',
+380 silly cache add   rawSpec: '^1.0.0',
+380 silly cache add   spec: '>=1.0.0 <2.0.0',
+380 silly cache add   type: 'range' }
+381 silly addNamed path-is-absolute@>=1.0.0 <2.0.0
+382 verbose addNamed ">=1.0.0 <2.0.0" is a valid semver range for path-is-absolute
+383 silly addNameRange { name: 'path-is-absolute',
+383 silly addNameRange   range: '>=1.0.0 <2.0.0',
+383 silly addNameRange   hasData: false }
+384 silly mapToRegistry name path-is-absolute
+385 silly mapToRegistry using default registry
+386 silly mapToRegistry registry https://registry.npmjs.com/
+387 silly mapToRegistry data Result {
+387 silly mapToRegistry   raw: 'path-is-absolute',
+387 silly mapToRegistry   scope: null,
+387 silly mapToRegistry   escapedName: 'path-is-absolute',
+387 silly mapToRegistry   name: 'path-is-absolute',
+387 silly mapToRegistry   rawSpec: '',
+387 silly mapToRegistry   spec: 'latest',
+387 silly mapToRegistry   type: 'tag' }
+388 silly mapToRegistry uri https://registry.npmjs.com/path-is-absolute
+389 verbose addNameRange registry:https://registry.npmjs.com/path-is-absolute not in flight; fetching
+390 verbose get https://registry.npmjs.com/minimatch not expired, no request
+391 silly resolveWithNewModule minimatch@3.0.4 checking installable status
+392 silly cache add args [ 'minimatch@^3.0.4', null ]
+393 verbose cache add spec minimatch@^3.0.4
+394 silly cache add parsed spec Result {
+394 silly cache add   raw: 'minimatch@^3.0.4',
+394 silly cache add   scope: null,
+394 silly cache add   escapedName: 'minimatch',
+394 silly cache add   name: 'minimatch',
+394 silly cache add   rawSpec: '^3.0.4',
+394 silly cache add   spec: '>=3.0.4 <4.0.0',
+394 silly cache add   type: 'range' }
+395 silly addNamed minimatch@>=3.0.4 <4.0.0
+396 verbose addNamed ">=3.0.4 <4.0.0" is a valid semver range for minimatch
+397 silly addNameRange { name: 'minimatch', range: '>=3.0.4 <4.0.0', hasData: false }
+398 silly mapToRegistry name minimatch
+399 silly mapToRegistry using default registry
+400 silly mapToRegistry registry https://registry.npmjs.com/
+401 silly mapToRegistry data Result {
+401 silly mapToRegistry   raw: 'minimatch',
+401 silly mapToRegistry   scope: null,
+401 silly mapToRegistry   escapedName: 'minimatch',
+401 silly mapToRegistry   name: 'minimatch',
+401 silly mapToRegistry   rawSpec: '',
+401 silly mapToRegistry   spec: 'latest',
+401 silly mapToRegistry   type: 'tag' }
+402 silly mapToRegistry uri https://registry.npmjs.com/minimatch
+403 verbose addNameRange registry:https://registry.npmjs.com/minimatch not in flight; fetching
+404 verbose get https://registry.npmjs.com/fs.realpath not expired, no request
+405 silly resolveWithNewModule fs.realpath@1.0.0 checking installable status
+406 silly cache add args [ 'fs.realpath@^1.0.0', null ]
+407 verbose cache add spec fs.realpath@^1.0.0
+408 silly cache add parsed spec Result {
+408 silly cache add   raw: 'fs.realpath@^1.0.0',
+408 silly cache add   scope: null,
+408 silly cache add   escapedName: 'fs.realpath',
+408 silly cache add   name: 'fs.realpath',
+408 silly cache add   rawSpec: '^1.0.0',
+408 silly cache add   spec: '>=1.0.0 <2.0.0',
+408 silly cache add   type: 'range' }
+409 silly addNamed fs.realpath@>=1.0.0 <2.0.0
+410 verbose addNamed ">=1.0.0 <2.0.0" is a valid semver range for fs.realpath
+411 silly addNameRange { name: 'fs.realpath', range: '>=1.0.0 <2.0.0', hasData: false }
+412 silly mapToRegistry name fs.realpath
+413 silly mapToRegistry using default registry
+414 silly mapToRegistry registry https://registry.npmjs.com/
+415 silly mapToRegistry data Result {
+415 silly mapToRegistry   raw: 'fs.realpath',
+415 silly mapToRegistry   scope: null,
+415 silly mapToRegistry   escapedName: 'fs.realpath',
+415 silly mapToRegistry   name: 'fs.realpath',
+415 silly mapToRegistry   rawSpec: '',
+415 silly mapToRegistry   spec: 'latest',
+415 silly mapToRegistry   type: 'tag' }
+416 silly mapToRegistry uri https://registry.npmjs.com/fs.realpath
+417 verbose addNameRange registry:https://registry.npmjs.com/fs.realpath not in flight; fetching
+418 verbose get https://registry.npmjs.com/once not expired, no request
+419 silly resolveWithNewModule once@1.4.0 checking installable status
+420 silly cache add args [ 'once@^1.3.0', null ]
+421 verbose cache add spec once@^1.3.0
+422 silly cache add parsed spec Result {
+422 silly cache add   raw: 'once@^1.3.0',
+422 silly cache add   scope: null,
+422 silly cache add   escapedName: 'once',
+422 silly cache add   name: 'once',
+422 silly cache add   rawSpec: '^1.3.0',
+422 silly cache add   spec: '>=1.3.0 <2.0.0',
+422 silly cache add   type: 'range' }
+423 silly addNamed once@>=1.3.0 <2.0.0
+424 verbose addNamed ">=1.3.0 <2.0.0" is a valid semver range for once
+425 silly addNameRange { name: 'once', range: '>=1.3.0 <2.0.0', hasData: false }
+426 silly mapToRegistry name once
+427 silly mapToRegistry using default registry
+428 silly mapToRegistry registry https://registry.npmjs.com/
+429 silly mapToRegistry data Result {
+429 silly mapToRegistry   raw: 'once',
+429 silly mapToRegistry   scope: null,
+429 silly mapToRegistry   escapedName: 'once',
+429 silly mapToRegistry   name: 'once',
+429 silly mapToRegistry   rawSpec: '',
+429 silly mapToRegistry   spec: 'latest',
+429 silly mapToRegistry   type: 'tag' }
+430 silly mapToRegistry uri https://registry.npmjs.com/once
+431 verbose addNameRange registry:https://registry.npmjs.com/once not in flight; fetching
+432 verbose get https://registry.npmjs.com/inherits not expired, no request
+433 silly addNameRange number 2 { name: 'inherits', range: '>=2.0.0 <3.0.0', hasData: true }
+434 silly addNameRange versions [ 'inherits',
+434 silly addNameRange   [ '1.0.0', '2.0.0', '2.0.1', '1.0.1', '1.0.2', '2.0.3' ] ]
+435 silly addNamed inherits@2.0.3
+436 verbose addNamed "2.0.3" is a plain semver version for inherits
+437 verbose get https://registry.npmjs.com/inflight not expired, no request
+438 silly addNameRange number 2 { name: 'inflight', range: '>=1.0.4 <2.0.0', hasData: true }
+439 silly addNameRange versions [ 'inflight',
+439 silly addNameRange   [ '1.0.0', '1.0.1', '1.0.2', '1.0.3', '1.0.4', '1.0.5', '1.0.6' ] ]
+440 silly addNamed inflight@1.0.6
+441 verbose addNamed "1.0.6" is a plain semver version for inflight
+442 verbose get https://registry.npmjs.com/path-is-absolute not expired, no request
+443 silly addNameRange number 2 { name: 'path-is-absolute',
+443 silly addNameRange   range: '>=1.0.0 <2.0.0',
+443 silly addNameRange   hasData: true }
+444 silly addNameRange versions [ 'path-is-absolute', [ '1.0.0', '1.0.1' ] ]
+445 silly addNamed path-is-absolute@1.0.1
+446 verbose addNamed "1.0.1" is a plain semver version for path-is-absolute
+447 verbose get https://registry.npmjs.com/minimatch not expired, no request
+448 silly addNameRange number 2 { name: 'minimatch', range: '>=3.0.4 <4.0.0', hasData: true }
+449 silly addNameRange versions [ 'minimatch',
+449 silly addNameRange   [ '0.0.1',
+449 silly addNameRange     '0.0.2',
+449 silly addNameRange     '0.0.4',
+449 silly addNameRange     '0.0.5',
+449 silly addNameRange     '0.1.1',
+449 silly addNameRange     '0.1.2',
+449 silly addNameRange     '0.1.3',
+449 silly addNameRange     '0.1.4',
+449 silly addNameRange     '0.1.5',
+449 silly addNameRange     '0.2.0',
+449 silly addNameRange     '0.2.2',
+449 silly addNameRange     '0.2.3',
+449 silly addNameRange     '0.2.4',
+449 silly addNameRange     '0.2.5',
+449 silly addNameRange     '0.2.6',
+449 silly addNameRange     '0.2.7',
+449 silly addNameRange     '0.2.8',
+449 silly addNameRange     '0.2.9',
+449 silly addNameRange     '0.2.10',
+449 silly addNameRange     '0.2.11',
+449 silly addNameRange     '0.2.12',
+449 silly addNameRange     '0.2.13',
+449 silly addNameRange     '0.2.14',
+449 silly addNameRange     '0.3.0',
+449 silly addNameRange     '0.4.0',
+449 silly addNameRange     '1.0.0',
+449 silly addNameRange     '2.0.0',
+449 silly addNameRange     '2.0.1',
+449 silly addNameRange     '2.0.2',
+449 silly addNameRange     '2.0.3',
+449 silly addNameRange     '2.0.4',
+449 silly addNameRange     '2.0.5',
+449 silly addNameRange     '2.0.6',
+449 silly addNameRange     '2.0.7',
+449 silly addNameRange     '2.0.8',
+449 silly addNameRange     '2.0.9',
+449 silly addNameRange     '2.0.10',
+449 silly addNameRange     '3.0.0',
+449 silly addNameRange     '3.0.2',
+449 silly addNameRange     '3.0.3',
+449 silly addNameRange     '3.0.4' ] ]
+450 silly addNamed minimatch@3.0.4
+451 verbose addNamed "3.0.4" is a plain semver version for minimatch
+452 verbose get https://registry.npmjs.com/fs.realpath not expired, no request
+453 silly addNameRange number 2 { name: 'fs.realpath', range: '>=1.0.0 <2.0.0', hasData: true }
+454 silly addNameRange versions [ 'fs.realpath', [ '0.0.0', '1.0.0' ] ]
+455 silly addNamed fs.realpath@1.0.0
+456 verbose addNamed "1.0.0" is a plain semver version for fs.realpath
+457 verbose get https://registry.npmjs.com/once not expired, no request
+458 silly addNameRange number 2 { name: 'once', range: '>=1.3.0 <2.0.0', hasData: true }
+459 silly addNameRange versions [ 'once',
+459 silly addNameRange   [ '1.1.1', '1.2.0', '1.3.0', '1.3.1', '1.3.2', '1.3.3', '1.4.0' ] ]
+460 silly addNamed once@1.4.0
+461 verbose addNamed "1.4.0" is a plain semver version for once
+462 silly cache afterAdd inherits@2.0.3
+463 verbose afterAdd /Users/hocnguyen/.npm/inherits/2.0.3/package/package.json not in flight; writing
+464 verbose correctMkdir /Users/hocnguyen/.npm correctMkdir not in flight; initializing
+465 silly cache afterAdd inflight@1.0.6
+466 verbose afterAdd /Users/hocnguyen/.npm/inflight/1.0.6/package/package.json not in flight; writing
+467 verbose correctMkdir /Users/hocnguyen/.npm correctMkdir not in flight; initializing
+468 silly cache afterAdd path-is-absolute@1.0.1
+469 verbose afterAdd /Users/hocnguyen/.npm/path-is-absolute/1.0.1/package/package.json not in flight; writing
+470 verbose correctMkdir /Users/hocnguyen/.npm correctMkdir not in flight; initializing
+471 silly cache afterAdd minimatch@3.0.4
+472 verbose afterAdd /Users/hocnguyen/.npm/minimatch/3.0.4/package/package.json not in flight; writing
+473 verbose correctMkdir /Users/hocnguyen/.npm correctMkdir not in flight; initializing
+474 silly cache afterAdd fs.realpath@1.0.0
+475 verbose afterAdd /Users/hocnguyen/.npm/fs.realpath/1.0.0/package/package.json not in flight; writing
+476 verbose correctMkdir /Users/hocnguyen/.npm correctMkdir not in flight; initializing
+477 silly cache afterAdd once@1.4.0
+478 verbose afterAdd /Users/hocnguyen/.npm/once/1.4.0/package/package.json not in flight; writing
+479 verbose correctMkdir /Users/hocnguyen/.npm correctMkdir not in flight; initializing
+480 verbose afterAdd /Users/hocnguyen/.npm/inflight/1.0.6/package/package.json written
+481 verbose afterAdd /Users/hocnguyen/.npm/minimatch/3.0.4/package/package.json written
+482 verbose afterAdd /Users/hocnguyen/.npm/inherits/2.0.3/package/package.json written
+483 verbose afterAdd /Users/hocnguyen/.npm/path-is-absolute/1.0.1/package/package.json written
+484 verbose afterAdd /Users/hocnguyen/.npm/fs.realpath/1.0.0/package/package.json written
+485 verbose afterAdd /Users/hocnguyen/.npm/once/1.4.0/package/package.json written
+486 silly fetchNamedPackageData wrappy
+487 silly mapToRegistry name wrappy
+488 silly mapToRegistry using default registry
+489 silly mapToRegistry registry https://registry.npmjs.com/
+490 silly mapToRegistry data Result {
+490 silly mapToRegistry   raw: 'wrappy',
+490 silly mapToRegistry   scope: null,
+490 silly mapToRegistry   escapedName: 'wrappy',
+490 silly mapToRegistry   name: 'wrappy',
+490 silly mapToRegistry   rawSpec: '',
+490 silly mapToRegistry   spec: 'latest',
+490 silly mapToRegistry   type: 'tag' }
+491 silly mapToRegistry uri https://registry.npmjs.com/wrappy
+492 verbose get https://registry.npmjs.com/wrappy not expired, no request
+493 silly resolveWithNewModule wrappy@1.0.2 checking installable status
+494 silly cache add args [ 'wrappy@1', null ]
+495 verbose cache add spec wrappy@1
+496 silly cache add parsed spec Result {
+496 silly cache add   raw: 'wrappy@1',
+496 silly cache add   scope: null,
+496 silly cache add   escapedName: 'wrappy',
+496 silly cache add   name: 'wrappy',
+496 silly cache add   rawSpec: '1',
+496 silly cache add   spec: '>=1.0.0 <2.0.0',
+496 silly cache add   type: 'range' }
+497 silly addNamed wrappy@>=1.0.0 <2.0.0
+498 verbose addNamed ">=1.0.0 <2.0.0" is a valid semver range for wrappy
+499 silly addNameRange { name: 'wrappy', range: '>=1.0.0 <2.0.0', hasData: false }
+500 silly mapToRegistry name wrappy
+501 silly mapToRegistry using default registry
+502 silly mapToRegistry registry https://registry.npmjs.com/
+503 silly mapToRegistry data Result {
+503 silly mapToRegistry   raw: 'wrappy',
+503 silly mapToRegistry   scope: null,
+503 silly mapToRegistry   escapedName: 'wrappy',
+503 silly mapToRegistry   name: 'wrappy',
+503 silly mapToRegistry   rawSpec: '',
+503 silly mapToRegistry   spec: 'latest',
+503 silly mapToRegistry   type: 'tag' }
+504 silly mapToRegistry uri https://registry.npmjs.com/wrappy
+505 verbose addNameRange registry:https://registry.npmjs.com/wrappy not in flight; fetching
+506 verbose get https://registry.npmjs.com/wrappy not expired, no request
+507 silly addNameRange number 2 { name: 'wrappy', range: '>=1.0.0 <2.0.0', hasData: true }
+508 silly addNameRange versions [ 'wrappy', [ '1.0.0', '1.0.1', '1.0.2' ] ]
+509 silly addNamed wrappy@1.0.2
+510 verbose addNamed "1.0.2" is a plain semver version for wrappy
+511 silly cache afterAdd wrappy@1.0.2
+512 verbose afterAdd /Users/hocnguyen/.npm/wrappy/1.0.2/package/package.json not in flight; writing
+513 verbose correctMkdir /Users/hocnguyen/.npm correctMkdir not in flight; initializing
+514 verbose afterAdd /Users/hocnguyen/.npm/wrappy/1.0.2/package/package.json written
+515 silly fetchNamedPackageData brace-expansion
+516 silly mapToRegistry name brace-expansion
+517 silly mapToRegistry using default registry
+518 silly mapToRegistry registry https://registry.npmjs.com/
+519 silly mapToRegistry data Result {
+519 silly mapToRegistry   raw: 'brace-expansion',
+519 silly mapToRegistry   scope: null,
+519 silly mapToRegistry   escapedName: 'brace-expansion',
+519 silly mapToRegistry   name: 'brace-expansion',
+519 silly mapToRegistry   rawSpec: '',
+519 silly mapToRegistry   spec: 'latest',
+519 silly mapToRegistry   type: 'tag' }
+520 silly mapToRegistry uri https://registry.npmjs.com/brace-expansion
+521 verbose get https://registry.npmjs.com/brace-expansion not expired, no request
+522 silly resolveWithNewModule brace-expansion@1.1.8 checking installable status
+523 silly cache add args [ 'brace-expansion@^1.1.7', null ]
+524 verbose cache add spec brace-expansion@^1.1.7
+525 silly cache add parsed spec Result {
+525 silly cache add   raw: 'brace-expansion@^1.1.7',
+525 silly cache add   scope: null,
+525 silly cache add   escapedName: 'brace-expansion',
+525 silly cache add   name: 'brace-expansion',
+525 silly cache add   rawSpec: '^1.1.7',
+525 silly cache add   spec: '>=1.1.7 <2.0.0',
+525 silly cache add   type: 'range' }
+526 silly addNamed brace-expansion@>=1.1.7 <2.0.0
+527 verbose addNamed ">=1.1.7 <2.0.0" is a valid semver range for brace-expansion
+528 silly addNameRange { name: 'brace-expansion',
+528 silly addNameRange   range: '>=1.1.7 <2.0.0',
+528 silly addNameRange   hasData: false }
+529 silly mapToRegistry name brace-expansion
+530 silly mapToRegistry using default registry
+531 silly mapToRegistry registry https://registry.npmjs.com/
+532 silly mapToRegistry data Result {
+532 silly mapToRegistry   raw: 'brace-expansion',
+532 silly mapToRegistry   scope: null,
+532 silly mapToRegistry   escapedName: 'brace-expansion',
+532 silly mapToRegistry   name: 'brace-expansion',
+532 silly mapToRegistry   rawSpec: '',
+532 silly mapToRegistry   spec: 'latest',
+532 silly mapToRegistry   type: 'tag' }
+533 silly mapToRegistry uri https://registry.npmjs.com/brace-expansion
+534 verbose addNameRange registry:https://registry.npmjs.com/brace-expansion not in flight; fetching
+535 verbose get https://registry.npmjs.com/brace-expansion not expired, no request
+536 silly addNameRange number 2 { name: 'brace-expansion',
+536 silly addNameRange   range: '>=1.1.7 <2.0.0',
+536 silly addNameRange   hasData: true }
+537 silly addNameRange versions [ 'brace-expansion',
+537 silly addNameRange   [ '0.0.0',
+537 silly addNameRange     '1.0.0',
+537 silly addNameRange     '1.0.1',
+537 silly addNameRange     '1.1.0',
+537 silly addNameRange     '1.1.1',
+537 silly addNameRange     '1.1.2',
+537 silly addNameRange     '1.1.3',
+537 silly addNameRange     '1.1.4',
+537 silly addNameRange     '1.1.5',
+537 silly addNameRange     '1.1.6',
+537 silly addNameRange     '1.1.7',
+537 silly addNameRange     '1.1.8' ] ]
+538 silly addNamed brace-expansion@1.1.8
+539 verbose addNamed "1.1.8" is a plain semver version for brace-expansion
+540 silly cache afterAdd brace-expansion@1.1.8
+541 verbose afterAdd /Users/hocnguyen/.npm/brace-expansion/1.1.8/package/package.json not in flight; writing
+542 verbose correctMkdir /Users/hocnguyen/.npm correctMkdir not in flight; initializing
+543 verbose afterAdd /Users/hocnguyen/.npm/brace-expansion/1.1.8/package/package.json written
+544 silly fetchNamedPackageData balanced-match
+545 silly mapToRegistry name balanced-match
+546 silly mapToRegistry using default registry
+547 silly mapToRegistry registry https://registry.npmjs.com/
+548 silly mapToRegistry data Result {
+548 silly mapToRegistry   raw: 'balanced-match',
+548 silly mapToRegistry   scope: null,
+548 silly mapToRegistry   escapedName: 'balanced-match',
+548 silly mapToRegistry   name: 'balanced-match',
+548 silly mapToRegistry   rawSpec: '',
+548 silly mapToRegistry   spec: 'latest',
+548 silly mapToRegistry   type: 'tag' }
+549 silly mapToRegistry uri https://registry.npmjs.com/balanced-match
+550 silly fetchNamedPackageData concat-map
+551 silly mapToRegistry name concat-map
+552 silly mapToRegistry using default registry
+553 silly mapToRegistry registry https://registry.npmjs.com/
+554 silly mapToRegistry data Result {
+554 silly mapToRegistry   raw: 'concat-map',
+554 silly mapToRegistry   scope: null,
+554 silly mapToRegistry   escapedName: 'concat-map',
+554 silly mapToRegistry   name: 'concat-map',
+554 silly mapToRegistry   rawSpec: '',
+554 silly mapToRegistry   spec: 'latest',
+554 silly mapToRegistry   type: 'tag' }
+555 silly mapToRegistry uri https://registry.npmjs.com/concat-map
+556 verbose get https://registry.npmjs.com/balanced-match not expired, no request
+557 silly resolveWithNewModule balanced-match@1.0.0 checking installable status
+558 silly cache add args [ 'balanced-match@^1.0.0', null ]
+559 verbose cache add spec balanced-match@^1.0.0
+560 silly cache add parsed spec Result {
+560 silly cache add   raw: 'balanced-match@^1.0.0',
+560 silly cache add   scope: null,
+560 silly cache add   escapedName: 'balanced-match',
+560 silly cache add   name: 'balanced-match',
+560 silly cache add   rawSpec: '^1.0.0',
+560 silly cache add   spec: '>=1.0.0 <2.0.0',
+560 silly cache add   type: 'range' }
+561 silly addNamed balanced-match@>=1.0.0 <2.0.0
+562 verbose addNamed ">=1.0.0 <2.0.0" is a valid semver range for balanced-match
+563 silly addNameRange { name: 'balanced-match',
+563 silly addNameRange   range: '>=1.0.0 <2.0.0',
+563 silly addNameRange   hasData: false }
+564 silly mapToRegistry name balanced-match
+565 silly mapToRegistry using default registry
+566 silly mapToRegistry registry https://registry.npmjs.com/
+567 silly mapToRegistry data Result {
+567 silly mapToRegistry   raw: 'balanced-match',
+567 silly mapToRegistry   scope: null,
+567 silly mapToRegistry   escapedName: 'balanced-match',
+567 silly mapToRegistry   name: 'balanced-match',
+567 silly mapToRegistry   rawSpec: '',
+567 silly mapToRegistry   spec: 'latest',
+567 silly mapToRegistry   type: 'tag' }
+568 silly mapToRegistry uri https://registry.npmjs.com/balanced-match
+569 verbose addNameRange registry:https://registry.npmjs.com/balanced-match not in flight; fetching
+570 verbose get https://registry.npmjs.com/concat-map not expired, no request
+571 silly resolveWithNewModule concat-map@0.0.1 checking installable status
+572 silly cache add args [ 'concat-map@0.0.1', null ]
+573 verbose cache add spec concat-map@0.0.1
+574 silly cache add parsed spec Result {
+574 silly cache add   raw: 'concat-map@0.0.1',
+574 silly cache add   scope: null,
+574 silly cache add   escapedName: 'concat-map',
+574 silly cache add   name: 'concat-map',
+574 silly cache add   rawSpec: '0.0.1',
+574 silly cache add   spec: '0.0.1',
+574 silly cache add   type: 'version' }
+575 silly addNamed concat-map@0.0.1
+576 verbose addNamed "0.0.1" is a plain semver version for concat-map
+577 silly mapToRegistry name concat-map
+578 silly mapToRegistry using default registry
+579 silly mapToRegistry registry https://registry.npmjs.com/
+580 silly mapToRegistry data Result {
+580 silly mapToRegistry   raw: 'concat-map',
+580 silly mapToRegistry   scope: null,
+580 silly mapToRegistry   escapedName: 'concat-map',
+580 silly mapToRegistry   name: 'concat-map',
+580 silly mapToRegistry   rawSpec: '',
+580 silly mapToRegistry   spec: 'latest',
+580 silly mapToRegistry   type: 'tag' }
+581 silly mapToRegistry uri https://registry.npmjs.com/concat-map
+582 verbose addNameVersion registry:https://registry.npmjs.com/concat-map not in flight; fetching
+583 verbose get https://registry.npmjs.com/balanced-match not expired, no request
+584 silly addNameRange number 2 { name: 'balanced-match',
+584 silly addNameRange   range: '>=1.0.0 <2.0.0',
+584 silly addNameRange   hasData: true }
+585 silly addNameRange versions [ 'balanced-match',
+585 silly addNameRange   [ '0.0.0',
+585 silly addNameRange     '0.0.1',
+585 silly addNameRange     '0.1.0',
+585 silly addNameRange     '0.2.0',
+585 silly addNameRange     '0.2.1',
+585 silly addNameRange     '0.3.0',
+585 silly addNameRange     '0.4.0',
+585 silly addNameRange     '0.4.1',
+585 silly addNameRange     '0.4.2',
+585 silly addNameRange     '1.0.0' ] ]
+586 silly addNamed balanced-match@1.0.0
+587 verbose addNamed "1.0.0" is a plain semver version for balanced-match
+588 verbose get https://registry.npmjs.com/concat-map not expired, no request
+589 silly cache afterAdd balanced-match@1.0.0
+590 verbose afterAdd /Users/hocnguyen/.npm/balanced-match/1.0.0/package/package.json not in flight; writing
+591 verbose correctMkdir /Users/hocnguyen/.npm correctMkdir not in flight; initializing
+592 silly cache afterAdd concat-map@0.0.1
+593 verbose afterAdd /Users/hocnguyen/.npm/concat-map/0.0.1/package/package.json not in flight; writing
+594 verbose correctMkdir /Users/hocnguyen/.npm correctMkdir not in flight; initializing
+595 verbose afterAdd /Users/hocnguyen/.npm/concat-map/0.0.1/package/package.json written
+596 verbose afterAdd /Users/hocnguyen/.npm/balanced-match/1.0.0/package/package.json written
+597 silly fetchNamedPackageData minimist
+598 silly mapToRegistry name minimist
+599 silly mapToRegistry using default registry
+600 silly mapToRegistry registry https://registry.npmjs.com/
+601 silly mapToRegistry data Result {
+601 silly mapToRegistry   raw: 'minimist',
+601 silly mapToRegistry   scope: null,
+601 silly mapToRegistry   escapedName: 'minimist',
+601 silly mapToRegistry   name: 'minimist',
+601 silly mapToRegistry   rawSpec: '',
+601 silly mapToRegistry   spec: 'latest',
+601 silly mapToRegistry   type: 'tag' }
+602 silly mapToRegistry uri https://registry.npmjs.com/minimist
+603 verbose get https://registry.npmjs.com/minimist not expired, no request
+604 silly resolveWithNewModule minimist@0.0.8 checking installable status
+605 silly cache add args [ 'minimist@0.0.8', null ]
+606 verbose cache add spec minimist@0.0.8
+607 silly cache add parsed spec Result {
+607 silly cache add   raw: 'minimist@0.0.8',
+607 silly cache add   scope: null,
+607 silly cache add   escapedName: 'minimist',
+607 silly cache add   name: 'minimist',
+607 silly cache add   rawSpec: '0.0.8',
+607 silly cache add   spec: '0.0.8',
+607 silly cache add   type: 'version' }
+608 silly addNamed minimist@0.0.8
+609 verbose addNamed "0.0.8" is a plain semver version for minimist
+610 silly mapToRegistry name minimist
+611 silly mapToRegistry using default registry
+612 silly mapToRegistry registry https://registry.npmjs.com/
+613 silly mapToRegistry data Result {
+613 silly mapToRegistry   raw: 'minimist',
+613 silly mapToRegistry   scope: null,
+613 silly mapToRegistry   escapedName: 'minimist',
+613 silly mapToRegistry   name: 'minimist',
+613 silly mapToRegistry   rawSpec: '',
+613 silly mapToRegistry   spec: 'latest',
+613 silly mapToRegistry   type: 'tag' }
+614 silly mapToRegistry uri https://registry.npmjs.com/minimist
+615 verbose addNameVersion registry:https://registry.npmjs.com/minimist not in flight; fetching
+616 verbose get https://registry.npmjs.com/minimist not expired, no request
+617 silly cache afterAdd minimist@0.0.8
+618 verbose afterAdd /Users/hocnguyen/.npm/minimist/0.0.8/package/package.json not in flight; writing
+619 verbose correctMkdir /Users/hocnguyen/.npm correctMkdir not in flight; initializing
+620 verbose afterAdd /Users/hocnguyen/.npm/minimist/0.0.8/package/package.json written
+621 silly fetchNamedPackageData has-flag
+622 silly mapToRegistry name has-flag
+623 silly mapToRegistry using default registry
+624 silly mapToRegistry registry https://registry.npmjs.com/
+625 silly mapToRegistry data Result {
+625 silly mapToRegistry   raw: 'has-flag',
+625 silly mapToRegistry   scope: null,
+625 silly mapToRegistry   escapedName: 'has-flag',
+625 silly mapToRegistry   name: 'has-flag',
+625 silly mapToRegistry   rawSpec: '',
+625 silly mapToRegistry   spec: 'latest',
+625 silly mapToRegistry   type: 'tag' }
+626 silly mapToRegistry uri https://registry.npmjs.com/has-flag
+627 verbose get https://registry.npmjs.com/has-flag not expired, no request
+628 silly resolveWithNewModule has-flag@2.0.0 checking installable status
+629 silly cache add args [ 'has-flag@^2.0.0', null ]
+630 verbose cache add spec has-flag@^2.0.0
+631 silly cache add parsed spec Result {
+631 silly cache add   raw: 'has-flag@^2.0.0',
+631 silly cache add   scope: null,
+631 silly cache add   escapedName: 'has-flag',
+631 silly cache add   name: 'has-flag',
+631 silly cache add   rawSpec: '^2.0.0',
+631 silly cache add   spec: '>=2.0.0 <3.0.0',
+631 silly cache add   type: 'range' }
+632 silly addNamed has-flag@>=2.0.0 <3.0.0
+633 verbose addNamed ">=2.0.0 <3.0.0" is a valid semver range for has-flag
+634 silly addNameRange { name: 'has-flag', range: '>=2.0.0 <3.0.0', hasData: false }
+635 silly mapToRegistry name has-flag
+636 silly mapToRegistry using default registry
+637 silly mapToRegistry registry https://registry.npmjs.com/
+638 silly mapToRegistry data Result {
+638 silly mapToRegistry   raw: 'has-flag',
+638 silly mapToRegistry   scope: null,
+638 silly mapToRegistry   escapedName: 'has-flag',
+638 silly mapToRegistry   name: 'has-flag',
+638 silly mapToRegistry   rawSpec: '',
+638 silly mapToRegistry   spec: 'latest',
+638 silly mapToRegistry   type: 'tag' }
+639 silly mapToRegistry uri https://registry.npmjs.com/has-flag
+640 verbose addNameRange registry:https://registry.npmjs.com/has-flag not in flight; fetching
+641 verbose get https://registry.npmjs.com/has-flag not expired, no request
+642 silly addNameRange number 2 { name: 'has-flag', range: '>=2.0.0 <3.0.0', hasData: true }
+643 silly addNameRange versions [ 'has-flag', [ '1.0.0', '2.0.0', '3.0.0' ] ]
+644 silly addNamed has-flag@2.0.0
+645 verbose addNamed "2.0.0" is a plain semver version for has-flag
+646 silly cache afterAdd has-flag@2.0.0
+647 verbose afterAdd /Users/hocnguyen/.npm/has-flag/2.0.0/package/package.json not in flight; writing
+648 verbose correctMkdir /Users/hocnguyen/.npm correctMkdir not in flight; initializing
+649 verbose afterAdd /Users/hocnguyen/.npm/has-flag/2.0.0/package/package.json written
+650 silly loadAllDepsIntoIdealTree Finishing
+651 silly loadIdealTree Finishing
+652 silly currentTree lib
+652 silly currentTree └─┬ mocha@5.0.0
+652 silly currentTree   ├── balanced-match@1.0.0
+652 silly currentTree   ├── brace-expansion@1.1.8
+652 silly currentTree   ├── browser-stdout@1.3.0
+652 silly currentTree   ├── commander@2.11.0
+652 silly currentTree   ├── concat-map@0.0.1
+652 silly currentTree   ├── debug@3.1.0
+652 silly currentTree   ├── diff@3.3.1
+652 silly currentTree   ├── escape-string-regexp@1.0.5
+652 silly currentTree   ├── fs.realpath@1.0.0
+652 silly currentTree   ├── glob@7.1.2
+652 silly currentTree   ├── growl@1.10.3
+652 silly currentTree   ├── has-flag@2.0.0
+652 silly currentTree   ├── he@1.1.1
+652 silly currentTree   ├── inflight@1.0.6
+652 silly currentTree   ├── inherits@2.0.3
+652 silly currentTree   ├── minimatch@3.0.4
+652 silly currentTree   ├── minimist@0.0.8
+652 silly currentTree   ├── mkdirp@0.5.1
+652 silly currentTree   ├── ms@2.0.0
+652 silly currentTree   ├── once@1.4.0
+652 silly currentTree   ├── path-is-absolute@1.0.1
+652 silly currentTree   ├── supports-color@4.4.0
+652 silly currentTree   └── wrappy@1.0.2
+653 silly idealTree lib
+653 silly idealTree └─┬ mocha@5.0.0
+653 silly idealTree   ├── balanced-match@1.0.0
+653 silly idealTree   ├── brace-expansion@1.1.8
+653 silly idealTree   ├── browser-stdout@1.3.0
+653 silly idealTree   ├── commander@2.11.0
+653 silly idealTree   ├── concat-map@0.0.1
+653 silly idealTree   ├── debug@3.1.0
+653 silly idealTree   ├── diff@3.3.1
+653 silly idealTree   ├── escape-string-regexp@1.0.5
+653 silly idealTree   ├── fs.realpath@1.0.0
+653 silly idealTree   ├── glob@7.1.2
+653 silly idealTree   ├── growl@1.10.3
+653 silly idealTree   ├── has-flag@2.0.0
+653 silly idealTree   ├── he@1.1.1
+653 silly idealTree   ├── inflight@1.0.6
+653 silly idealTree   ├── inherits@2.0.3
+653 silly idealTree   ├── minimatch@3.0.4
+653 silly idealTree   ├── minimist@0.0.8
+653 silly idealTree   ├── mkdirp@0.5.1
+653 silly idealTree   ├── ms@2.0.0
+653 silly idealTree   ├── once@1.4.0
+653 silly idealTree   ├── path-is-absolute@1.0.1
+653 silly idealTree   ├── supports-color@4.4.0
+653 silly idealTree   └── wrappy@1.0.2
+654 silly generateActionsToTake Starting
+655 silly install generateActionsToTake
+656 warn checkPermissions Missing write access to /usr/local/lib/node_modules/mocha
+657 warn checkPermissions Missing write access to /usr/local/lib/node_modules
+658 silly rollbackFailedOptional Starting
+659 silly rollbackFailedOptional Finishing
+660 silly runTopLevelLifecycles Finishing
+661 silly install printInstalled
+662 verbose stack Error: EACCES: permission denied, access '/usr/local/lib/node_modules/mocha'
+662 verbose stack     at Error (native)
+663 verbose cwd /Users/hocnguyen/Documents/chotot/property/projects/packages/study-form-widget/lib/data/test
+664 error Darwin 15.6.0
+665 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "-g" "mocha"
+666 error node v6.9.4
+667 error npm  v3.10.10
+668 error path /usr/local/lib/node_modules/mocha
+669 error code EACCES
+670 error errno -13
+671 error syscall access
+672 error Error: EACCES: permission denied, access '/usr/local/lib/node_modules/mocha'
+672 error     at Error (native)
+672 error  { Error: EACCES: permission denied, access '/usr/local/lib/node_modules/mocha'
+672 error     at Error (native)
+672 error   errno: -13,
+672 error   code: 'EACCES',
+672 error   syscall: 'access',
+672 error   path: '/usr/local/lib/node_modules/mocha' }
+673 error Please try running this command again as root/Administrator.
+674 verbose exit [ -13, true ]

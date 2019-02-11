@@ -1,0 +1,21 @@
+<template name="searchInput">
+  {{#unless notSearch}}
+    {{>Template.dynamic template=getTemplate data=getData}}
+  {{/unless}}
+</template>
+<template name="selectSearchInput">
+    <select class="search-input">
+      {{#each search.options}}
+        <option value="{{value}}" {{isSelected}}>{{display}}</option>
+      {{/each}}
+    </select>  
+</template>
+<template name="inputSearchInput">
+  <input class="search-input" type="text" placeholder="{{text}}" value="{{defaultValue}}"/>
+</template>
+<template name="dateSearchInput">
+  <input class="search-input" type="text" data-type="date" placeholder="[{<}{=}{>}]MM/DD/YYYY" value="{{defaultValue}}"/>
+</template>
+<template name="boolSearchInput">
+  <input class="search-input" type="text" data-type="date" placeholder="{{placeholder}}" value="{{defaultValue}}"/>
+</template>

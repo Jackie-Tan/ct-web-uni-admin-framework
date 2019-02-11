@@ -1,0 +1,28 @@
+<template name="selectOptions">
+  {{#each data}}
+    {{#if isSelected}}
+      {{#if is_disable}}
+      <option selected="selected" value="{{value}}" disabled>{{display}}</option>
+      {{else}}
+      <option selected="selected" value="{{value}}">{{display}}</option>
+      {{/if}}
+    {{else}}
+      {{#if is_disable}}
+        <option value="{{value}}" disabled>{{display}}</option>
+      {{else}}
+        <option value="{{value}}">{{display}}</option>
+      {{/if}}
+    {{/if}}
+  {{/each}}
+</template>
+<template name="selectInput">
+  {{#if isOptional}}
+    <select class="form-control select2" data-name="{{key}}" data-subtype="{{input.subtype}}">
+      {{> selectOptions}}
+    </select>
+  {{else}}
+    <select required class="form-control select2" data-name="{{key}}" data-subtype="{{input.subtype}}">
+      {{> selectOptions}}
+    </select>
+  {{/if}}
+</template>

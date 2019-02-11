@@ -1,0 +1,7 @@
+<template name="baseHeads">
+  {{#with data}}
+  {{#each heads}}
+    {{> inputSchema key=key opt=opt}}
+  {{/each}}
+  {{/with}}
+</template>

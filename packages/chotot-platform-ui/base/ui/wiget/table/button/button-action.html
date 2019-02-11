@@ -1,0 +1,58 @@
+<template name='buttonAction'>
+  {{#each actions}}
+    {{#if enable}}
+      {{>Template.dynamic template=getTemplate data=getData}}
+    {{/if}}
+  {{/each}}
+</template>
+<template name='defaultBtnAction'>
+  <button class="btn btn-primary transition btn-action" type="button" name="button" data-modal="base{{Name}}Data" data-action="{{name}}">
+    <i class="fa fa-plus"></i>
+    <span>{{Name}} Data</span>
+  </button>
+</template>
+<template name='editBtnAction'>
+  <button class="btn btn-primary btn-edit transition btn-action" type="button" name="button" data-id={{id}} data-modal="baseEditData" data-action="edit">
+    <i class="fa fa-pencil-square-o"></i>
+  </button>
+</template>
+<template name='boolBtnAction'>
+  {{> checkboxCellOutput}}
+</template>
+<template name='cellOutput'>
+  {{>Template.dynamic template=getTemplate data=this}}
+</template>
+<template name='textCellOutput'>
+  {{data}}
+</template>
+<template name='jsonCellOutput'>
+  {{parseData}}
+</template>
+<template name='dateCellOutput'>
+  {{formatDate this.data}}
+</template>
+<template name='datetimeCellOutput'>
+  {{formatTime this.data}}
+</template>
+<template name='logoCellOutput'>
+  <img height="40" src={{data}} onerror="this.src='/images/no-images.png'" class="logo-cell-output">
+</template>
+<template name='checkboxCellOutput'>
+  <button class="btn btn-primary btn-toggle-active transition btn-action" type="button" name="button" data-id="{{id}}" data-actived="{{toString isTrue}}" data-action="{{key}}" title="{{action}}" >
+
+    {{#if isTrue}}
+      <i class="fa fa-check"></i>
+    {{else}}
+      <i class="fa fa-times"></i>
+    {{/if}}
+  </button>
+</template>
+<template name='urlCellOutput'>
+  <a href="{{data}}">{{data}}</a>
+</template>
+<template name='linkCellOutput'>
+  <a href="{{getLink}}">{{data}}</a>
+</template>
+<template name='emailCellOutput'>
+  <a href="mailto:{{data}}">{{data}}</a>
+</template>

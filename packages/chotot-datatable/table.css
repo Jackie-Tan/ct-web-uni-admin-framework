@@ -1,0 +1,22 @@
+.datatable td {
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.datatable td:last-child {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.datatable .logo-cell-output {
+  max-height: 40px;
+  max-width: 100px;
+}
+.datatable .search-input {
+  width: 100%
+}
+.datatable .th-search {
+  padding: 10px;
+}

@@ -1,0 +1,20 @@
+<template name="forInForSchema">
+  {{#if config.isLoop}}
+    {{#forSchema key=key opt=opt}}
+      {{> forInForSchema}}
+    {{/forSchema}}
+  {{else}}
+    {{> OutInForSchema key=key opt=opt config=config}}
+  {{/if}}
+</template>
+<template name="OutInForSchema">
+  {{#if config.isBlock}}
+    {{#Template.dynamic template=template data=outPutDataWithBlock}}
+      {{#forSchema key=root.key opt=root.opt}}
+        {{> forInForSchema}}
+      {{/forSchema}}
+    {{/Template.dynamic}}
+  {{else}}
+    {{> Template.dynamic template=template data=outPutData}}
+  {{/if}}
+</template>

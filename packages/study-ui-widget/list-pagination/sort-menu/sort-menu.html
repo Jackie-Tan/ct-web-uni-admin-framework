@@ -1,0 +1,7 @@
+<template name="sortMenu">
+    <ul class="sub-menu">
+        {{#each sortType}}
+        <li class="{{isSelectedInSort}} cb-sort-pagination" data-field="{{field}}"><a href="">{{name}}</a></li>
+        {{/each}}
+    </ul>
+</template>
