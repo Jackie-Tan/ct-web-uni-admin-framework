@@ -1,0 +1,9 @@
+<template name="json.selectInput">
+  <div class="form-group {{displayClass}}">
+  {{#if items}}
+    {{#each items}}
+      {{> inputSchema key=key}}
+    {{/each}}
+  {{/if}}
+  </div>
+</template>

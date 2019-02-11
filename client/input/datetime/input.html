@@ -1,0 +1,12 @@
+<template name="datetimeInput">
+  <div class='input-group date datetimepicker'>
+    {{#if isOptional}}
+      <input type="text" class="form-control" placeholder="{{input.placeHolder}}" data-name="{{key}}" data-type="date">
+    {{else}}
+      <input required type="text" class="form-control" placeholder="{{input.placeHolder}}" data-name="{{key}}" data-type="date">
+    {{/if}}
+    <span class="input-group-addon">
+         <span class="fa fa-calendar"></span>
+     </span>
+  </div>
+</template>

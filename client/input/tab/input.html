@@ -1,0 +1,18 @@
+<template name="tabInput">
+  <div class="tabs-container">
+    <ul class="nav nav-tabs">
+      {{#each heads}}
+      <li class="{{#if isActive}}active{{/if}}"><a data-toggle="tab" href="#tab-{{key}}" aria-expanded="true"> {{{text}}}</a></li>
+      {{/each}}
+    </ul>
+    <div class="tab-content">
+      {{#each heads}}
+      <div id="tab-{{key}}" class="tab-pane {{#if isActive}}active{{/if}}">
+        <div class="panel-body">
+          {{> Template.contentBlock}}
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</template>

@@ -1,0 +1,14 @@
+{
+  "name": "admin-framework",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.0.0-beta.55",
+    "async-run": "^1.0.2",
+    "bcrypt": "^3.0.4",
+    "jquery": "^2.2.4",
+    "pg-escape": "^0.2.0"
+  }
+}

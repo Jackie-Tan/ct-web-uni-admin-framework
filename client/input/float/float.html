@@ -1,0 +1,7 @@
+<template name="floatInput">
+  {{#if isOptional}}
+    <input class="form-control" type="number" data-name="{{key}}" value={{value}} step="0.000000001" placeholder="{{input.placeHolder}}"/>
+  {{else}}
+    <input class="form-control" required type="number" data-name="{{key}}" value={{value}} step="0.000000001" placeholder="{{input.placeHolder}}"/>
+  {{/if}}
+</template>
