@@ -86,6 +86,7 @@ RoleDef = {
       },
       'pass': function (levels, ref) {
         let roles = this.do("map", this.do("conf_roles", ref));
+        console.log('roles', roles, levels);
         let isPass = false;
         // to string for compare indexOf
         levels = levels.map(function(i) {
@@ -107,17 +108,17 @@ RoleDef = {
           }
         }
         if (!isPass)
-          throw new Meteor.Error('You do not have permission for this ' + this._type);
+          throw new Meteor.Error('You do not have permission for this ' + this._type, ref);
       }
     },
     "do": {
       "conf_roles": function (ref) {
-        let refConf  = BaseTemplate.getCache('config', ref) || {};
+        let refConf = BaseTemplate.load(ref)._config || {};
         let roleField = (refConf.roles_config || {}).conf || "roles";
         return refConf[roleField];
       },
       "user_roles": function (user, ref) {
-        let refConf = BaseTemplate.getCache('config', ref) || {};
+        let refConf = BaseTemplate.load(ref)._config || {};
         let roleField = (ref && (refConf.roles_config || {}).user) || this._key;
         return user[roleField];
       },

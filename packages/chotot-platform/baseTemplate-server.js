@@ -43,6 +43,9 @@ class baseTemplate {
     }
 
   }
+  static load(name) {
+    return BaseTemplate.Instances[name] || {}
+  }
   static of(name, config) {
     if (BaseTemplate.Instances[name]) {
       return BaseTemplate.Instances[name]
