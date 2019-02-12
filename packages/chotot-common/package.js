@@ -12,6 +12,7 @@ Package.on_use(function (api, where) {
     'ads/map_ad_params.js',
     'ads/map_ad_params_centrailize_cconf.js',
     'ads/s_cp.js',
+    'sort.js'
   ]);
   api.add_files(['func/input-script.js'], 'client');
   api.add_files(['index.js']);

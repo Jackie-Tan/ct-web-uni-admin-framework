@@ -86,7 +86,6 @@ RoleDef = {
       },
       'pass': function (levels, ref) {
         let roles = this.do("map", this.do("conf_roles", ref));
-        console.log('roles', roles, levels);
         let isPass = false;
         // to string for compare indexOf
         levels = levels.map(function(i) {
