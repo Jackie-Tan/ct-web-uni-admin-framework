@@ -67,13 +67,14 @@ class baseTemplate {
     //config
     const adminModules = require('meteor/chotot:platform-modules');
     const {ACTIONS} = require('meteor/chotot:platform-modules/config');
+    let parent = {};
     let current = {};
     for (let cfgDir in ACTIONS) {
       let mConfig = adminModules.modules[md][cfgDir] || {};
       for (let mi in mConfig) {
         let name = md+'/'+mi;
         if (!current[name]) {
-          current[name] = {md, mi, name};
+          current[name] = {md, mi, name, parent};
         }
         let conf = mConfig[mi]() || {}; 
         if (typeof conf == 'object') {

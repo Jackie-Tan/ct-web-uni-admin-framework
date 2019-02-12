@@ -33,7 +33,6 @@ chotot:platform@0.0.1
 chotot:platform-ctp@0.0.1
 chotot:platform-modules@0.0.1
 chotot:platform-ui@0.0.1
-chotot:platform-view@0.0.1
 chotot:postgres-simple-query@0.0.1
 chotot:role@0.0.1
 chotot:user-management@0.0.1

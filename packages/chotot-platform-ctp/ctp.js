@@ -31,6 +31,7 @@ class ctp {
         if (more.template) {
             defMore = [['defMore', more.template]];
         }
+        logger.warn('ctp validator for ', template._context);
         let vTemplate = ctpComponent.of(this, template, defMore.concat([['defType', dcTemplate]])).get();
         for (let field in vTemplate) {
             if (dcTemplate._func[field]) {

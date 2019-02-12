@@ -20,11 +20,12 @@ base._component = {
     autoValue: ctpField.of(null, FUNCTION, STRING, ARRAY, OBJECT, BOOLEAN, NUMBER).desc('auto Value if null'),
     sort: ctpField.of(null, OBJECT).desc('sort options for a col'),
 
-
-    text: ctpField.of(null, STRING).desc('for label in input form'),
     isHidden: ctpField.of(null, BOOLEAN).desc('=== true will be only use in server'), // 
     isVisible: ctpField.of(null, BOOLEAN).desc('=== false, must be show by remove hide class'), //
     isOptional: ctpField.of(null, BOOLEAN).desc('=== false, it will be not require in form'), //
+    isDisabled: ctpField.of(null, BOOLEAN).desc('disbled this component, but can trigger to enable'),
+
+    text: ctpField.of(null, STRING).desc('for label in input form'),
     input: ctpField.of(null, OBJECT).desc('ui configuration'), // implement below
     events: ctpField.of(null, ARRAY).desc('list events will change state value of this component'),
     run: ctpField.of(null, OBJECT).desc('list function when using inputRun(_component_key_in_schema, _run_key) helpers. each function will use context is this component'),
@@ -38,6 +39,7 @@ base['_component.input'] = {
     boundClass: ctpField.of(null, STRING).desc('class before input form'),
     displayClass: ctpField.of(null, STRING).desc(''),
     labelClass: ctpField.of(null, STRING).desc('class bound lable in input form'),
+    hide: ctpField.of(null, BOOLEAN).desc('the componet using style display none'),
 
     enable: ctpField.of(null, BOOLEAN), //show but disable this but util change from another ref
     type: ctpField.of('text', STRING), //identify type 
@@ -50,7 +52,7 @@ base['_component.input'] = {
 
     isEdit: ctpField.of(null, BOOLEAN).desc('it will/not show in schema having data'),
     isAdd: ctpField.of(null, BOOLEAN).desc('it will/not show in schema without data'),
-
+    
     pong: ctpField.of(null, FUNCTION).desc('listen event from another component and do action here'),
     value: ctpField.of(null, FUNCTION),
     display: ctpField.of(null, FUNCTION), //state for display
@@ -63,7 +65,16 @@ base['_component.input'] = {
 
     label: ctpField.of(null, STRING).desc('json.images component props'),
     properties: ctpField.of(null, OBJECT).desc('json.images component props'),
-    refClass: ctpField.of(null, STRING).desc('radio components, refClass')
+    refClass: ctpField.of(null, STRING).desc('radio components, refClass'),
+    max: ctpField.of(null, NUMBER).desc('textarea components, max words'),
+    placeholder: ctpField.of(null, STRING).desc('text input components, when without text'),
+   
+    defaultValue: ctpField.of(null, STRING, NUMBER).desc('autocomplete components, default value'),
+    refId: ctpField.of(null, FUNCTION).desc('autocomplete components, find autocomplete for specific value'),
+    
+    fromToday: ctpField.of(null, BOOLEAN).desc('date components, enable value just only from today'),
+    disabledDates: ctpField.of(null, BOOLEAN),
+    date_opts: ctpField.of(null, BOOLEAN).desc('date components, datetimepickerjs opts')
 };
 //Event listener for Input
 base['_component.onInput'] = {
