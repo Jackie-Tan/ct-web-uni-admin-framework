@@ -5,7 +5,7 @@ Package.describe({
   });
   
   Package.onUse(function(api) {
-    api.use(['ecmascript', 'aldeed:simple-schema','aldeed:collection2']);
+    api.use(['ecmascript', 'aldeed:simple-schema','aldeed:collection2@2.10.0']);
     api.use(['reactive-var'], 'client');
     api.use([
       'chotot:logger',
