@@ -8,7 +8,7 @@ Npm.depends({
 });
 Package.on_use(function (api, where) {
   api.use(['ecmascript']);
-  api.use(['chotot:postgres-simple-query','chotot:navigation', 'chotot:role', 'aldeed:simple-schema', 'chotot:logger', 'chotot:platform-ctp'],['server']);
+  api.use(['chotot:postgres-simple-query', 'chotot:role', 'aldeed:simple-schema', 'chotot:logger', 'chotot:platform-ctp'],['server']);
   api.add_files([
     'lib/client/index.js',
     
