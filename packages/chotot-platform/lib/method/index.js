@@ -112,10 +112,12 @@ class Methods {
    return method && method.apply(this, Array.prototype.slice.call(arguments, 1))
   }
   add(action, func, opt){
+    const self = this;
     logger.debug(`add action ${action} to template ${this.name}`)
     const method = {
       [this.method+'/'+action]: (async function(){
         try {
+          this._methodIns = self;
           return await func.apply(this, arguments);
         } catch (e){
           logger.trace(e);

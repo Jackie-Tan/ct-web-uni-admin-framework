@@ -33,7 +33,7 @@ class baseTemplate {
             continue;
           }
           customActions[mKey.toLowerCase()] = true
-          methodIns.add(`${mKey}`,customMethods[mKey].bind(methodIns))
+          methodIns.add(`${mKey}`,customMethods[mKey])
         }
       }
       this.addRole(config, customActions);

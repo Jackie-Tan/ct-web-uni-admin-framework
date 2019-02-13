@@ -3,12 +3,20 @@ function capitalizeFirstLetter(string) {
 }
 
 function getTemplate(data) {
+  let {name} = data;
   if (data.withTable)
-  return 'BaseTemplateProject';
-  let name = data.name+'Custom';
-  if (!Template[name])
-    return 'baseTemplateCustom';
-  return name;
+    return 'BaseTemplateProject';
+  
+  let tName1 = name+'Custom';
+  if (Template[tName1]) {
+    return tName1;
+  }
+  //for backward, hope to be removed.
+  let tName2 = name.split('/').pop()+'Custom';
+  if (Template[tName2]) {
+    return tName2;
+  }
+  return 'baseTemplateCustom';
 }
 Template.baseTemplate.onCreated(function(){
   let data = Template.parentData()

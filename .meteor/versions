@@ -21,6 +21,7 @@ caching-compiler@1.1.12
 caching-html-compiler@1.1.2
 callback-hook@1.1.0
 check@1.3.1
+chotot:accounts-cp@1.3.0
 chotot:accounts-google@1.2.0
 chotot:bconf@1.3.0
 chotot:common@0.0.1

@@ -19,6 +19,7 @@ class baseTemplate {
     this._pings = {};
 
     if (Template[name]) {
+      console.warn('template name is exists, it may be get wrong effect')
       return;
     }
     Template[name] = new Template("Template."+name, (function() {
