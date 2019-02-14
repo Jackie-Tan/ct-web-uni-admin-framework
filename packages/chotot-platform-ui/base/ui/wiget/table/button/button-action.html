@@ -35,7 +35,7 @@
   {{formatTime this.data}}
 </template>
 <template name='logoCellOutput'>
-  <img height="40" src={{data}} onerror="this.src='/images/no-images.png'" class="logo-cell-output">
+  <img height="40" src={{data}} class="logo-cell-output">
 </template>
 <template name='checkboxCellOutput'>
   <button class="btn btn-primary btn-toggle-active transition btn-action" type="button" name="button" data-id="{{id}}" data-actived="{{toString isTrue}}" data-action="{{key}}" title="{{action}}" >
