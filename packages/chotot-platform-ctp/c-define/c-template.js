@@ -20,10 +20,13 @@ base._component = {
     prefix: ctpField.of(null, REQUIRED, STRING),
     display: ctpField.of(null, REQUIRED, STRING),
     roles: ctpField.of(null, REQUIRED, ARRAY),
+    attr: ctpField.of(null, OBJECT).desc('attr for redirect, check the object below'),
+    redirect: ctpField.of(null, STRING).desc('url to redirect when click to the module'),
     router: ctpField.of(null, STRING).desc("custom router for this module"),
     href: ctpField.of(null, STRING).desc('custom href to another route when clicking this module'),
     router_details: ctpField.of(null, STRING).desc('custom router details when click an item'),
     details: ctpField.of(null, OBJECT).desc('config for details page'),
+    
     
     layout: ctpField.of('mainLayout', STRING).desc('preload layout for this module'),
     preload: ctpField.of(null, FUNCTION).desc('preload lib for this module'),
@@ -38,6 +41,7 @@ base._component = {
     baseSchema: ctpField.of([], ARRAY).desc('list col autoValue when insert or update'),
     api_client: ctpField.of(null, OBJECT).desc('replace postgres db to API client interface'),
     api_env: ctpField.of(null, STRING).desc('add this.api_env to base ApiClient'),
+    clientData: ctpField.of(null, FUNCTION).desc('caching all data (of datatable in style I) from sever to client, listen change by  reactive var'),
     tracking: ctpField.of(null, OBJECT).desc('enable tracking when insert to update to action_historys'),
     col_id: ctpField.of(null, STRING, ARRAY).desc('unique value by column or columns for update'),
 
@@ -49,6 +53,9 @@ base._component = {
     actions_config: ctpField.of(null, OBJECT).desc('set permission for action in styleI')
 };
 
+base['_component.attr'] = {
+    target: ctpField.of(null, STRING).desc('ex: _blank, the target when click rediect. check more <a> for details')
+}
 base['_component.datatable'] = {
     "bigSearch": ctpField.of(null, BOOLEAN).desc('if is false will remove search all cols')
 },
@@ -70,7 +77,8 @@ base['_component.actions_config'] = {
     _dkey_action_conf: ctpField.of(null, OBJECT).desc('action that set permisison')
 };
 base['_component.actions_config._dkey_action_conf'] = {
-    role: ctpField.of(null, REQUIRED, NUMBER).desc('define role for an action')
+    role: ctpField.of(null, REQUIRED, NUMBER).desc('define role for an action'),
+    isFull: ctpField.of(null, BOOLEAN).desc('true is get All Data while send to server (for action "edit" only)'),
 };
 base._func = {
     // context is the ctp Template

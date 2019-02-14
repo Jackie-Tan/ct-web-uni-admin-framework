@@ -22,7 +22,7 @@ class ctp {
         return new ctp(name);
     }
     Component(component, more = []) {
-        let addons = [['defType', cBase.of('component')]].concat(more);
+        const addons = [['defType', cBase.of('component')]].concat(more);
         return ctpComponent.of(this, component, addons).get();
     }
     Template(template = {}, more = {}) {
@@ -31,13 +31,17 @@ class ctp {
         if (more.template) {
             defMore = [['defMore', more.template]];
         }
-        logger.warn('ctp validator for ', template._context);
-        let vTemplate = ctpComponent.of(this, template, defMore.concat([['defType', dcTemplate]])).get();
+        const addons = [['defType', dcTemplate]].concat(defMore.concat());
+        logger.warn(`--------------------begin validate template----------------------------`, this._name);
+        let vTemplate = ctpComponent.of(this, template, addons).get();
         for (let field in vTemplate) {
             if (dcTemplate._func[field]) {
+                logger.warn(`--begin ${field} ---`)
                 vTemplate[field] = dcTemplate._func[field].call(this, vTemplate[field], more.component);
+                logger.warn(`--end ${field} ---`)
             }
         }
+        logger.warn(`--------------------end validate template----------------------------`, this._name);
         return vTemplate;
     }
    

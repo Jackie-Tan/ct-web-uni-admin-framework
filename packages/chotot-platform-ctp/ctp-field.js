@@ -72,7 +72,7 @@ class ctpField {
         for (let key in data) {
             let field = fields[key];
             if (!field) {
-                logger.warn('the field', key, 'at', point, 'is missing define, it will affect to crash app!');
+                logger.warn('[WARN] the field', key, 'at', point, 'is missing define, it will affect to crash app!');
                 obj[key] = data[key];
                 continue;
             }

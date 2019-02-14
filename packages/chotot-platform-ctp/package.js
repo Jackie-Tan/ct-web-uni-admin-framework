@@ -13,7 +13,7 @@ Package.describe({
     ], 'server');
     api.add_files([
       'c-define/c-base.js',
-      'c-define/c-schema.js',
+      'c-define/c-component.js',
       'c-define/c-template.js',
     ], 'server');
     api.add_files([
