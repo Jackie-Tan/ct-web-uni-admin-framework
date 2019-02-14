@@ -49,6 +49,8 @@ base._component = {
     schema: ctpField.of(null, OBJECT).desc('define component for the module'),
     iRegister: ctpField.of([], ARRAY).desc('list internal, public urls that user have permission for this module can use'),
 
+    initData: ctpField.of(null, FUNCTION).desc('reformat data before show the schema '),
+
     roles_config: ctpField.of(null, OBJECT).desc('custom key to compare user and config permision'),
     actions_config: ctpField.of(null, OBJECT).desc('set permission for action in styleI')
 };

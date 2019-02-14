@@ -8,9 +8,14 @@ base._component = {
     schema_wrap: ctpField.of(null, OBJECT).desc('define an input will be in schema wrap'),
     metadata: ctpField.of(null, STRING).desc('define component type , currently we support view and input'), 
     key: ctpField.of(null, STRING).desc('define a key'), //
-    isBlock: ctpField.of(null, BOOLEAN).desc('the componet will bound its children component (in ui)'),
-    isLoop: ctpField.of(null, BOOLEAN).desc('ex: v1 isLoop, when we use forInFor that key, it will run a loop v1.a, v1.b ....'),
     use_view: ctpField.of(null, BOOLEAN).desc('if the input is disabled it will be a view'),
+//PARENT KEY
+    isBlock: ctpField.of(null, BOOLEAN).desc('(in ui), the component using span view-bound will bound its children component '),
+    isBreak: ctpField.of(null, BOOLEAN).desc('in ui, the component using div with class in displayClass to bound its children component'),
+    displayClass: ctpField.of(null, STRING).desc('support for isBreak'),
+    isLoop: ctpField.of(null, BOOLEAN).desc('ex: v1 isLoop, when we use forInFor that key, it will run a loop v1.a, v1.b ....'),
+    initData: ctpField.of(null, FUNCTION).desc('reformat data before transfer to its children'),
+
 //STYLE I
     width: ctpField.of(null, STRING).desc('in Style I, width of col'),
     notSearch: ctpField.of(false, BOOLEAN).desc('in Style I, filter by column will be disable by this props'),
@@ -30,6 +35,7 @@ base._component = {
     events: ctpField.of(null, ARRAY).desc('list events will change state value of this component'),
     run: ctpField.of(null, OBJECT).desc('list function when using inputRun(_component_key_in_schema, _run_key) helpers. each function will use context is this component'),
 
+    clean: ctpField.of(null, FUNCTION).desc('reformat data of the component before send to server'),
     spacebar: ctpField.of(null, OBJECT).desc('spacebar builder support'),
     onInput: ctpField.of(null, OBJECT).desc('event handle by selector'), // implement below
     onView: ctpField.of(null, OBJECT).desc('event handle by selector'), // implement below
@@ -55,6 +61,7 @@ base['_component.input'] = {
     isAdd: ctpField.of(null, BOOLEAN).desc('it will/not show in schema without data'),
     
     pong: ctpField.of(null, FUNCTION).desc('listen event from another component and do action here'),
+    pongView: ctpField.of(null, FUNCTION).desc('using same pong when the componet not have isInput'),
     value: ctpField.of(null, FUNCTION),
     display: ctpField.of(null, FUNCTION), //state for display
     validate: ctpField.of(null, FUNCTION).desc('the func validate value after changed'),
