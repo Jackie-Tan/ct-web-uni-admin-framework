@@ -47,10 +47,11 @@ Template.defaultBtnAction.helpers({
 
 Template.cellOutput.helpers({
   'getTemplate': function(){
-    const name = this.type + 'CellOutput';
+    const cellType = this.cell || this.type;
+    const name = cellType + 'CellOutput';
     if (Template[name])
       return name;
-    const defaultName = ("text"||this.type).split('.')[0]+'CellOutput'
+    const defaultName = ("text"|| cellType).split('.')[0]+'CellOutput';
     if (Template[defaultName])
       return defaultName;
     return 'textCellOutput';
