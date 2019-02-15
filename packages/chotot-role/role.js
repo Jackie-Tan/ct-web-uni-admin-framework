@@ -48,7 +48,7 @@ class Role {
   checkBaseRole(userId, nexts = []) {
     //IF superAdmin, go ahead
     //IF a user is Admin of a module He would have all permisison in this module
-    let {levels } = this.isSuperAdmin()
+    let { levels } = this.isSuperAdmin()
     const user = Meteor.users.findOne(userId) || {};
     let roleIns = roleDef.of('collection');
     let currentRoles = roleIns.do("map", user.role);
@@ -58,16 +58,16 @@ class Role {
     }
   }
   extendInfo(data) {
-    let {levels } = this.isSuperAdmin();
+    let { levels } = this.isSuperAdmin();
     const user = Meteor.users.findOne(data._id) || {};
     let roleIns = roleDef.of('collection');
-    for (let key of roleDef.user_keys) { 
+    for (let key of roleDef.user_keys) {
       if (!data[key])
         continue;
       let currentRoles = roleIns.do("map", user[key]);
       //keep role out of scope this admin
       let outScope = roleIns.do('out_scope', levels, currentRoles);
-      data[key] = _.union(outScope, roleIns.do("map",data[key]));
+      data[key] = _.union(outScope, roleIns.do("map", data[key]));
     }
   }
 
