@@ -14,7 +14,7 @@ const GET_NODE_FROM_META = function(meta) {
 const SPECIAL_RENDER = function(tpl, obj, input) {
   if (!input)
     return;
-  if (input.type != 'text' && Template[`${input.type}CellOutput`]) {
+  if (input.type != 'text' && input.cell !== false && Template[`${input.cell || input.type}CellOutput`]) {
     obj.render = function (data, type, full, meta) {
       let node = GET_NODE_FROM_META(meta);
       setTimeout(function(){
