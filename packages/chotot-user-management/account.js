@@ -129,11 +129,23 @@ Meteor.secureMethods({
   'Global/Users/UpdateInfo': function (data) {
     delete data.verify_password;
     delete data.password;
+    delete data.emails;
 
     return Role.of(Meteor.userId()).updateInfo(data);
   },
   'Global/Users/ResetPassword': function (data) {
-    return Role.of(Meteor.userId()).setPassword(data)
+    Role.of(Meteor.userId()).setPassword(data)
+
+    Email.send({
+      from: '',
+      to: data.email_address,
+      subject: 'Chotot: Admin-Center Reset Password',
+      html: `
+      Please login again at: ${process.env.ROOT_URL}/signout with:
+      <p>Email: <b>${data.email_address}</b></p>
+      <p>New Password: <b>${data.new_password}</b></p>
+      `
+    })
   },
   'Global/Users/Get': function (opt = {}) {
     let { query = {}, limit = 10, offset = 0, sort = '', columnSearch = [] } = opt;
