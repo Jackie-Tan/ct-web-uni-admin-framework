@@ -66,7 +66,7 @@ class baseTemplate {
       let prefix = name.slice(0, -1);
       for (let key in list) {
         let keySplit = key.split('/');
-        if (keySplit[0] == name) {
+        if (keySplit[0] == prefix) {
           group[keySplit[1]] = list[key];
         }
       }
