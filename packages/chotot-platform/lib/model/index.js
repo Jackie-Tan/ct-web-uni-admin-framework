@@ -125,7 +125,7 @@ class BaseModel {
         this.columns.push('id');
       }
       addColumns(this.columns, schema);
-      this.hookList = BaseTemplate.getCache('hook', config._context.md+'/'+name) || {}
+      this.hookList = BaseTemplate.getCache('hook', config._context.name) || {}
       //----S Cols
       this._sCols = {
         role: "role"
