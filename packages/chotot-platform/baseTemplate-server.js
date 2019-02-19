@@ -52,13 +52,27 @@ class baseTemplate {
     }
     new BaseTemplate(name, config);
   }
-  static getCache(key, name) {
+  static getCache(key, name = "") {
     const CACHING_KEY = `__${key}`;
     if (!BaseTemplate[CACHING_KEY])
       BaseTemplate[CACHING_KEY] = {};
+    var list = BaseTemplate[CACHING_KEY];
     if (!name)
-      return BaseTemplate[CACHING_KEY];
-    return BaseTemplate[CACHING_KEY][name];
+      return list;
+    if (list[name])
+      return list[name];
+    if (name.slice(-1) == "*") {
+      let group = {};
+      let prefix = name.slice(0, -1);
+      for (let key in list) {
+        let keySplit = key.split('/');
+        if (keySplit[0] == name) {
+          group[keySplit[1]] = list[key];
+        }
+      }
+      return group;
+    }
+    return {};
   }
   static caching(key, mi, conf) {
     const CACHING_KEY = `__${key}`;
