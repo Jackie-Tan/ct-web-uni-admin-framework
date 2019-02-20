@@ -71,6 +71,7 @@ Meteor.startup(function () {
 })
 
 import Role from 'meteor/chotot:role/role.js'
+import { DH_NOT_SUITABLE_GENERATOR } from 'constants';
 Meteor.secureMethods({
   'Global/Users/MigrateRoleToString': function () {
     let users = Meteor.users.find({}).fetch();
@@ -134,17 +135,18 @@ Meteor.secureMethods({
     return Role.of(Meteor.userId()).updateInfo(data);
   },
   'Global/Users/ResetPassword': function (data) {
-    Role.of(Meteor.userId()).setPassword(data)
-
+    let action_user = Role.of(Meteor.userId()) // current (logined user) admin that do set password for target user
+    let currentAdminEmail = action_user._user.emails[0].address
+    action_user.setPassword(data)
     Email.send({
       from: '',
       to: data.email_address,
       subject: 'Chotot: Admin-Center Reset Password',
       html: `
-      Please login again at: ${process.env.ROOT_URL}/signout with:
-      <p>Email: <b>${data.email_address}</b></p>
-      <p>New Password: <b>${data.new_password}</b></p>
-      `
+          ${currentAdminEmail} has changed your password. Please login again at: ${process.env.ROOT_URL}/signout with:
+          <p>Email: <b>${data.email_address}</b></p>
+          <p>New Password: <b>${data.new_password}</b></p>
+          `
     })
   },
   'Global/Users/Get': function (opt = {}) {
