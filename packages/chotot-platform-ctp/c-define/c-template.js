@@ -113,6 +113,13 @@ base._func = {
                 )
             );
         });
-    }
+    },
+    actions_config: function(components = {}, more = null) {
+        let res = {};
+        for (let key in components) {
+            res[key.toLowerCase()] = components[key];
+        }
+        return res;
+    } 
 };
 module.exports = base;

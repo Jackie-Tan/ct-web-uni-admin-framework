@@ -61,7 +61,7 @@ class Role {
     let { levels } = this.isSuperAdmin();
     const user = Meteor.users.findOne(data._id) || {};
     let roleIns = roleDef.of('collection');
-    for (let key of roleDef.user_keys) {
+    for (let key of [roleDef._key]) {
       if (!data[key])
         continue;
       let currentRoles = roleIns.do("map", user[key]);

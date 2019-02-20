@@ -21,14 +21,16 @@ RoleDef = {
       'pass': function (levels, ref) {
         let refSplit = ref.split('.');
         let tName = refSplit[0];
-        let aName = refSplit[1];
-        let template = BaseTemplate.getCache('config', tName);
+        let aName = refSplit[1] || "";
+        aName = aName.toLowerCase();
+        let template = BaseTemplate.of(tName)._config;
         let actionCfgs = template.actions_config || {};
-        let role = actionCfgs[aName] && actionCfgs[aName].role;
-        if (!role)
+        if (!actionCfgs[aName])
           return
+        let role = actionCfgs[aName].role;
         logger.trace('role validator action', role)
-        if (levels.indexOf(`${template}.${role.level}`) == -1)
+        console.log('DEBUGLOG',levels,`${tName}.${role}`)
+        if (levels.indexOf(`${tName}.${role}`) == -1)
           throw new Meteor.Error('You do not have permission for this ' + ref);
       }
     },
