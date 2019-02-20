@@ -6,12 +6,12 @@ const STATIC_URL = process.env.S3_STATIC_URL || 'https://static.chotot.com.vn/st
 const PATH = '/' + (process.env.S3_BUCKET || 'admin-centre');
 const encrypt = require('./lib/encrypt')
 import Request from 'request';
-Router.route('/s3-upload/:folder', {where: 'server'}).put(function () {
+const FWRequrest = function (length =2) {
   var request = this.request;
   var response = this.response;
   //TODO refactor headers
   let headers = {};
-  var FOLDER = '/'+request.originalUrl.split('/')[2];
+  var FOLDER = '/'+request.originalUrl.split('/').slice(-length).join('_');
   let time =(new Date()).toUTCString()
   let file_name = `${FOLDER}_${new Date().getTime()}.jpg`
   let s = `PUT\n\nimage/jpeg\n\nx-amz-acl:public-read\nx-amz-date:${time}\n${PATH+FOLDER+file_name}`;
@@ -30,5 +30,12 @@ Router.route('/s3-upload/:folder', {where: 'server'}).put(function () {
     response.writeHead(400, {"Content-Type": "application/json"});
     response.end(JSON.stringify({error: err.message}))
   });
+}
+Router.route('/s3-upload/:folder', {where: 'server'}).put(function () {
+  FWRequrest.call(this, 1);
+})
+
+Router.route('/s3-upload/:prefix/:folder', {where: 'server'}).put(function () {
+  FWRequrest.call(this, 2);
 })
 
