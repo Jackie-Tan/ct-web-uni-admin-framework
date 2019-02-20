@@ -38,9 +38,6 @@ class ctpField {
         if (vfunc.not(value)) {
             value = this._autovalue;
         }
-        if (typeof value == 'function') {
-            return '__('+value.toString()+')__end_func__';
-        }
         return value;
         
     }
