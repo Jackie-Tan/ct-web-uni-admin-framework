@@ -5,6 +5,7 @@ class Client {
       else
         this.api_url = process.env[api_env] || process.env.GATEWAY_URL || 'https://gateway.chotot.org'
       this.opt = {}
+      this.api_url = ("http://"+this.api_url).replace(/http[^s]*(s*)[^\/]\/\//, "http$1://");
       this.url = this.api_url + url;
     }
     static of(url, api_env){
