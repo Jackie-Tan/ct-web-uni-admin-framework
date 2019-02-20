@@ -71,7 +71,6 @@ Meteor.startup(function () {
 })
 
 import Role from 'meteor/chotot:role/role.js'
-import { DH_NOT_SUITABLE_GENERATOR } from 'constants';
 Meteor.secureMethods({
   'Global/Users/MigrateRoleToString': function () {
     let users = Meteor.users.find({}).fetch();
