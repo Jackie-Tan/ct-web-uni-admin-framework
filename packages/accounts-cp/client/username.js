@@ -36,7 +36,7 @@ Meteor.loginWithPassword = function (user, password, cb) {
           isCPLoggingIn.set(false);
 
           // set cookie with timeout 1 hour on login
-          setCookie('s', Meteor.user().services.cp.token, 3600, getDomain(process.env.NODE_ENV))
+          setCookie('s', Meteor.user().services.cp.token, 3600, getDomain(meteorEnv.NODE_ENV))
         }, 0)
         return Meteor.logoutOtherClients(cb)
       }
