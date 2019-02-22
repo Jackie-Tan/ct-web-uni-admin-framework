@@ -392,20 +392,24 @@ let func = {
     if (data.notices && data.notices.length) {
       for (let p of data.notices) {
         if (p.uid) {
+          p._type = 'usergroup';
           new_notices.usergroup = p;
           continue
         }
         if (p.user_id) {
+          p._type = 'user';
           new_notices.user = p;
           continue
         }
         if (p.ad_id) {
+          p._type = 'ad';
           new_notices.ad = p;
         }
       }
     }
     if (data.contact_notices && data.contact_notices.length) {
       for (let p of data.contact_notices) {
+        p._type = p.notice_type;
         new_notices[p.notice_type] = p;
       }
     }
