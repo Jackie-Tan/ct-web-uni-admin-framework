@@ -10,7 +10,7 @@ Template.baseDetailsPage.helpers({
   },
   'data': function(){
     const tpl = Template.instance();
-    return tpl.formData
+    return tpl.formData.get();
   },
   'isEditing': function(){
     return BaseSchema.of().get("isEditing")
@@ -21,7 +21,7 @@ Template.baseDetailsPage.helpers({
   }
 })
 Template.baseDetailsPage.onCreated(function(){
-  this.formData = new ReactiveVar({});
+  this.formData = new ReactiveVar();
   this.reload = new ReactiveVar();
   const self = this;
   const id = Router.current().params.id;

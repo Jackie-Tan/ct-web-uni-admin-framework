@@ -1,6 +1,7 @@
 <template name="baseDetailsPage">
   <div id="over-view-page" class="row  border-bottom white-bg dashboard-header base-details-page">
     <h2> Over View </h2>
+    {{#if data}}
     {{#baseSchema name=name data=data}}
     <form id="over-view-form" role="form" data-toggle="validator" class="row">
         {{#if isEditing}}
@@ -28,5 +29,6 @@
       </div>
     </div>
     {{/baseSchema}}
+    {{/if}}
   </div>
 </template>
