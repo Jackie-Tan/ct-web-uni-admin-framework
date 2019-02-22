@@ -14,16 +14,17 @@ const GET_NODE_FROM_META = function(meta) {
 const SPECIAL_RENDER = function(tpl, obj, input) {
   if (!input)
     return;
-  if (input.type != 'text' && input.cell !== false && Template[`${input.cell || input.type}CellOutput`]) {
+  const cellType = input.cell || input.type;
+  if (cellType != 'text' && input.cell !== false && Template[`${cellType}CellOutput`]) {
     obj.render = function (data, type, full, meta) {
       let node = GET_NODE_FROM_META(meta);
       setTimeout(function(){
         if (node.innerHTML)
           return;
         Blaze.renderWithData(Template.cellOutput, {
-          type: input.type,
-          data: MAP_DATA(input, data, full),
-          input: input
+          cellType,
+          input,
+          data: MAP_DATA(input, data, full)
         }, node);
       })
       return "";

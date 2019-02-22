@@ -18,6 +18,14 @@ Template.baseDetailsPage.helpers({
   'actions': function () {
     let details = BaseTemplate.of()._config.details
     return (details && details.actions) || []
+  },
+  'cellType': function() {
+    let {input} = this;
+    let cellType = input.cell || input.type;
+    if (cellType != 'text' && input.cell !== false) {
+      return cellType;
+    }
+    return false;
   }
 })
 Template.baseDetailsPage.onCreated(function(){

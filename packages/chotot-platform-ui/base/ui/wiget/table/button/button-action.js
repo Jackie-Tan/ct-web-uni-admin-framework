@@ -47,7 +47,7 @@ Template.defaultBtnAction.helpers({
 
 Template.cellOutput.helpers({
   'getTemplate': function(){
-    const cellType = this.cell || this.type;
+    const {cellType} = this;
     const name = cellType + 'CellOutput';
     if (Template[name])
       return name;

@@ -14,7 +14,11 @@
               {{#if value}}
                 <div class="form-group {{displayClass}}">
                   <label>{{text}}</label>
-                  {{> cellOutput type=type data=value input=input}}
+                  {{#if cellType}}
+                    {{> cellOutput cellType=cellType data=value input=input}}
+                  {{else}} 
+                    {{value}}
+                  {{/if}}
                 </div>
               {{/if}}
             {{/viewSchema}}
