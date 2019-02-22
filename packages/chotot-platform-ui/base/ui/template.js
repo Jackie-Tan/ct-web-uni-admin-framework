@@ -19,7 +19,9 @@ function getTemplate(data) {
   return 'baseTemplateCustom';
 }
 Template.baseTemplate.onCreated(function(){
-  let data = Template.parentData()
+  let data = Template.parentData();
+  BaseTemplate.of().clearSchema();
+  BaseTemplate.of().clearDependency();
   this._tplName = getTemplate(data || this.data)
   this.comp = this.autorun(function(){
     if (!Meteor.user() || Accounts._loggingIn.get()) {
