@@ -41,7 +41,7 @@ var Images= {
           },
           error: function(error){
             console.error(error);
-            resolve('');
+            reject('');
           }
       });
     })
