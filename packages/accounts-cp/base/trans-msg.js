@@ -35,24 +35,12 @@ class TransClient {
   send(cmd, method, body, opt) {
     //IS EMPTY QUEUE RUN ONE CORE
     let startTime = new Date()
-    // QUEUE MANAGE, REMOVED FOR SAME TOKEN
-    // let userId = Meteor.userId();
-    // let queueUser = Queue.of(userId);
-    // if (queueUser.curr()) {
-    //   Meteor.wrapAsync(queueUser.setNext(cmd, method, body, opt).wait, queueUser)();
-    //   let duration = new Date()-startTime;
-    //   logger.stats(cmd, "waiting", duration)
-    //   logger.action(cmd, "", {waiting_in_queue: duration}, "cp")
-    // } else {
-    //   queueUser.setNext(cmd, method, body, opt)
-    // }
     logger.debug('run message ',arguments)
     let options = this.beforeSend(cmd, method, body, opt)
     try {
       let resp = CPRequest(cmd, method, options)
       this.afterSend(cmd, method, body, resp.data, opt);
       let duration = new Date()-startTime;
-      logger.stats(cmd, "200", duration)
       logger.action(cmd, "", {method, options, result: "success", waiting_send_tran: duration, startTime: startTime}, "cp")
       return resp.data
     } catch (e) {
@@ -71,9 +59,9 @@ class TransClient {
         statusSTD = "403"
         Meteor.call('Global/Users/forceLogout');
       }
-      let duration = new Date()-startTime;
-      logger.stats(cmd, statusSTD, duration)
-      throw new Meteor.Error(message || e.message || e.reason);
+      let err = new Meteor.Error(message || e.message || e.reason);
+      err.statusCode = statusSTD;
+      throw err;
     }
   }
   afterSend(cmd, method, body, resp, opt = {}){
