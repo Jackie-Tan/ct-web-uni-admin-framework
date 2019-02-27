@@ -215,39 +215,40 @@ var getStcBconf = function() {
     logger.error(e);
   }
 }
+var updateVersion = function(id, INIT_TIME = 3){
+  let newVersion = Math.round(new Date()/1000);
+  let oldVerion = Confs.findOne({id}).version;
+  //oldVersion can be inited by another instance -> we will using oldVersion in less than 2 minutes
+  let delta = (newVersion - oldVerion)/60;
+ 
+  if (delta < INIT_TIME) {
+    Confs.__caching[id] = oldVerion;
+    return;
+  }
+  Confs.__caching[id] = newVersion;
+  Confs.update({id}, {$set: {version: newVersion}});
+}
 
 Meteor.methods({
   'Global/Trans/Bconf':function(){
     if (Confs.__caching.bconf != Confs.findOne({id:'bconf'}).version) {
-      console.log('wrap waiting');
       getDynBconf();
-      console.log('wrap done');
     }
     return Bconf.data;
   },
   'Global/Trans/BconfS':function(){
-    if (Confs.__caching.bconfS != Confs.findOne({id:'bconf'}).version) {
-      console.log('wrap waiting');
+    if (Confs.__caching.bconfS != Confs.findOne({id:'bconfS'}).version) {
       getStcBconf();
-      console.log('wrap done');
     }
     return Bconf
   },
   'Global/Trans/Bconf/Refresh': function() {
-    console.log('dyn refresh wating');
     getDynBconf();
-    let time = Math.round(new Date()/1000);
-    console.log('update dynamic bconf', time);
-    Confs.__caching.bconf = time;
-    Confs.update({id: 'bconf'}, {$set: {version: time}});
+    updateVersion('bconf', 0.5);
   },
   'Global/Trans/BconfS/Refresh': function() {
-    console.log('static refresh watiting');
     getStcBconf();
-    let time = Math.round(new Date()/1000);
-    console.log('update static bconf', time);
-    Confs.__caching.bconfS = time;
-    Confs.update({id: 'bconfS'}, {$set: {version: time}});
+    updateVersion('bconfS', 2);
   },
 })
 Meteor.publish('conf', function(){
@@ -258,6 +259,5 @@ Meteor.startup(function(){
   console.log('waiting config');
   getDynBconf();
   getStcBconf();
-  
   console.log('ok');
 })
