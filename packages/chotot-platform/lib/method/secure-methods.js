@@ -11,15 +11,15 @@ Meteor.secureMethods = function(methods, opts){
       const userId = user && user._id
       if (!userId)
         throw new Meteor.Error('You do not have permission!');
+      let startTime = new Date();
       try {
-        let startTime = new Date();
         Permission.of(userId).isPassMethod(key, opts);
         logger.stats(`${key}_permission`, 200, new Date() - startTime);
       } catch (e){
         logger.stats(key, 403, new Date() - startTime);
       }
+      startTime = new Date();
       try {
-        let startTime = new Date();
         let data = await methods[key].apply(this, arguments);
         logger.stats(key, 200, new Date() - startTime);
         logger.action(key, this.connection.clientAddress, {arguments, result: "success"})
