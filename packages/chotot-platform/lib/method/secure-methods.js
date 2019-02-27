@@ -26,7 +26,7 @@ Meteor.secureMethods = function(methods, opts){
         return data;
       }
       catch (e) {
-        logger.stats(key, 500, new Date() - startTime);
+        logger.stats(key, 400, new Date() - startTime);
         logger.error(e)
         logger.action(key, this.connection.clientAddress, {arguments, error: e.message})
         throw new Meteor.Error(e.message);
