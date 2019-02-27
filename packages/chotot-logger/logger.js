@@ -5,13 +5,18 @@ const MAP_LOG_LEVEL = {
   "TRACE": 3,
 }
 var moment = require('moment-timezone');
-var StatsD = require('node-statsd');
-var statsHost = function() {
-  return process.env.STATS_HOST
-}
-var statsClient = statsHost() && new StatsD({
-  host: statsHost()
-})
+const statClient = Npm.require('prom-client');
+const buckets = [
+  0.005, 0.01, 0.02, 0.04, 0.06, 0.08, 0.1, 0.15, 0.25, 0.4, 0.6, 0.8, 1, 1.5, 2, 3, 5
+]
+const statH = new statClient.Histogram(
+  'request_duration_seconds',
+  'The HTTP request latencies in seconds.',
+  ['code','path'],
+  {
+    buckets: buckets
+  }
+)
 var isNotLog = function (debugLevel) {
   let level = process.env.LOG_LEVEL;
   if (!level || typeof level != 'string')
@@ -32,18 +37,14 @@ logger = {
     let msgWhere = where? `[${where}]`:""
     console.log(`[${time}]${msgWhere} ${msgUser} ${action} with args`, JSON.stringify(data))
   },
+  metrics: function() {
+    return statClient.register.metrics();
+  },
   stats: function (action, status, duration) {
-    let user = Meteor.user();
-    let msgUser = `${user && user._id || 'system'}`
-    let stats = `response.admin_${process.env.APP}.${msgUser}.${action}.${status}.${duration}`
-    console.log(stats)
-    if (statsHost() && !statsClient)
-      statsClient = new StatsD({
-        host: statsHost()
-      })
-    if (!statsClient || !duration)
-      return;
-    statsClient.timing(stats)
+    const APP_NAME = process.env.APP || 'non_register_admin';
+    var path = `${APP_NAME}.${action}`;
+    statH.labels(status, path).observe(duration/1000);
+    logger.info(status, path, duration);
   },
   time: function (data) {
     let time = new Date().getTime()
