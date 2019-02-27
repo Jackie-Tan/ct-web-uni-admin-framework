@@ -15,7 +15,6 @@ class TransClient {
         throw new Meteor.Error('Bạn không có quyền truy cập CP')
       }
       this.user_tran_id = user.services.cp.id;
-      console.log('cp_time', user.services.cp.cp_time);
       if (!opt.no_token)
       this.token = data.token = user.services.cp.token;
       if (!data.remote_addr)
