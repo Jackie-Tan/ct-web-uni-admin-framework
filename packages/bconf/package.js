@@ -11,7 +11,7 @@ Package.describe({
       'chotot:logger',
     ], ['server']);
     api.addFiles('bconf-version.js');
-    api.addFiles("server/bconf.js", 'server');
+    api.addFiles(["server/init.js", "server/bconf.js"], 'server');
     api.addFiles(["client/bconf.js"], 'client');
     api.export('Confs');
     api.export("Bconf", 'client');

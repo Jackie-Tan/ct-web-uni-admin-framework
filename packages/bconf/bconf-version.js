@@ -17,6 +17,7 @@ if (Meteor.isServer) {
         bconf: time,
         bconfS: time,
     };
+    Confs.__processing = {};
     Confs.insert({id: 'bconf', version: time});
     Confs.insert({id: 'bconfS', version: time});
 }

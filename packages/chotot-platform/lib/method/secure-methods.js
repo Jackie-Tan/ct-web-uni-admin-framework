@@ -16,7 +16,8 @@ Meteor.secureMethods = function(methods, opts){
         Permission.of(userId).isPassMethod(key, opts);
         logger.stats(`${key}_permission`, 200, new Date() - startTime);
       } catch (e){
-        logger.stats(key, 403, new Date() - startTime);
+        logger.stats(`${key}_permission`, 403, new Date() - startTime);
+        throw new Meteor.Error(e.message);
       }
       startTime = new Date();
       try {
