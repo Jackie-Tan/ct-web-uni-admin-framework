@@ -77,7 +77,10 @@ class baseTemplate {
     BaseTemplateIns[name] = this;
   }
   static of(tName) {
-    let name = tName || Router.current().route.getName();
+    let name;
+    Tracker.nonreactive(function() {
+      name = tName || Router.current().route.getName();
+    });
     return name && (BaseTemplateIns[name] || BaseTemplateIns[name.split(".")[0]]) || null;
   }
   addRoute(name, route, render = {}) {
