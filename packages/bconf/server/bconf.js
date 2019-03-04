@@ -1,18 +1,4 @@
 var {confOpts, runBconf, Bconf} = require('./init');
-var getConf = function(id) {
-  Confs.__processing[id] = true;
-  const {cmd, key, address, addons = []} = confOpts[id];
-  try {
-    console.log('getConf process...', id, confOpts[id]);
-    let res = Meteor.wrapAsync(runBconf)(cmd, key, address);
-    for (let addon of addons) {
-      addon(res);
-    }
-  } catch (e) {
-    logger.error(e);
-  }
-  Confs.__processing[id] = false;
-}
 var updateVersion = function(id, INIT_TIME = 3){
   let newVersion = Math.round(new Date()/1000);
   let oldVerion = Confs.findOne({id}).version;
@@ -25,6 +11,21 @@ var updateVersion = function(id, INIT_TIME = 3){
   }
   Confs.__caching[id] = newVersion;
   Confs.update({id}, {$set: {version: newVersion}});
+}
+var getConf = function(id) {
+  Confs.__processing[id] = true;
+  const {cmd, key, address, addons = [], deltaVersion} = confOpts[id];
+  try {
+    console.log('getConf process...', id, confOpts[id]);
+    let res = Meteor.wrapAsync(runBconf)(cmd, key, address);
+    for (let addon of addons) {
+      addon(res);
+    }
+    updateVersion('bconf', deltaVersion);
+  } catch (e) {
+    logger.error(e);
+  }
+  Confs.__processing[id] = false;
 }
 var isHavingNewVersion = function (id) {
   if (Confs.__processing[id]) {
@@ -49,11 +50,9 @@ Meteor.methods({
   },
   'Global/Trans/Bconf/Refresh': function() {
     getConf('bconf');
-    updateVersion('bconf', 0.5);
   },
   'Global/Trans/BconfS/Refresh': function() {
     getConf('bconfS');
-    updateVersion('bconfS', 2);
   },
 })
 Meteor.publish('conf', function(){
@@ -65,5 +64,4 @@ Meteor.startup(function(){
   getConf('bconf');
   getConf('bconfS');
   console.log('ok');
-
 })
