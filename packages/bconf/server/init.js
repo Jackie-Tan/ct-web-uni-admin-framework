@@ -28,24 +28,34 @@ Bconf = {
 }
 var regex = new RegExp("([\*][\.])","g");
 
+function GetPtr(start, k, opts = {}) {
+  const {upsert} = opts;
+  let ptr = start;
+  k = k.replace(regex, "");
+  let keys = k.split('.')
+  if (!keys.length)
+    return {ptr: {}, endKey: ''};
+  let endKey = keys.pop();
+  for (let key of keys) {
+    if (!ptr[key]) {
+      if (!upsert) {
+        return {ptr: {}, endKey: ''};
+      }
+      ptr[key] = {};
+    }
+    ptr = ptr[key];
+  }
+  return {ptr, endKey};
+}
 function BconfInit(data, bconf) {
   for (let k in data) {
     let value = data[k];
-    if (value === "") 
+    if (value === "") {
+      let {ptr, endKey} = GetPtr(bconf, k);
+      delete ptr[endKey];
       continue;
-    k = k.replace(regex, "")
-    let keys = k.split('.')
-    if (!keys.length)
-      continue;
-    let key = null;
-    let endKey = keys.pop();
-    let ptr = bconf;
-    for (key of keys) {
-      if (!ptr[key]) {
-        ptr[key] = {}
-      }
-      ptr = ptr[key];
     }
+    let {ptr, endKey} = GetPtr(bconf, k, {upsert: true});
     ptr[endKey] = value;
   }
 }
@@ -201,7 +211,7 @@ module.exports = {
       cmd: 'conf',
       key: 'data',
       address: `${process.env.CP_HOST}:${process.env.CP_PORT}/v1`,
-      deltaVersion: parseFloat(process.env.DYN_CONF_DELTA || 0.5),
+      deltaVersion: parseFloat(process.env.DYN_CONF_DELTA || 0.01),
     },
     'bconfS': {
         cmd: 'all',
