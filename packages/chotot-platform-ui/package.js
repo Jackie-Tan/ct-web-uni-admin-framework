@@ -27,6 +27,8 @@ Package.on_use(function (api, where) {
     'base/action/method.js',
     'base/baseTemplate.js',
     'base/ui/template.css',
+    'base/ui/cell-output/cell.html',
+    'base/ui/cell-output/cell.js',
     'base/ui/details/action/index.html',
     'base/ui/details/action/index.js',
     'base/ui/details/index.html',

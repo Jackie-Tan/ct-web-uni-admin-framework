@@ -17,27 +17,6 @@
   </button>
 </template>
 <template name='boolBtnAction'>
-  {{> checkboxCellOutput}}
-</template>
-<template name='cellOutput'>
-  {{>Template.dynamic template=getTemplate data=this}}
-</template>
-<template name='textCellOutput'>
-  {{data}}
-</template>
-<template name='jsonCellOutput'>
-  {{parseData}}
-</template>
-<template name='dateCellOutput'>
-  {{formatDate this.data}}
-</template>
-<template name='datetimeCellOutput'>
-  {{formatTime this.data}}
-</template>
-<template name='logoCellOutput'>
-  <img height="40" src={{data}} class="logo-cell-output">
-</template>
-<template name='checkboxCellOutput'>
   <button class="btn btn-primary btn-toggle-active transition btn-action" type="button" name="button" data-id="{{id}}" data-actived="{{toString isTrue}}" data-action="{{key}}" title="{{action}}" >
 
     {{#if isTrue}}
@@ -46,13 +25,4 @@
       <i class="fa fa-times"></i>
     {{/if}}
   </button>
-</template>
-<template name='urlCellOutput'>
-  <a href="{{data}}">{{data}}</a>
-</template>
-<template name='linkCellOutput'>
-  <a href="{{getLink}}">{{data}}</a>
-</template>
-<template name='emailCellOutput'>
-  <a href="mailto:{{data}}">{{data}}</a>
 </template>

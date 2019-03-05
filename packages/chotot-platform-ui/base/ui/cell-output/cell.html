@@ -1,0 +1,41 @@
+<template name='cellOutput'>
+  {{#if cellType}}
+    {{>Template.dynamic template=getTemplate data=this}}
+  {{else}} 
+    {{value}}
+  {{/if}}
+</template>
+<template name='textCellOutput'>
+  {{value}}
+</template>
+<template name='jsonCellOutput'>
+  {{parseData}}
+</template>
+<template name='dateCellOutput'>
+  {{formatDate this.value}}
+</template>
+<template name='datetimeCellOutput'>
+  {{formatTime this.value}}
+</template>
+<template name='logoCellOutput'>
+<img height="{{height}}" src={{value}} class="logo-cell-output">
+</template>
+<template name='checkboxCellOutput'>
+  <button class="btn btn-primary btn-toggle-active transition btn-action" type="button" name="button" data-id="{{id}}" data-actived="{{toString isTrue}}" data-action="{{key}}" title="{{action}}" >
+
+    {{#if isTrue}}
+      <i class="fa fa-check"></i>
+    {{else}}
+      <i class="fa fa-times"></i>
+    {{/if}}
+  </button>
+</template>
+<template name='urlCellOutput'>
+  <a href="{{value}}">{{value}}</a>
+</template>
+<template name='linkCellOutput'>
+  <a href="{{getLink}}">{{value}}</a>
+</template>
+<template name='emailCellOutput'>
+  <a href="mailto:{{value}}">{{value}}</a>
+</template>

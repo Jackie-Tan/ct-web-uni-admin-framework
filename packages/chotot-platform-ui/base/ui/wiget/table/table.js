@@ -22,9 +22,8 @@ const SPECIAL_RENDER = function(tpl, obj, input) {
         if (node.innerHTML)
           return;
         Blaze.renderWithData(Template.cellOutput, {
-          cellType,
           input,
-          data: MAP_DATA(input, data, full)
+          value: MAP_DATA(input, data, full)
         }, node);
       })
       return "";
