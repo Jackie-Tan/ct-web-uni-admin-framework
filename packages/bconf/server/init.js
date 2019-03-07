@@ -211,14 +211,12 @@ module.exports = {
       cmd: 'conf',
       key: 'data',
       address: `${process.env.CP_HOST}:${process.env.CP_PORT}/v1`,
-      deltaVersion: parseFloat(process.env.DYN_CONF_DELTA || 0.01),
     },
     'bconfS': {
         cmd: 'all',
         key: 'dataS',
         address: `${process.env.CCONF_HOST}:${process.env.CCONF_PORT}`,
         addons: cachingStatic,
-        deltaVersion: parseFloat(process.env.STC_CONF_DELTA || 2)
     }
   },
 };

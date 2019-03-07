@@ -1,19 +1,14 @@
+//1. init conf -> store __processing
+//2. client get conf -> conf caching
+//3. change conf -> trigger get new conf -> update conf caching -> update new version
+//4. after conf change version -> client listien event change -> get conf -> conf caching
+
 var {confOpts, runBconf, Bconf} = require('./init');
-var updateVersion = function(id, INIT_TIME = 3){
+var updateVersion = function(id){
   let newVersion = Math.round(new Date()/1000);
-  let oldVerion = Confs.findOne({id}).version;
-  //oldVersion can be inited by another instance -> we will using oldVersion in less than 2 minutes
-  let delta = (newVersion - oldVerion)/60;
- 
-  if (delta < INIT_TIME) {
-    Confs.__caching[id] = oldVerion;
-    return;
-  }
-  Confs.__caching[id] = newVersion;
-  Confs.update({id}, {$set: {version: newVersion}});
-}
-var getConf = function(id) {
-  Confs.__processing[id] = true;
+  Confs.update({id}, {$set: {version: newVersion}}, {upsert: true});
+};
+var getConf = function(id, {stopOnMissConf} = {}) {
   const {cmd, key, address, addons = [], deltaVersion} = confOpts[id];
   try {
     console.log('getConf process...', id, confOpts[id]);
@@ -23,29 +18,18 @@ var getConf = function(id) {
     }
     updateVersion('bconf', deltaVersion);
   } catch (e) {
+    if (stopOnMissConf) {
+      throw new Error(e);
+    }
     logger.error(e);
   }
-  Confs.__processing[id] = false;
 }
-var isHavingNewVersion = function (id) {
-  if (Confs.__processing[id]) {
-    return false;
-  }
-  return Confs.__caching[id] != Confs.findOne({id}).version
-}
-
 
 Meteor.methods({
   'Global/Trans/Bconf':function(){
-    if (isHavingNewVersion('bconf')) {
-      getConf('bconf');
-    }
     return Bconf.data;
   },
   'Global/Trans/BconfS':function(){
-    if (isHavingNewVersion('bconfS')) {
-      getConf('bconfS');
-    }
     return Bconf
   },
   'Global/Trans/Bconf/Refresh': function() {
@@ -61,7 +45,7 @@ Meteor.publish('conf', function(){
 
 Meteor.startup(function(){
   console.log('waiting config');
-  getConf('bconf');
-  getConf('bconfS');
+  getConf('bconf', {stopOnMissConf: true});
+  getConf('bconfS', {stopOnMissConf: true});
   console.log('ok');
 })
