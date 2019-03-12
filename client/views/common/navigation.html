@@ -1,61 +1,66 @@
 <template name="navigation">
-    <nav class="navbar-default navbar-static-side" role="navigation">
-        <div class="sidebar-collapse">
+  <nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
 
-            <!-- Close canvas menu used only on OffCanvas page -->
-            <!-- You can remove this tag if you dont use offCanvas menu -->
-            <a class="close-canvas-menu"><i class="fa fa-times"></i></a>
-            <!-- End offCanvas menu toggle -->
-            {{#if navReady}}
-            <ul class="nav metismenu" id="side-menu">
-                <li class="nav-header">
-                    <div class="dropdown profile-element">
-                      <!--<span>-->
-                            <!--<img alt="image" class="img-circle" src="img/profile_small.jpg" />-->
-                             <!--</span>-->
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{emailUser}}</strong> </span></span> </a>
-                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="{{pathFor route='profile'}}">Profile</a></li>
-                            <li class="divider"></li>
-                            <li><a href="{{pathFor route='signout'}}">Logout</a></li>
-                        </ul>
-                    </div>
-                    <div class="logo-element">
-                        IN+
-                    </div>
-                </li>
-                {{#each navList}}
-                  {{#unless navHidden}}  
-                  <li class="{{isActiveRoute 'active'}}">
-                    <a href="{{href}}"  {{attr}}><span class="icon-nav fa {{icon}}"></span> <span class="nav-label">{{name}} </span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level {{isActiveRoute 'in'}}">
-                      {{#each children}}
-                        {{#unless hidden}}
-                        <li class="{{isActiveRoute 'active'}}">
-                            {{#if children.length}}
-                            <a href="{{href}}" {{attr}}><span class="icon-nav fa {{icon}}"></span> <span class="nav-label">{{name}} </span> <span class="fa arrow"></span></a>
-                            <ul class="nav nav-third-level {{isActiveRoute 'in'}}">
-                              {{#each children}}
-                                {{#unless hidden}}
-                                <li class="{{isActiveRoute 'active'}}">
-                                    <a href="{{href}}" {{attr}} ><span class="icon-nav fa {{icon}}"></span><span class="nav-label">{{name}} </span></a>
-                                </li>
-                                {{/unless}}
-                              {{/each}}
-                            </ul>
-                            {{else}}
-                            <a href="{{href}}" {{attr}} ><span class="icon-nav fa {{icon}}"></span> <span class="nav-label">{{name}} </span></a>
-                            {{/if}}
-                        </li>
-                        {{/unless}}
-                      {{/each}}
-                    </ul>
-                  </li>
-                  {{/unless}}
-                {{/each}}
+      <!-- Close canvas menu used only on OffCanvas page -->
+      <!-- You can remove this tag if you dont use offCanvas menu -->
+      <a class="close-canvas-menu"><i class="fa fa-times"></i></a>
+      <!-- End offCanvas menu toggle -->
+      {{#if navReady}}
+      <ul class="nav metismenu" id="side-menu">
+        <li class="nav-header">
+          <div class="dropdown profile-element">
+            <!--<span>-->
+            <!--<img alt="image" class="img-circle" src="img/profile_small.jpg" />-->
+            <!--</span>-->
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+              <span class="clear block m-t-xs"> <strong class="font-bold">{{emailUser}}</strong></span>
+            </a>
+            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+              <li><a href="/change_password">Change Password</a></li>
+              <li class="divider"></li>
+              <li><a href="{{pathFor route='signout'}}">Logout</a></li>
             </ul>
-            {{/if}}
-        </div>
-    </nav>
+          </div>
+          <div class="logo-element">
+            IN+
+          </div>
+        </li>
+        {{#each navList}}
+        {{#unless navHidden}}
+        <li class="{{isActiveRoute 'active'}}">
+          <a href="{{href}}" {{attr}}><span class="icon-nav fa {{icon}}"></span> <span class="nav-label">{{name}}
+            </span><span class="fa arrow"></span></a>
+          <ul class="nav nav-second-level {{isActiveRoute 'in'}}">
+            {{#each children}}
+            {{#unless hidden}}
+            <li class="{{isActiveRoute 'active'}}">
+              {{#if children.length}}
+              <a href="{{href}}" {{attr}}><span class="icon-nav fa {{icon}}"></span> <span class="nav-label">{{name}}
+                </span> <span class="fa arrow"></span></a>
+              <ul class="nav nav-third-level {{isActiveRoute 'in'}}">
+                {{#each children}}
+                {{#unless hidden}}
+                <li class="{{isActiveRoute 'active'}}">
+                  <a href="{{href}}" {{attr}}><span class="icon-nav fa {{icon}}"></span><span class="nav-label">{{name}}
+                    </span></a>
+                </li>
+                {{/unless}}
+                {{/each}}
+              </ul>
+              {{else}}
+              <a href="{{href}}" {{attr}}><span class="icon-nav fa {{icon}}"></span> <span class="nav-label">{{name}}
+                </span></a>
+              {{/if}}
+            </li>
+            {{/unless}}
+            {{/each}}
+          </ul>
+        </li>
+        {{/unless}}
+        {{/each}}
+      </ul>
+      {{/if}}
+    </div>
+  </nav>
 </template>
