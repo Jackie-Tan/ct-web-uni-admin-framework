@@ -51,7 +51,7 @@ Accounts.onLogin(function () {
 
 Accounts.onLogout(function () {
   // remove cookie when logout
-  removeCookie('s', getDomain(process.env.NODE_ENV))
+  removeCookie('s', getDomain(meteorEnv.NODE_ENV))
 })
 
 const getDomain = (env) => {
