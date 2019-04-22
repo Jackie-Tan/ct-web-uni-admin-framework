@@ -1,14 +1,26 @@
 
 Template.registerHelper('formatTime', function(data){
-  return moment(data).format('MM-DD-YYYY HH:mm:ss');
+  if (data) {
+    return moment(data).format('MM-DD-YYYY HH:mm:ss')
+  }
+  return null;
 })
 Template.registerHelper('formatDate', function(data){
-  return moment(data).format('MM-DD-YYYY')
+  if (data) {
+    return moment(data).format('MM-DD-YYYY')
+  }
+  return null;
 })
 
 Template.registerHelper('cpDate', function(data){
-  return moment(data).format('YYYY-MM-DD')
+  if (data) {
+    return moment(data).format('YYYY-MM-DD')
+  }
+  return null;
 })
 Template.registerHelper('cpTime', function(data){
-  return moment(data).format('YYYY-MM-DD HH:mm')
+  if (data) {
+    return moment(data).format('YYYY-MM-DD HH:mm')
+  }
+  return null;
 })
