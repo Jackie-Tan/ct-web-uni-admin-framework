@@ -245,13 +245,13 @@ class BaseModel {
     return {id};
   }
   queryID(id) {
-    if (!id) 
+    if (!id)
       return {end: Promise.reject(new Error("id is required!"))}
     let col_id = this.config.col_id;
     if (typeof col_id == "undefined") {
       return {conditionArr: 'id=$1', queryData: [id]};
     }
-    if (!col_id) 
+    if (!col_id)
       return {end: Promise.resolve({})}
     if (typeof col_id == "string") {
       return {conditionArr: `${col_id}=$1`, queryData: [id]};
@@ -485,9 +485,9 @@ class BaseModel {
     let list = Object.keys(data.set);
     list.push('updated_at');
     this.extendRole(data.query, opt);
-    if (!opt || opt.isImport !== true) {
+    if (!opt.saveEmptyField && (!opt || opt.isImport !== true)) {
       let UpdateSchema = this.schema.pick(list);
-      check(UpdateSchema.clean(data.set, {filter: false}), UpdateSchema);
+      check(UpdateSchema.clean(data.set, { filter: false }), UpdateSchema);
     }
     let self = this;
     return new Promise(function(resolve, reject){

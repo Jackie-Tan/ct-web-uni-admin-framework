@@ -73,12 +73,12 @@ class Methods {
             throw new Meteor.Error(e.message);
           }
         }),
-        [this.method+'/Update']: (async function(query, set){
+        [this.method+'/Update']: (async function(query, set, opt = {}){
           try {
             if (!Object.keys(set).length) {
               throw new Error('Nothing change!');
             }
-            return await self.model.update({query: query, set: set}, {});
+            return await self.model.update({query: query, set: set}, opt);
           } catch (e){
             logger.trace(e);
             throw new Meteor.Error(e.message);
