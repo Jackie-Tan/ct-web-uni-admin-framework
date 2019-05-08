@@ -30,7 +30,7 @@ class baseMethod {
   }
   beforePost(action, opt = {}) {
     //check connection status
-    
+
     //---end check connection
     let {silent, no_popup, success} = opt
     dsLog.info('[CALL] '+this._method);
@@ -48,7 +48,7 @@ class baseMethod {
       return;
     }
     !silent && $('.hide-modal').click();
-    !silent && !no_popup && dsLog.success(success || this.success(action));
+    !silent && !no_popup && dsLog.success(success || this.success(action), { timeOut: 888 });
     if (cb)
       return cb(null, result)
   }
