@@ -44,7 +44,7 @@ logger = {
     const APP_NAME = process.env.APP || 'non_register_admin';
     var path = `${APP_NAME}.${action}`;
     statH.labels(status, path).observe(duration/1000);
-    logger.info(status, path, duration);
+    logger.info(status, path, 'Duration_request:', duration);
   },
   time: function (data) {
     let time = new Date().getTime()
