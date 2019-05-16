@@ -7,7 +7,7 @@ Template.registerHelper('formatTime', function(data){
 })
 Template.registerHelper('formatDate', function(data){
   if (data) {
-    return moment(data).format('MM-DD-YYYY')
+    return moment(data).tz('Asia/Ho_Chi_Minh').format('MM-DD-YYYY')
   }
   return null;
 })
