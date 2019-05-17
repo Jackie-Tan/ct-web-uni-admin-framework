@@ -32,7 +32,7 @@ let func = {
     let shop_url = data.shop_url = data.shop['urls'][0] && data.shop['urls'][0]['url'];
     var getShopBase = function(type) {
       let url = Bconf.getS(`common.shop.${type}`);
-      if (!IsProduction) {
+      if (!IsProduction && url) {
         return url.replace(".com", ".org");
       }
       return url
@@ -84,7 +84,7 @@ let func = {
       queries.push(`${key}=${params[key]}`)
     }
     return queries.join('&')
-  }, 
+  },
   routeByQuery: function(params) {
     let path = Router.current().originalUrl.split("?")[0];
     return `${path}?${func.hefWithParams(params)}`
