@@ -1,14 +1,23 @@
 function HTTP_CACHING(method, route, options) {
+  const startTime = new Date().getTime();
   return new Promise((resolve, reject) => {
     let key = `Internal/${method}/${route}?${options.query || ''}`
     if (CachingData[key]) {
       return resolve(CachingData[key])
     }
+    options.timeout = 10000;
     HTTP.call(method, route, options, function (err, data) {
+      const durationTime = new Date().getTime() - startTime;
       if (err) {
+        logger.graylogError(`${error}: --- ${route}`);
         return reject(err);
       }
       CachingData[key] = data;
+      if (durationTime > 3000) {
+        logger.graylogWarning(`Too slow when request ${route} in ${durationTime}, over 3000ms`);
+      } else {
+        logger.graylogInfo(`Request ${route} so ok in ${durationTime}`);
+      }
       setTimeout(function () {
         CachingData[key] = null
       }, 10000)
@@ -17,10 +26,18 @@ function HTTP_CACHING(method, route, options) {
   })
 }
 function HTTP_NO_CACHING(method, route, options) {
+  const startTime = new Date().getTime();
   return new Promise((resolve, reject) => {
+    options.timeout = 10000;
     HTTP.call(method, route, options, function (err, data) {
       if (err) {
+        logger.graylogError(`${error}: --- ${route}`);
         return reject(err);
+      }
+      if (durationTime > 3000) {
+        logger.graylogWarning(`Too slow when request ${route} in ${durationTime}, over 3000ms`);
+      } else {
+        logger.graylogInfo(`Request ${route} so ok in ${durationTime}`);
       }
       return resolve(data)
     })

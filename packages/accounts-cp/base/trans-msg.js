@@ -64,7 +64,15 @@ class TransClient {
     }
   }
   afterSend(cmd, method, body, resp, opt = {}){
-    logger.debug(`RESPONSE TIME for cmd: ${cmd} status: ${resp instanceof Error ? 'ERROR': 'SUCCESS' }`, new Date()-this.time);
+    const responseTime = new Date() - this.time;
+    logger.debug(`RESPONSE TIME for cmd: ${cmd} status: ${resp instanceof Error ? 'ERROR': 'SUCCESS' }`, responseTime);
+    if (resp instanceof Error) {
+      logger.graylogError(`cmd: ${cmd} --- ${resp} with ${responseTime}`);
+    } else if (responseTime > 3000) {
+      logger.graylogWarning(`Too slow when request cmd: ${cmd} --- ${resp} with ${responseTime}`);
+    } else {
+      logger.graylogInfo(`cmd: ${cmd} so ok in ${responseTime}`);
+    }
     Meteor.users.update({_id: Meteor.userId()}, {$set: {'services.cp.cp_time': new Date()/1000}});
     // if (resp && resp.token != this.token) {
     //   CPToken.set(this.user_tran_id, resp.token);

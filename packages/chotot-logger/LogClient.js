@@ -6,6 +6,7 @@ const TEST_ENV = 'staging';
 let appenders = []
 appenders.push(log_config('info'));
 appenders.push(log_config('error'));
+appenders.push(log_config('warn'));
 
 let _log_info, _log_error, _console;
 log4js.configure({
@@ -13,6 +14,7 @@ log4js.configure({
 })
 _log_info = log4js.getLogger('info')
 _log_error = log4js.getLogger('error')
+_log_warn = log4js.getLogger('warn')
 _console = console;
 
 class LogClient {

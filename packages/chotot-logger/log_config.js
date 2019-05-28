@@ -20,6 +20,13 @@ export default function(category) {
             port: LOG_PORT,
             category: 'error'
           };
+        case 'warn':
+          return {
+            type: 'gelf',
+            host: LOG_HOST,
+            port: LOG_PORT,
+            category: 'warn'
+          };
         default:
           return {
             type: 'gelf',
@@ -62,6 +69,13 @@ export default function(category) {
             host: LOG_HOST,
             port: LOG_PORT,
             category: 'error'
+          };
+        case 'warn':
+          return {
+            type: 'gelf',
+            host: LOG_HOST,
+            port: LOG_PORT,
+            category: 'warn'
           };
         default:
           return {
