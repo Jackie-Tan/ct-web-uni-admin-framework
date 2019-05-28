@@ -87,6 +87,9 @@ logger = {
   },
   graylogError: function(error) {
     LogClient.error(error);
+  },
+  graylogWarning: function(warning) {
+    LogClient.warning(warning);
   }
 }
 

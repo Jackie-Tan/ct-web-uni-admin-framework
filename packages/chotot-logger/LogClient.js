@@ -51,9 +51,7 @@ class LogClient {
         }
     }
     warning(str, ...obj) {
-        if (process.env.LOG_ENV === TEST_ENV) {
-            this._console.info(str, ...obj)
-        }
+        this._log_info.warn(str, ...obj);
     }
     trace(method, requestUrl, body, responseBody, responseStatus) {
         if (process.env.LOG_ENV === TEST_ENV) {
