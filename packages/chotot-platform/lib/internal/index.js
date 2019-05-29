@@ -9,14 +9,14 @@ function HTTP_CACHING(method, route, options) {
     HTTP.call(method, route, options, function (err, data) {
       const durationTime = new Date().getTime() - startTime;
       if (err) {
-        logger.graylogError(`${error}: --- ${route}`);
+        logger.graylogError(`Request Error: <path>${route}</path> <errorContent>${err}</errorContent>`);
         return reject(err);
       }
       CachingData[key] = data;
-      if (durationTime > 3000) {
-        logger.graylogWarning(`Too slow when request ${route} in ${durationTime}, over 3000ms`);
+      if (durationTime > 1000) {
+        logger.graylogWarning(`Request Slow: <path>${route}</path> in <responseTime>${durationTime}</responseTime>, over 1000ms`);
       } else {
-        logger.graylogInfo(`Request ${route} so ok in ${durationTime}`);
+        logger.graylogInfo(`Request OK: <path>${route}</path> in <responseTime>${durationTime}</responseTime>`);
       }
       setTimeout(function () {
         CachingData[key] = null
@@ -31,13 +31,14 @@ function HTTP_NO_CACHING(method, route, options) {
     options.timeout = 10000;
     HTTP.call(method, route, options, function (err, data) {
       if (err) {
-        logger.graylogError(`${error}: --- ${route}`);
+        logger.graylogError(`Request Error: <path>${route}</path> <errorContent>${err}</errorContent>`);
         return reject(err);
       }
-      if (durationTime > 3000) {
-        logger.graylogWarning(`Too slow when request ${route} in ${durationTime}, over 3000ms`);
+      const durationTime = new Date().getTime() - startTime;
+      if (durationTime > 1000) {
+        logger.graylogWarning(`Request Slow: <path>${route}</path> in <responseTime>${durationTime}</responseTime>, over 1000ms`);
       } else {
-        logger.graylogInfo(`Request ${route} so ok in ${durationTime}`);
+        logger.graylogInfo(`Request OK: <path>${route}</path> in <responseTime>${durationTime}</responseTime>`);
       }
       return resolve(data)
     })

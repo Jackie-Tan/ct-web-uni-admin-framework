@@ -67,11 +67,11 @@ class TransClient {
     const responseTime = new Date() - this.time;
     logger.debug(`RESPONSE TIME for cmd: ${cmd} status: ${resp instanceof Error ? 'ERROR': 'SUCCESS' }`, responseTime);
     if (resp instanceof Error) {
-      logger.graylogError(`cmd: ${cmd} --- ${resp} with ${responseTime}`);
+      logger.graylogError(`Cmd Error: <path>${cmd}</path> <response>${resp}</response> with <responseTime>${responseTime}</responseTime>`);
     } else if (responseTime > 3000) {
-      logger.graylogWarning(`Too slow when request cmd: ${cmd} --- ${resp} with ${responseTime}`);
+      logger.graylogWarning(`Cmd Slow: <path>${cmd}</path> <response>${resp}</response> with <responseTime>${responseTime}</responseTime>`);
     } else {
-      logger.graylogInfo(`cmd: ${cmd} so ok in ${responseTime}`);
+      logger.graylogInfo(`Cmd OK: <path>${cmd}</path> in <responseTime>${responseTime}</responseTime>`);
     }
     Meteor.users.update({_id: Meteor.userId()}, {$set: {'services.cp.cp_time': new Date()/1000}});
     // if (resp && resp.token != this.token) {

@@ -34,7 +34,7 @@ class Client {
           if (error) {
             console.log(JSON.stringify(self));
             console.warn(error);
-            logger.graylogError(`${error}: --- ${self.url}`);
+            logger.graylogError(`Request Error: <path>${self.url}</path> <errorContent>${error}</errorContent>`);
             reject(error);
           }
           let data = result.data || result;
@@ -48,10 +48,10 @@ class Client {
             }
           }
           const durationTime = new Date().getTime() - startTime;
-          if (durationTime > 3000) {
-            logger.graylogWarning(`Too slow when request ${self.url} in ${durationTime}, over 3000ms`);
+          if (durationTime > 1000) {
+            logger.graylogWarning(`Request Slow: <path>${self.url}</path> in <responseTime>${durationTime}</responseTime>, over 1000ms`);
           } else {
-            logger.graylogInfo(`Request ${self.url} so ok in ${durationTime}`);
+            logger.graylogInfo(`Request OK: <path>${self.url}</path> in <responseTime>${durationTime}</responseTime>`);
           }
           return resolve(data);
         }))
