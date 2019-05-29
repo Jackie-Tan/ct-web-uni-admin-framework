@@ -13,8 +13,8 @@ function HTTP_CACHING(method, route, options) {
         return reject(err);
       }
       CachingData[key] = data;
-      if (durationTime > 1000) {
-        logger.graylogWarning(`Request Slow: <path>${route}</path> in <responseTime>${durationTime}</responseTime>, over 1000ms`);
+      if (durationTime > parseInt(process.env.INTERNAL_SLOW_TIME, 10)) {
+        logger.graylogWarning(`Request Slow: <path>${route}</path> in <responseTime>${durationTime}</responseTime>, over ${parseInt(process.env.INTERNAL_SLOW_TIME, 10)}ms`);
       } else {
         logger.graylogInfo(`Request OK: <path>${route}</path> in <responseTime>${durationTime}</responseTime>`);
       }
@@ -35,8 +35,8 @@ function HTTP_NO_CACHING(method, route, options) {
         return reject(err);
       }
       const durationTime = new Date().getTime() - startTime;
-      if (durationTime > 1000) {
-        logger.graylogWarning(`Request Slow: <path>${route}</path> in <responseTime>${durationTime}</responseTime>, over 1000ms`);
+      if (durationTime > parseInt(process.env.INTERNAL_SLOW_TIME, 10)) {
+        logger.graylogWarning(`Request Slow: <path>${route}</path> in <responseTime>${durationTime}</responseTime>, over ${parseInt(process.env.INTERNAL_SLOW_TIME, 10)}ms`);
       } else {
         logger.graylogInfo(`Request OK: <path>${route}</path> in <responseTime>${durationTime}</responseTime>`);
       }

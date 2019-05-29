@@ -91,17 +91,25 @@ class Postgres {
       logger.debug(parseData);
       logger.debug(queryString);
       self.getClient(function(client) {
+        const startTime = new Date();
         client.query(queryString,
           parseData.data, function (error, result) {
+            const durationTime = new Date() - startTime;
             if (error){
               logger.error(queryString);
+              logger.graylogError(`Postgres Error: <query>${queryString}</query> <errorContent>${error}</errorContent> with <responseTime>${durationTime}</responseTime>`);
               reject(error);
+            }
+            if (durationTime > parseInt(process.env.POSTGRES_SLOW_TIME, 10)) {
+              logger.graylogWarning(`Postgres Slow: <query>${queryString}</query> in <responseTime>${durationTime}</responseTime>, over ${parseInt(process.env.POSTGRES_SLOW_TIME, 10)}ms`);
+            } else {
+              logger.graylogInfo(`Postgres OK: <query>${queryString}</query> in <responseTime>${durationTime}</responseTime>`);
             }
             logger.trace(result);
             resolve(result);
         });
       })
-      
+
 
     })
 
@@ -116,11 +124,19 @@ class Postgres {
       logger.debug(parseData);
       logger.debug(queryString);
       self.getClient(function(client) {
+        const startTime = new Date();
         client.query(queryString,
         parseData.data, function (error, result) {
+          const durationTime = new Date() - startTime;
           if (error) {
             logger.error(queryString);
+            logger.graylogError(`Postgres Error: <query>${queryString}</query> <errorContent>${error}</errorContent> with <responseTime>${durationTime}</responseTime>`);
             reject(error);
+          }
+          if (durationTime > parseInt(process.env.POSTGRES_SLOW_TIME, 10)) {
+            logger.graylogWarning(`Postgres Slow: <query>${queryString}</query> in <responseTime>${durationTime}</responseTime>, over ${parseInt(process.env.POSTGRES_SLOW_TIME, 10)}ms`);
+          } else {
+            logger.graylogInfo(`Postgres OK: <query>${queryString}</query> in <responseTime>${durationTime}</responseTime>`);
           }
           logger.trace(result)
           resolve(result);
@@ -138,11 +154,19 @@ class Postgres {
       logger.debug(parseData);
       logger.debug(queryString);
       self.getClient(function(client) {
+        const startTime = new Date();
         client.query(queryString,
         parseData.data, function (error, result) {
+          const durationTime = new Date() - startTime;
           if (error) {
             logger.error(queryString);
+            logger.graylogError(`Postgres Error: <query>${queryString}</query> <errorContent>${error}</errorContent> with <responseTime>${durationTime}</responseTime>`);
             reject(error);
+          }
+          if (durationTime > parseInt(process.env.POSTGRES_SLOW_TIME, 10)) {
+            logger.graylogWarning(`Postgres Slow: <query>${queryString}</query> in <responseTime>${durationTime}</responseTime>, over ${parseInt(process.env.POSTGRES_SLOW_TIME, 10)}ms`);
+          } else {
+            logger.graylogInfo(`Postgres OK: <query>${queryString}</query> in <responseTime>${durationTime}</responseTime>`);
           }
           logger.trace(result)
           resolve(result);
@@ -187,10 +211,18 @@ class Postgres {
       logger.debug(parseData);
       logger.debug(queryString);
       self.getClient(function(client) {
+        const startTime = new Date();
         client.query(queryString, parseData.data, function (error, result) {
+          const durationTime = new Date() - startTime;
           if (error) {
             logger.error(queryString);
+            logger.graylogError(`Postgres Error: <query>${queryString}</query> <errorContent>${error}</errorContent> with <responseTime>${durationTime}</responseTime>`);
             reject(error);
+          }
+          if (durationTime > parseInt(process.env.POSTGRES_SLOW_TIME, 10)) {
+            logger.graylogWarning(`Postgres Slow: <query>${queryString}</query> in <responseTime>${durationTime}</responseTime>, over ${parseInt(process.env.POSTGRES_SLOW_TIME, 10)}ms`);
+          } else {
+            logger.graylogInfo(`Postgres OK: <query>${queryString}</query> in <responseTime>${durationTime}</responseTime>`);
           }
           logger.trace(result)
           resolve(result);
@@ -210,10 +242,18 @@ class Postgres {
         logger.debug(parseData);
         logger.debug(queryString);
         self.getClient(function(client) {
+          const startTime = new Date();
           client.query(queryString, parseData.data, function (error, result) {
+            const durationTime = new Date() - startTime;
             if (error) {
               logger.error(queryString);
+              logger.graylogError(`Postgres Error: <query>${queryString}</query> <errorContent>${error}</errorContent> with <responseTime>${durationTime}</responseTime>`);
               reject(error);
+            }
+            if (durationTime > parseInt(process.env.POSTGRES_SLOW_TIME, 10)) {
+              logger.graylogWarning(`Postgres Slow: <query>${queryString}</query> in <responseTime>${durationTime}</responseTime>, over ${parseInt(process.env.POSTGRES_SLOW_TIME, 10)}ms`);
+            } else {
+              logger.graylogInfo(`Postgres OK: <query>${queryString}</query> in <responseTime>${durationTime}</responseTime>`);
             }
             logger.trace(result)
             resolve(result);
@@ -232,6 +272,7 @@ class Postgres {
     return this.get(`SELECT COUNT(DISTINCT (${this.getID(opt)})) FROM ${table}`);
   }
   getDataForTable(options){
+    const startTime = new Date();
     return new Promise((resolve, reject) => {
       const self = this;
       let get = async function () {
@@ -239,12 +280,20 @@ class Postgres {
           const data = await self.get(options.query.text, options.query.data);
           const total = await self.get(options.count.text, options.count.data);
           const lengthData = total.rows.length? parseInt(total.rows[0].count): 0;
+          const durationTime = new Date() - startTime;
+          if (durationTime > parseInt(process.env.POSTGRES_SLOW_TIME, 10)) {
+            logger.graylogWarning(`Postgres Slow: <query>${options.query.text}</query> in <responseTime>${durationTime}</responseTime>, over ${parseInt(process.env.POSTGRES_SLOW_TIME, 10)}ms`);
+          } else {
+            logger.graylogInfo(`Postgres OK: <query>${options.query.text}</query> in <responseTime>${durationTime}</responseTime>`);
+          }
           resolve({
             lengthData: lengthData,
             data: data.rows
-          })
+          });
         } catch (e){
+          const durationTime = new Date() - startTime;
           logger.error(e);
+          logger.graylogError(`Postgres Error: <query>${options.query.text}</query> <errorContent>${e}</errorContent> with <responseTime>${durationTime}</responseTime>`);
           reject(e);
         }
       };

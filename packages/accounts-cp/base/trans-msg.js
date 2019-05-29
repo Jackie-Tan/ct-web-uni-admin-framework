@@ -67,9 +67,9 @@ class TransClient {
     const responseTime = new Date() - this.time;
     logger.debug(`RESPONSE TIME for cmd: ${cmd} status: ${resp instanceof Error ? 'ERROR': 'SUCCESS' }`, responseTime);
     if (resp instanceof Error) {
-      logger.graylogError(`Cmd Error: <path>${cmd}</path> <response>${resp}</response> with <responseTime>${responseTime}</responseTime>`);
-    } else if (responseTime > 3000) {
-      logger.graylogWarning(`Cmd Slow: <path>${cmd}</path> <response>${resp}</response> with <responseTime>${responseTime}</responseTime>`);
+      logger.graylogError(`Cmd Error: <path>${cmd}</path> <errorContent>${resp}</errorContent> with <responseTime>${responseTime}</responseTime>`);
+    } else if (responseTime > parseInt(process.env.TRANSCMD_SLOW_TIME, 10)) {
+      logger.graylogWarning(`Cmd Slow: <path>${cmd}</path> <response>${resp}</response> with <responseTime>${responseTime}</responseTime> over ${parseInt(process.env.TRANSCMD_SLOW_TIME, 10)}ms`);
     } else {
       logger.graylogInfo(`Cmd OK: <path>${cmd}</path> in <responseTime>${responseTime}</responseTime>`);
     }

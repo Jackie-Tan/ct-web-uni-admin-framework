@@ -6,7 +6,7 @@ class Client {
         this.api_url = process.env[api_env] || process.env.GATEWAY_URL || 'https://gateway.chotot.org';
       }
       this.opt = {
-        timeout: 10000
+        timeout: process.env.GATEWAY_TIMEOUT
       };
       this.api_url = ("http://"+this.api_url).replace(/http[^s]*(s*)[^\/]\/\//, "http$1://");
       this.url = this.api_url + url;
@@ -48,8 +48,8 @@ class Client {
             }
           }
           const durationTime = new Date().getTime() - startTime;
-          if (durationTime > 1000) {
-            logger.graylogWarning(`Request Slow: <path>${self.url}</path> in <responseTime>${durationTime}</responseTime>, over 1000ms`);
+          if (durationTime > parseInt(process.env.GATEWAY_SLOW_TIME, 10)) {
+            logger.graylogWarning(`Request Slow: <path>${self.url}</path> in <responseTime>${durationTime}</responseTime>, over ${parseInt(process.env.GATEWAY_SLOW_TIME, 10)}ms`);
           } else {
             logger.graylogInfo(`Request OK: <path>${self.url}</path> in <responseTime>${durationTime}</responseTime>`);
           }
