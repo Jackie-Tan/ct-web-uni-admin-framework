@@ -1,5 +1,5 @@
 var autoValue = {
-  'date': function() {
+  'date': function () {
     if (this.value) {
       if (this.input && this.input.subtype == 'number') {
         return this.value
@@ -10,7 +10,7 @@ var autoValue = {
       return mInstance.format('MM-DD-YYYY')
     }
   },
-  'datetime': function() {
+  'datetime': function () {
     if (this.value) {
       if (this.input && this.input.subtype == 'number') {
         return this.value
@@ -18,10 +18,10 @@ var autoValue = {
       const mInstance = moment(this.value);
       if (!mInstance.isValid())
         return null;
-      return mInstance.format('MM-DD-YYYY HH:mm:ss')
+      return mInstance.format('MM-DD-YYYY HH:mm:ssZ')
     }
   },
-  'array': function() {
+  'array': function () {
     if (this.value) {
       try {
         if (typeof this.value == "string") {
@@ -35,7 +35,7 @@ var autoValue = {
       }
     }
   },
-  'json': function() {
+  'json': function () {
     if (this.value) {
       try {
         if (typeof this.value == "string") {
@@ -49,7 +49,7 @@ var autoValue = {
       }
     }
   },
-  'ojson': function() {
+  'ojson': function () {
     if (this.value) {
       try {
         if (typeof this.value == "string") {
@@ -63,7 +63,7 @@ var autoValue = {
       }
     }
   },
-  'json.geo': function() {
+  'json.geo': function () {
     if (this.value) {
       if (!this.value.x && this.value.x !== 0)
         return this.unset();
