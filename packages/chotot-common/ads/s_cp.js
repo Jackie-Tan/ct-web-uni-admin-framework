@@ -6,13 +6,13 @@ var STRIP_ENDING_REG = null
 var COLOR_WRAP_SPAN = null
 if (typeof window != 'undefined') {
   // ONLY FOR CLIENT SIDE
-  CLEAN_UP_CHARS_REG = new RegExp('[^\\d\\w]','g')
+  CLEAN_UP_CHARS_REG = new RegExp('[^\\d\\w]', 'g')
   SPLIT_WORDS = new RegExp('([^ \\n\\r]+ *)|([\\n\\r]+)')
   try {
-    STRIP_ENDING_REG = new RegExp('^(.+?)( *)$','s');
+    STRIP_ENDING_REG = new RegExp('^(.+?)( *)$', 's');
   } catch (e) {
     //for old web browser
-    STRIP_ENDING_REG = new RegExp('^(.+?)( *)$','m');
+    STRIP_ENDING_REG = new RegExp('^(.+?)( *)$', 'm');
   }
   COLOR_WRAP_SPAN = new RegExp('<span_([^<>]*)\>', 'ig')
 }
@@ -28,9 +28,9 @@ let func = {
     return SHOP_CATE[cate];
   },
   shop_init_data(data, opt = {}) {
-    let {IsProduction} = opt;
+    let { IsProduction } = opt;
     let shop_url = data.shop_url = data.shop['urls'][0] && data.shop['urls'][0]['url'];
-    var getShopBase = function(type) {
+    var getShopBase = function (type) {
       let url = Bconf.getS(`common.shop.${type}`);
       if (!IsProduction && url) {
         return url.replace(".com", ".org");
@@ -59,7 +59,7 @@ let func = {
   ad_shop_info(data) {
     let p = data.new_actions_params;
     if (!data.ad.shop_alias || (p.payment_status && ['free', 'paid'].indexOf(p.payment_status) != -1)) {
-        return 'Ad to Listing'
+      return 'Ad to Listing'
     }
     return 'Ad to Shop'
   },
@@ -67,51 +67,51 @@ let func = {
     let query = Router.current().params.query || {}
     return cb(query[this._oConfig.key])
   },
-  getCConfParams(category, type){
+  getCConfParams(category, type) {
     try {
       return Bconf.categoryParams[category][type];
-    } catch(e) {
+    } catch (e) {
       console.warn('missing config for ', category, type);
       return [];
     }
   },
-  historyLink: function (text, ad_id) {
-    return `<a href="javascript:void(0)" onclick="window.open('/history_ad?ad_id=${ad_id}', 'Ad history', 'width=600, height=500, scrollbars=yes, resizable=yes')">${text}</a>`
+  historyLink: function (text, ad_id, schema) {
+    return `<a href="javascript:void(0)" onclick="window.open('/history_ad?ad_id=${ad_id}&schema=${schema}', 'Ad history', 'width=600, height=500, scrollbars=yes, resizable=yes')">${text}</a>`
   },
-  hefWithParams: function(params) {
+  hefWithParams: function (params) {
     let queries = []
     for (let key in params) {
       queries.push(`${key}=${params[key]}`)
     }
     return queries.join('&')
   },
-  routeByQuery: function(params) {
+  routeByQuery: function (params) {
     let path = Router.current().originalUrl.split("?")[0];
     return `${path}?${func.hefWithParams(params)}`
   },
-  searchHef: function(params) {
+  searchHef: function (params) {
     params.offset = params.offset || 0;
     params.limit = params.limit || 20;
     return `/search_for_ad?${func.hefWithParams(params)}`
   },
-  searchLink: function(value, params) {
+  searchLink: function (value, params) {
     return `<a target="_blank" href="${func.searchHef(params)}">${value}</a>`
   },
-  phoneUIDLink: function(text, uid) {
+  phoneUIDLink: function (text, uid) {
     return `<a href="javascript:void(0)" onclick="window.open('/phone_uid?uid=${uid}', 'Phone BY UID', 'width=600, height=500, scrollbars=yes, resizable=yes')">${text}</a>`
   },
-  uidPhoneLink: function(text, uid) {
+  uidPhoneLink: function (text, uid) {
     return `<a href="javascript:void(0)" onclick="window.open('/uid_phone?uid=${uid}', 'UID BY Phone', 'width=600, height=500, scrollbars=yes, resizable=yes')">${text}</a>`
   },
   sortDup: function (dups = []) {
-    return dups.sort(function(a, b){
-      let rankA = a.rank || {percent: 0};
-      let rankB = b.rank || {percent: 0};
-      return rankA.percent <= rankB.percent? 1: -1;
+    return dups.sort(function (a, b) {
+      let rankA = a.rank || { percent: 0 };
+      let rankB = b.rank || { percent: 0 };
+      return rankA.percent <= rankB.percent ? 1 : -1;
     })
   },
-  getImageById: function(key, {IsProduction} = {}) {
-    return "/" + ("000000000000"+ key).slice(-14) ;
+  getImageById: function (key, { IsProduction } = {}) {
+    return "/" + ("000000000000" + key).slice(-14);
   },
   initImage: function (data) {
     if (['accepted', 'refused'].indexOf(data.actions.state) != -1) {
@@ -120,7 +120,7 @@ let func = {
     return data.new_images = (data.ad_image_changes || data.images)
   },
   formatVietnamZone: function (timestamp) {
-    return timestamp.replace("Z","+07:00");
+    return timestamp.replace("Z", "+07:00");
   },
   find_text: function (n, m) {
     var l = []
@@ -134,9 +134,9 @@ let func = {
   text_diff: function (t1, t2) {
     // Shortcut
     if (t1 == t2)
-      return(t1);
-    t1 = ""+t1;
-    t2 = ""+t2;
+      return (t1);
+    t1 = "" + t1;
+    t2 = "" + t2;
     let result = [];
     let a1 = [];
     let a2 = [];
@@ -144,13 +144,13 @@ let func = {
     let all2 = [];
 
     // Split both texts
-    all1 = t1.split(SPLIT_WORDS).filter((item) => {return item});
-    all2 = t2.split(SPLIT_WORDS).filter((item) => {return item});
+    all1 = t1.split(SPLIT_WORDS).filter((item) => { return item });
+    all2 = t2.split(SPLIT_WORDS).filter((item) => { return item });
     // Clean up insignificant chars.
-    for (let o of all1 ) {
+    for (let o of all1) {
       a1.push(o.replace(CLEAN_UP_CHARS_REG, ""));
     }
-    for (let o of all2 ) {
+    for (let o of all2) {
       a2.push(o.replace(CLEAN_UP_CHARS_REG, ""));
     }
     let i1 = 0;
@@ -169,7 +169,7 @@ let func = {
       } else {
         // Words differ
         // Find position for the next "sync"
-        let {n1, n2} = func.text_diff_find_sync(a1, i1, a2, i2, 1);
+        let { n1, n2 } = func.text_diff_find_sync(a1, i1, a2, i2, 1);
         // Skipped text is a diff
         if (n1 != i1) {
           let tmp = [];
@@ -215,29 +215,29 @@ let func = {
       min_array = a2length;
     }
 
-    for (let o = 0; o < a1length-i1; o++) {
+    for (let o = 0; o < a1length - i1; o++) {
       for (let i = o; i < min_array; i++) {
-        let c=0;
+        let c = 0;
         while (i1 + c + i < min_array &&
-        i2 + c + i < min_array &&
-        a1[i1 + c + i] == a2[i2 + o + c]) {
+          i2 + c + i < min_array &&
+          a1[i1 + c + i] == a2[i2 + o + c]) {
           c++;
           if (c == minimum_words) {
-            return({n1: i1 + i, n2:i2 + o});
+            return ({ n1: i1 + i, n2: i2 + o });
           }
         }
         c = 0;
         while (i1 + c + i < min_array &&
-        i2 + c + i < min_array &&
-        a1[i1 + c + o] == a2[i2 + i + c]) {
+          i2 + c + i < min_array &&
+          a1[i1 + c + o] == a2[i2 + i + c]) {
           c++;
           if (c == minimum_words) {
-            return ({n1: i1 + o, n2: i2 + i});
+            return ({ n1: i1 + o, n2: i2 + i });
           }
         }
       }
     }
-    return {n1: a1length, n2: a2length};
+    return { n1: a1length, n2: a2length };
   },
   get_new_category: function (category) {
     return [category]
@@ -249,10 +249,10 @@ let func = {
     let category_array = [];
     let arr = Bconf.get('controlpanel.modules.adqueue.highlight.text');
     let type_short = Bconf.getS(`common.type.${type}.short_name`);
-    if(!arr)
+    if (!arr)
       return res;
     /* Check for old category */
-    if(category < 1000)
+    if (category < 1000)
       category_array = func.get_new_category(category);
     else
       category_array.push(category);
@@ -274,7 +274,7 @@ let func = {
     }
     return res;
   },
-  text_clean: function(text) {
+  text_clean: function (text) {
     if (!text)
       return '';
     return text.replace(/\</g, '&lt;');
@@ -308,7 +308,7 @@ let func = {
       let before = 0;
       text = text.replace(regexObj, (match, p1, p2, p3) => {
         let pos = p3;
-        if (match  == ">") {
+        if (match == ">") {
           before = pos;
           return match;
         }
@@ -331,12 +331,12 @@ let func = {
   getLabelType: function (category, type) {
     let str = Bconf.getS(`lang_settings.code_message.1.${category}.${type}.vi.value`) ||
       Bconf.getS(`lang_settings.code_message.1.type.${type}.vi.value`)
-    return str.replace("value:","")
+    return str.replace("value:", "")
   },
   _formatPrice: function (price) {
     let length = price.length;
-    if (length > 3){
-      return func._formatPrice(price.slice(0, length-3)) + "," + price.slice(length-3, length)
+    if (length > 3) {
+      return func._formatPrice(price.slice(0, length - 3)) + "," + price.slice(length - 3, length)
     }
     return price
   },
@@ -353,9 +353,9 @@ let func = {
       q.textrange("set", l[0], value.length)
       return
     }
-    dsLog.error("Can not find \"" + m.text().trim()+ '"')
+    dsLog.error("Can not find \"" + m.text().trim() + '"')
   },
-  initAdChanges: function(data) {
+  initAdChanges: function (data) {
     data.new_params = {};
     data.new_actions_params = {}
     data.params = data.params || [];
@@ -383,7 +383,7 @@ let func = {
     // IMAGES
     func.initImage(data)
     if (data.new_images && data.new_images.length) {
-      data.ad.ad_has_images= true;
+      data.ad.ad_has_images = true;
     }
   },
   initAdNotices: function (data) {
