@@ -1,4 +1,3 @@
-const crypto = require('crypto')
 const ACCESS_KEY = process.env.S3_ACCESS_KEY || 'U22CBQGXWFNMHCL14F6Q';
 const SECRET_KEY = process.env.S3_SECRET_KEY || '4rZuxyVkCd14siy1zFuWaTBBOIBKEKZktFo9dZ5Q';
 const DOMAIN = process.env.S3_DOMAIN || 'http://rgw.chotot.com'
