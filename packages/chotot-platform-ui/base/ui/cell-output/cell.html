@@ -1,7 +1,7 @@
 <template name='cellOutput'>
   {{#if cellType}}
     {{>Template.dynamic template=getTemplate data=this}}
-  {{else}} 
+  {{else}}
     {{value}}
   {{/if}}
 </template>
@@ -15,6 +15,9 @@
   {{formatDate this.value}}
 </template>
 <template name='datetimeCellOutput'>
+  {{formatTime this.value}}
+</template>
+<template name='datetimevnCellOutput'>
   {{formatTime this.value}}
 </template>
 <template name='logoCellOutput'>

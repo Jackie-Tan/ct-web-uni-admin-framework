@@ -21,6 +21,17 @@ var autoValue = {
       return mInstance.format('MM-DD-YYYY HH:mm:ssZ')
     }
   },
+  'datetimevn': function () {
+    if (this.value) {
+      if (this.input && this.input.subtype == 'number') {
+        return this.value
+      }
+      const mInstance = moment(this.value);
+      if (!mInstance.isValid())
+        return null;
+      return mInstance.format('MM-DD-YYYY HH:mm:ssZ')
+    }
+  },
   'array': function () {
     if (this.value) {
       try {
