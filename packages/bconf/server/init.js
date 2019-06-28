@@ -103,7 +103,7 @@ var cachingStatic = [
         }
       }
     }
-    let categories = [{"value": "", "display": "chọn danh mục"}];
+    let categories = []
     let listCate = Bconf.getS(`cat_order`);
     for (let order in listCate) {
       let category = listCate[order]
@@ -114,6 +114,10 @@ var cachingStatic = [
       }
       categories.push({"value": category, "display": Bconf.getS(`cat.${category}.name.vi`)});
     }
+
+    categories.sort((a, b) => parseInt(a.value) - parseInt(b.value))
+    categories.unshift({"value": "", "display": "chọn danh mục"})
+
     Bconf.categories = categories;
     let regions = [];
     let areas = {}
