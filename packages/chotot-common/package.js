@@ -5,12 +5,10 @@ Package.describe({
 });
 Npm.depends({
   "lodash": "4.13.1",
-  "ct-iris-client": "1.0.9"
 });
 Package.on_use(function (api, where) {
   api.use('ecmascript');
   api.add_files([
-    'ads/iris.js',
     'ads/map_ad_params.js',
     'ads/map_ad_params_centrailize_cconf.js',
     'ads/s_cp.js',

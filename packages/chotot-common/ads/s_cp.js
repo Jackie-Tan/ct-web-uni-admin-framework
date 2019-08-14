@@ -1,4 +1,3 @@
-const iris = require('./iris')
 var AD_WORD_MARKS = {};
 var WORD_MARKS = {}
 var CLEAN_UP_CHARS_REG = null
@@ -113,9 +112,6 @@ let func = {
   },
   getImageById: function (key, { IsProduction } = {}) {
     return "/" + ("000000000000" + key).slice(-14);
-  },
-  getIrisImageById: function (id, options = null) {
-    return iris(id, options)
   },
   initImage: function (data) {
     if (['accepted', 'refused'].indexOf(data.actions.state) != -1) {
