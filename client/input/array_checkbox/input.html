@@ -1,12 +1,16 @@
 <template name="ojson.checkboxInput">
   {{#each Ref}}
     <div class="{{refClass}}">
-      {{#if checked}}
-        <input type="checkbox" name={{key}} data-type="multi" data-name="{{key}}" value="{{value}}" checked/>
-      {{else}}
-        <input type="checkbox" name={{key}} data-type="multi" data-name="{{key}}" value="{{value}}" />
-      {{/if}}
-      <span class="json-array-checkbox-label">{{text}}</span>
+      <div class="checkbox-inline i-checks" style="cursor: pointer;">
+        <label>
+          {{#if checked}}
+            <input type="checkbox" name={{key}} data-type="multi" data-name="{{key}}" value="{{value}}" checked/>
+          {{else}}
+            <input type="checkbox" name={{key}} data-type="multi" data-name="{{key}}" value="{{value}}" />
+          {{/if}}
+            <i></i><span class="json-array-checkbox-label" style="font-weight: normal; cursor: pointer;">{{text}}</span>
+        </label>
+      </div>
     </div>
   {{/each}}
   <input type="checkbox" name={{key}} data-type="multi" data-name="{{key}}" value="__break__" style="display:none" />

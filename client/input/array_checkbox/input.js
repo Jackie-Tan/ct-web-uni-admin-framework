@@ -11,6 +11,14 @@ Template['ojson.checkboxInput'].onCreated(function () {
     })
   }
 })
+
+Template['ojson.checkboxInput'].onRendered(function () {
+  $('.i-checks').iCheck({
+    checkboxClass: 'icheckbox_square-green',
+    radioClass: 'iradio_square-green',
+  });
+})
+
 Template['ojson.checkboxInput'].helpers({
   'Ref': function(){
     let inputCfg = Template.instance()._inputIns._input
