@@ -2,7 +2,7 @@
   <div class="radio-root-class row">
     {{#each Ref}}
       {{#if enable}}
-        {{> radioRef key=key input=input displayClass=displayClass isChecked=isChecked checked=checked prefix=prefix pKey=pKey refValue=refValue text=text refClass=refClass  id=id}}
+        {{> radioRef key=key input=input displayClass=displayClass isChecked=isChecked checked=checked prefix=prefix pKey=pKey refValue=refValue text=text refClass=refClass id=id rightHotkeyLabel=rightHotkeyLabel}}
       {{/if}}
     {{/each}}
   </div>
@@ -11,20 +11,23 @@
   <div class="{{refClass}} radio-bound {{#if isChecked}} selected {{/if}}">
     {{#if input}}
       {{#if input.show_radio}}
-        {{> radioInstance class="radio-with-input" checked=checked prefix=prefix pKey=pKey refValue=refValue text=text id=id}}
+        {{> radioInstance class="radio-with-input" checked=checked prefix=prefix pKey=pKey refValue=refValue text=text id=id rightHotkeyLabel=rightHotkeyLabel}}
       {{else}}
-        {{> radioInstance class="hidden" checked=checked prefix=prefix pKey=pKey refValue=refValue text=text id=id}}
+        {{> radioInstance class="hidden" checked=checked prefix=prefix pKey=pKey refValue=refValue text=text id=id rightHotkeyLabel=rightHotkeyLabel}}
       {{/if}}
       <div class="radio-input">
         {{> inputSchema key=key noLabel=true}}
       </div>
     {{else}}
-      {{> radioInstance checked=checked prefix=prefix pKey=pKey refValue=refValue text=text id=id}}
+      {{> radioInstance checked=checked prefix=prefix pKey=pKey refValue=refValue text=text id=id rightHotkeyLabel=rightHotkeyLabel}}
     {{/if}}
   </div>
 </template>
 <template name="radioInstance">
   <div class="form-group {{class}}">
       <input type="radio" id="{{id}}" name="{{pKey}}" data-name="{{pKey}}" value="{{refValue}}" {{checked}} /> <span for="{{id}}" class="normal-label">{{text}}</span>
+      {{#if rightHotkeyLabel}}
+      <span class="right-hotkey-label"><strong>{{rightHotkeyLabel}}</strong></span>
+      {{/if}}
   </div>
 </template>
