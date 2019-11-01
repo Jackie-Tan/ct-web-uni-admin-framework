@@ -10,7 +10,7 @@ Npm.depends({
   'memcached': '2.2.2'
 })
 Package.onUse(function(api) {
-  api.use('ecmascript');
+  api.use(['ecmascript', 'aldeed:simple-schema', 'aldeed:collection2@2.10.0']);
   api.use([
     'useraccounts:core',
   ], ['client']);
