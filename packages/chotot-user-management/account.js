@@ -135,11 +135,15 @@ Meteor.secureMethods({
   },
   'Global/Users/ResetPassword': function (data) {
     let action_user = Role.of(Meteor.userId()) // current (logined user) admin that do set password for target user
-    let currentAdminEmail = action_user._user.emails[0].address
+    let currentAdminEmail = action_user._user.emails[0].address;
+    let emailSend = data.email_address;
+    if (emailSend === 'admin-ds@chotot.vn') {
+      emailSend = 'phatvo@chotot.vn';
+    }
     action_user.setPassword(data)
     Email.send({
       from: '',
-      to: data.email_address,
+      to: emailSend,
       subject: 'Chotot: Admin-Center Reset Password',
       html: `
           ${currentAdminEmail} has changed your password. Please login again at: ${process.env.ROOT_URL}/signout with:
