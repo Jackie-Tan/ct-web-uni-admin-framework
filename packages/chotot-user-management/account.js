@@ -24,6 +24,17 @@ function updateUser(options, user) {
   Meteor.users.update({ _id: old_user._id }, { $set: { [`services.${options.type}`]: user.services[options.type] } })
   return user
 }
+
+function makeRandomPassword(length) {
+   var result           = '';
+   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+   var charactersLength = characters.length;
+   for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+   }
+   return result;
+}
+
 Meteor.startup(function () {
   try {
     let smtp = {
@@ -63,8 +74,17 @@ Meteor.startup(function () {
     return user;
   });
   const user = Meteor.users.find({ role: 0 }).fetch();
-  if (user.length)
+  if (user.length) {
+    if (process.env.SHOULD_RESET_ADMIN_PASSWORD) {
+      const dataPassword = {
+        _id: user[0]._id,
+        new_password: makeRandomPassword(20)
+      };
+      logger.graylogInfo(`New Admin Password ${dataPassword.new_password}`);
+      Role.of(user[0]._id).setPassword(dataPassword);
+    }
     return;
+  }
   const userId = createUser("admin-ds@chotot.vn", process.env.ADMIN_PASSWORD || "123456");
 
   Meteor.users.update({ _id: userId }, { $set: { role: [0], role_db: [0] } });
