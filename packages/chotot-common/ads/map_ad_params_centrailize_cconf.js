@@ -65,26 +65,26 @@ const TOGGLE_TO = {
     }
   },
   "accessories_type": {
-      "key": ["accessories_class"],
-      "group_key": "accessoriesclass",
-      "end_key": "accessoriestype"
+    "key": ["accessories_class"],
+    "group_key": "accessoriesclass",
+    "end_key": "accessoriestype"
   },
 
   "component_type": {
-      "key": ["component_class"],
-      "group_key": "componentclass",
-      "end_key": "componenttype"
+    "key": ["component_class"],
+    "group_key": "componentclass",
+    "end_key": "componenttype"
   },
 
   "auvi_brand": {
-      "key": ["auvi_type"],
-      "group_key": "auvitype",
-      "end_key": "auvibrand"
+    "key": ["auvi_type"],
+    "group_key": "auvitype",
+    "end_key": "auvibrand"
   },
   "swatch_model": {
-      "key": ["swatch_brand"],
-      "group_key": "swatchbrand",
-      "end_key": "swatchmodel"
+    "key": ["swatch_brand"],
+    "group_key": "swatchbrand",
+    "end_key": "swatchmodel"
   }
 }
 const PARAMS_PRIORITY = {
@@ -99,12 +99,12 @@ const PARAMS_PRIORITY = {
 }
 
 let getLabel = function (param) {
-  return (Bconf.getS(`label_settings.${param}.1.vi.value`) || "").replace("label:","")
+  return (Bconf.getS(`label_settings.${param}.1.vi.value`) || "").replace("label:", "")
 }
 
 const MAP_BY_TYPES = {
   "date": function (value) {
-    return parseInt(value)*1000
+    return parseInt(value) * 1000
   },
   "multiselect": function (value) {
     if (!value)
@@ -182,7 +182,7 @@ const MAP_SUB_TYPES = {
 }
 
 let getCConfType = function (paramDef = {}) {
-  return (paramDef.chapy && (paramDef.chapy.newad_type3 || paramDef.chapy.newad_type)) || paramDef.apitype || paramDef.type || 'text'
+  return (paramDef.chapy && (paramDef.cp.type || paramDef.chapy.newad_type3 || paramDef.chapy.newad_type)) || paramDef.apitype || paramDef.type || 'text'
 }
 let getSubType = function (paramDef = {}) {
   let keyboard = paramDef.keyboard;
@@ -216,11 +216,11 @@ let getType = function (param, paramDef = {}, options) {
     return MAP_TYPES[type]
   return 'text';
 }
-let addInputData = function(input, param, options, more) {
+let addInputData = function (input, param, options, more) {
   //common
   //ad-hoc
   if (input.type == 'select') {
-    input.options =  getOptions(options, {param})
+    input.options = getOptions(options, {param})
     return input;
   }
   if (input.type == 'multiselect') {
@@ -232,9 +232,9 @@ let addInputData = function(input, param, options, more) {
   let toggleBy = TOGGLE_TO[param];
   if (toggleBy) {
     let {prefix} = more;
-    input.ref = function(opt, cb){
+    input.ref = function (opt, cb) {
       let parent = toggleBy.key
-      let parentValue = this.another(prefix+'.'+parent).get();
+      let parentValue = this.another(prefix + '.' + parent).get();
       if (!parentValue)
         return cb([{value: "", display: placeHolder(parent)}])
       cb(getOptions(Bconf.getS(`common.${toggleBy.group_key}.${parentValue}.${toggleBy.end_key}`), {param}))
@@ -248,14 +248,14 @@ let isOptions = function (param) {
   let keyboard = paramDef.keyboard;
   return !keyboard && Bconf.getS(`common.${param}`)
 }
-let getInput = function (param, more = {prefix:"", non_editable_conf}) {
+let getInput = function (param, more = {prefix: "", non_editable_conf}) {
   let paramDef = Bconf.adParams[param];
   let options = isOptions(param);
   let {prefix, non_editable_conf} = more;
   let input = {
     "type": getType(param, paramDef, options),
     "subtype": getSubType(paramDef),
-    "pong": !non_editable_conf ? pongParams(param): null,
+    "pong": !non_editable_conf ? pongParams(param) : null,
     "placeHolder": placeHolder(param),
     "value": valueParams(param),
     "display": displayParams(param),
@@ -264,12 +264,16 @@ let getInput = function (param, more = {prefix:"", non_editable_conf}) {
 }
 
 
-module.exports = function (category, type, {prefix ="", non_editable_conf, non_label_no_input, except = function (key) {return false}} = {}) {
+module.exports = function (category, type, {
+  prefix = "", non_editable_conf, non_label_no_input, except = function (key) {
+    return false
+  }
+} = {}) {
   let params = Bconf.categoryParams[category][type]
-  let bigCate = Math.round(parseInt(category)/1000)*1000
+  let bigCate = Math.round(parseInt(category) / 1000) * 1000
   let resp = []
   for (let param of params) {
-    let sKey = prefix?`${prefix}.${param}`: param
+    let sKey = prefix ? `${prefix}.${param}` : param
     if (except(sKey)) {
       continue
     }
@@ -280,18 +284,18 @@ module.exports = function (category, type, {prefix ="", non_editable_conf, non_l
       "same_input": true,
       "isOptional": Bconf.getS(`validator_settings.${param}.1.optional.value`) == "1",
       "text": label,
-      "input": non_label_no_input && !label?{enable: false}:getInput(param, {prefix, non_editable_conf}) ,
+      "input": non_label_no_input && !label ? {enable: false} : getInput(param, {prefix, non_editable_conf}),
       "order": parseInt(Bconf.insertOrder[param] || "9999"),
       "pos": PARAMS_PRIORITY[param] && (PARAMS_PRIORITY[param].bigCate == bigCate) && PARAMS_PRIORITY[param].pos || 0,
     })
   }
   //SORT
-  resp.sort(function(a,b){
+  resp.sort(function (a, b) {
     if (a.pos < b.pos)
       return 1;
     if (a.pos > b.pos)
       return -1;
-    return a.order > b.order? 1 : -1;
+    return a.order > b.order ? 1 : -1;
   })
   return resp
 }
