@@ -182,7 +182,7 @@ const MAP_SUB_TYPES = {
 }
 
 let getCConfType = function (paramDef = {}) {
-  return (paramDef.chapy && (paramDef.cp.type || paramDef.chapy.newad_type3 || paramDef.chapy.newad_type)) || paramDef.apitype || paramDef.type || 'text'
+  return (paramDef.cp && paramDef.cp.type) || (paramDef.chapy && (paramDef.chapy.newad_type3 || paramDef.chapy.newad_type)) || paramDef.apitype || paramDef.type || 'text'
 }
 let getSubType = function (paramDef = {}) {
   let keyboard = paramDef.keyboard;
