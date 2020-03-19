@@ -1,6 +1,7 @@
-const TIME_REFRESH = 1000*60*60;
-function getBconfD(cb){
-  Meteor.call('Global/Trans/Bconf', function(err, res) {
+const TIME_REFRESH = 1000 * 60 * 60;
+
+function getBconfD(cb) {
+  Meteor.call('Global/Trans/Bconf', function (err, res) {
     if (err) {
       dsLog.error(err.message || err.reason);
       return;
@@ -10,8 +11,9 @@ function getBconfD(cb){
     cb && cb();
   })
 }
-function getBconfS(cb){
-  Meteor.call('Global/Trans/BconfS', function(err, res) {
+
+function getBconfS(cb) {
+  Meteor.call('Global/Trans/BconfS', function (err, res) {
     if (err) {
       dsLog.error(err.message || err.reason);
       return;
@@ -22,6 +24,7 @@ function getBconfS(cb){
     cb && cb();
   })
 }
+
 Bconf = {
   versions: {
     bconf: new ReactiveVar(),
@@ -50,50 +53,53 @@ Bconf = {
     }
   },
   refresh() {
-    Tracker.autorun(function(){   
-      let conf = Confs.find({id:'bconf'}).fetch()[0];
-      if (!conf)
-        return;
-      if (!Bconf.versions.bconf.curValue) {
-        Bconf.versions.bconf.set(conf.version)
-        localStorage.setItem('BconfDVersion', ""+conf.version);
-        return;
-      }
-      if (Bconf.versions.bconf.curValue == conf.version) {
-        return;
-      }
-      console.log('---reloading dynamic config----');
-      //dynamic bconf no need refresh
-      getBconfD(function(){
-        Bconf.versions.bconf.set(conf.version);
-        localStorage.setItem('BconfDVersion', ""+conf.version);
+    Tracker.autorun(function () {
+      Meteor.subscribe('conf', function () {
+        let conf = Confs.find({id: 'bconf'}).fetch()[0];
+        if (!conf)
+          return;
+        if (!Bconf.versions.bconf.curValue) {
+          Bconf.versions.bconf.set(conf.version)
+          localStorage.setItem('BconfDVersion', "" + conf.version);
+          return;
+        }
+        if (Bconf.versions.bconf.curValue == conf.version) {
+          return;
+        }
+        console.log('---reloading dynamic config----');
+        //dynamic bconf no need refresh
+        getBconfD(function () {
+          Bconf.versions.bconf.set(conf.version);
+          localStorage.setItem('BconfDVersion', "" + conf.version);
+        });
+        this.stop();
       });
-      
     });
-    Tracker.autorun(function(){
-      
-      let conf = Confs.find({id:'bconfS'}).fetch()[0];
-      if (!conf)
-        return;
-      if (!Bconf.versions.bconfS.curValue) {
-        Bconf.versions.bconfS.set(conf.version)
-        localStorage.setItem('BconfSVersion', ""+conf.version);
-        return;
-      }
-      if (Bconf.versions.bconfS.curValue == conf.version) {
-        return;
-      }
-      console.log('---reloading static config----');
-      getBconfS(function() {
-        Bconf.versions.bconfS.set(conf.version);
-        localStorage.setItem('BconfSVersion', ""+conf.version);
-        document.location.reload(true);
-      })
-     
+    Tracker.autorun(function () {
+      Meteor.subscribe('conf', function () {
+        let conf = Confs.find({id: 'bconfS'}).fetch()[0];
+        if (!conf)
+          return;
+        if (!Bconf.versions.bconfS.curValue) {
+          Bconf.versions.bconfS.set(conf.version)
+          localStorage.setItem('BconfSVersion', "" + conf.version);
+          return;
+        }
+        if (Bconf.versions.bconfS.curValue == conf.version) {
+          return;
+        }
+        console.log('---reloading static config----');
+        getBconfS(function () {
+          Bconf.versions.bconfS.set(conf.version);
+          localStorage.setItem('BconfSVersion', "" + conf.version);
+          document.location.reload(true);
+        })
+        this.stop();
+      });
     });
   },
-  baseGet: function(bKey, data) {
-    let keys = (""+bKey).split('.');
+  baseGet: function (bKey, data) {
+    let keys = ("" + bKey).split('.');
     if (!keys.length)
       return null
     let ptr = data
@@ -104,16 +110,15 @@ Bconf = {
     }
     return ptr
   },
-  get : function(bKey){
+  get: function (bKey) {
     let version = Bconf.versions.bconf.get();
     return Bconf.baseGet(bKey, Bconf.data)
   },
-  getS : function(bKey){
+  getS: function (bKey) {
     return Bconf.baseGet(bKey, Bconf.dataS)
   },
 }
-Meteor.subscribe('conf');
-Meteor.startup(function(){
+Meteor.startup(function () {
   Bconf.init();
   Bconf.refresh();
   if (!window.Bconf) {
