@@ -113,11 +113,12 @@ Template.datatable.onRendered(function () {
       tableOpts.serverSide = true;
       tableOpts.ajax = function (data, callback, settings) {
         const options = {
+          ...(tpl.data.options || {}),
           limit: settings._iDisplayLength,
           offset: settings._iDisplayStart,
           search: settings.oPreviousSearch.sSearch,
-          columnSearch: []
-        }
+          columnSearch: [],
+        };
         if (settings.aaSorting.length && settings.aaSorting[0].length > 1)
           options.sort = `${tpl.heads[settings.aaSorting[0][0]].key} ${settings.aaSorting[0][1].toUpperCase()}`;
         if (settings.aoPreSearchCols.length) {
@@ -143,7 +144,7 @@ Template.datatable.onRendered(function () {
         if (instance.data && !instance.data.checkOptionsChange(options))
           return instance.data.get(callback)
         instance.tbOptions = options;
-        instance.post('Get', options, { silent: true }, function (err, res) {
+        instance.post(tpl.data.getDataMethod || 'Get', options, { silent: true }, function (err, res) {
           instance.setVar('data', new TableData(res, options));
           callback(res);
         });
