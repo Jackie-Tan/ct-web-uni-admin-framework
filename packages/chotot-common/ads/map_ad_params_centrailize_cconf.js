@@ -185,9 +185,9 @@ let getCConfType = function (paramDef = {}) {
   return (paramDef.cp && paramDef.cp.type) || (paramDef.chapy && (paramDef.chapy.newad_type3 || paramDef.chapy.newad_type)) || paramDef.apitype || paramDef.type || 'text'
 }
 let getSubType = function (paramDef = {}) {
-  let keyboard = paramDef.keyboard;
-  if (keyboard)
-    return MAP_SUB_TYPES[keyboard] || 'text';
+  // let keyboard = paramDef.keyboard;
+  // if (keyboard)
+  //   return MAP_SUB_TYPES[keyboard] || 'text';
   let type = getCConfType(paramDef)
   if (MAP_SUB_TYPES[type])
     return MAP_SUB_TYPES[type];
