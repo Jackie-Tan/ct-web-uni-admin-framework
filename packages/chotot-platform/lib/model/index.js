@@ -118,7 +118,7 @@ class BaseModel {
       this.name = name
       this.table = config.table || name;
       this.tableView = config.tableView || this.table;
-      this.isTrack = (config.tracking && config.tracking.enable !== false) || true;
+      this.isTrack = config.tracking ? config.tracking.enable : true;
       this.track_table = track_table || config.track_table || 'action_history';
       this.columns = [];
       if (typeof config.col_id == 'undefined') {
