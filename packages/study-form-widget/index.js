@@ -28,8 +28,8 @@ var GetData = {
     switch (el.attr('type')) {
       case 'number':
         if (!el.attr('step'))
-          return parseInt(el.val());
-        return parseFloat(el.val());
+          return el.val();
+        return el.val();
       case "radio":
         if (Data.FUNC_LIST.indexOf(val) != -1)
           return val;
