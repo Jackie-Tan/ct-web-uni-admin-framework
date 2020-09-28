@@ -30,6 +30,7 @@ var Images= {
     return new Promise((resolve, reject) => {
       $.ajax({
           url: opt.url || "/upload-image",
+          headers: opt.headers || {},
           cache: false,
           contentType: false,
           processData: false,
