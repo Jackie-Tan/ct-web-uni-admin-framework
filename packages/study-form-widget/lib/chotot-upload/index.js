@@ -44,7 +44,7 @@ var Images = {
       });
     });
   },
-  storeImage: function (file, opt) {
+  storeImage: function (data, opt) {
     var form_data = new FormData();
     if (data instanceof FormData) {
       form_data = data;
