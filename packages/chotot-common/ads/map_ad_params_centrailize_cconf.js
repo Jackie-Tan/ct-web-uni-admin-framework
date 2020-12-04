@@ -243,14 +243,14 @@ let addInputData = function (input, param, options, more) {
   }
   return input;
 }
-let isOptions = function (param) {
+let isOptions = function (param, category) {
   let paramDef = Bconf.adParams[param] || {};
   let keyboard = paramDef.keyboard;
-  return !keyboard && Bconf.getS(`common.${param}`)
+  return !keyboard && (Bconf.getS(`common.${param}`) || Bconf.getS(`common.${category}.${param}`))
 }
-let getInput = function (param, more = {prefix: "", non_editable_conf}) {
+let getInput = function (param, more = {prefix: "", non_editable_conf}, category) {
   let paramDef = Bconf.adParams[param];
-  let options = isOptions(param);
+  let options = isOptions(param, category);
   let {prefix, non_editable_conf} = more;
   let input = {
     "type": getType(param, paramDef, options),
@@ -284,7 +284,7 @@ module.exports = function (category, type, {
       "same_input": true,
       "isOptional": Bconf.getS(`validator_settings.${param}.1.optional.value`) == "1",
       "text": label,
-      "input": non_label_no_input && !label ? {enable: false} : getInput(param, {prefix, non_editable_conf}),
+      "input": non_label_no_input && !label ? {enable: false} : getInput(param, {prefix, non_editable_conf}, category),
       "order": parseInt(Bconf.insertOrder[param] || "9999"),
       "pos": PARAMS_PRIORITY[param] && (PARAMS_PRIORITY[param].bigCate == bigCate) && PARAMS_PRIORITY[param].pos || 0,
     })
