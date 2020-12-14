@@ -2,6 +2,7 @@ const Request = require('request');
 const fs = require('fs');
 const { Readable } = require('stream');
 const { Uploader } = require("ct-iris-client");
+const fetch = require('node-fetch');
 
 const URL_UPLOAD = process.env.IRIS_URL || 'https://gateway.chotot.org/v1/internal/images/upload'
 const uploader = new Uploader(URL_UPLOAD);
@@ -45,13 +46,30 @@ Router.route('/iris/image-upload', {where: 'server'}).post(function () {
     })
     .on('end', () => {
       readable.push(null);
-      uploader
-        .upload(readable, { type: 'admincentre' })
-        .then(data => {
-          console.log('resp from iris', data);
+      // uploader
+      //   .upload(readable, { type: 'admincentre' })
+      //   .then(data => {
+      //     console.log('resp from iris', data);
+      //   })
+      //   .catch(error => {
+      //     console.log('error', error);
+      //   });
+      fetch(URL_UPLOAD, {
+        body: readable,
+        headers: {
+          "content-type": request.headers["content-type"],
+          "content-length": request.headers["content-length"],
+        },
+        method: "POST",
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          response.writeHead(200, { "Content-Type": "application/json" });
+          response.end(JSON.stringify({ url: res.image_url }));
         })
-        .catch(error => {
-          console.log('error', error);
+        .catch((err) => {
+          response.writeHead(400, { "Content-Type": "application/json" });
+          response.end(JSON.stringify({ error: err.message }));
         });
       console.log('end');
     });
