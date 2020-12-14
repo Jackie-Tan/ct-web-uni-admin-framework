@@ -1,4 +1,5 @@
 const Request = require('request');
+const fs = require('fs');
 
 const URL_UPLOAD = process.env.IRIS_URL || 'https://gateway.chotot.org/v1/internal/images/upload'
 
@@ -31,10 +32,17 @@ const UploadIris = function () {
 }
 
 Router.route('/iris/image-upload', {where: 'server'}).post(function () {
-  // var request = this.request;
-  // var response = this.response;
+  var request = this.request;
+  var response = this.response;
+  request
+    .on('data', data => {
+      console.log('data', data);
+    })
+    .on('end', () => {
+      console.log('end');
+    });
   // var chototUploadImage = Request.post(URL_UPLOAD);
   // request.pipe(chototUploadImage);
   // chototUploadImage.pipe(response);
-  FWRequrest.call(this);
+  // FWRequrest.call(this);
 });
