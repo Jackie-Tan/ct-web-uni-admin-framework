@@ -16,7 +16,7 @@ const UploadIris = function () {
   let headers = {};
   headers['content-type'] = 'image/jpeg';
   headers['Tenant-Namespace'] = 'chotot';
-  var chototUploadImage = Request.post({ method: 'POST', uri: URL_UPLOAD, headers: headers });
+  var chototUploadImage = Request.post(URL_UPLOAD);
   request.pipe(chototUploadImage);
   chototUploadImage.on('response', function (resp) {
     console.log('resp', resp);
