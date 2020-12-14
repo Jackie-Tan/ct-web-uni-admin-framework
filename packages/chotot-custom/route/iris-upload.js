@@ -36,7 +36,8 @@ Router.route('/iris/image-upload', {where: 'server'}).post(function () {
   var response = this.response;
   request
     .on('data', data => {
-      console.log('data', data);
+      const readStream = fs.createReadStream(data);
+      console.log('readStream', readStream);
     })
     .on('end', () => {
       console.log('end');
