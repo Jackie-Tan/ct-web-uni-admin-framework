@@ -36,20 +36,21 @@ const UploadIris = function () {
 Router.route('/iris/image-upload', {where: 'server'}).post(function () {
   var request = this.request;
   var response = this.response;
+  let bufs = [];
   request
     .on('data', data => {
-      const readStream = fs.createReadStream(data);
-      console.log('readStream', readStream);
+      bufs.push(chunk);
+    })
+    .on('end', () => {
+      var image = Buffer.concat(bufs);
       uploader
-        .upload(readStream, { type: 'admincentre' })
+        .upload(image, { type: 'admincentre' })
         .then(data => {
           console.log('resp from iris', data);
         })
         .catch(error => {
           console.log('error', error);
         });
-    })
-    .on('end', () => {
       console.log('end');
     });
   // var chototUploadImage = Request.post(URL_UPLOAD);
