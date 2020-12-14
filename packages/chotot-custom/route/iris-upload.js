@@ -38,6 +38,7 @@ Router.route('/iris/image-upload', {where: 'server'}).post(function () {
   var request = this.request;
   var response = this.response;
   const readable = new Readable();
+  readable._read = () => {};
   request
     .on('data', data => {
       readable.push(data);
