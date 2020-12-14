@@ -1,6 +1,6 @@
 const { Uploader } = require('ct-iris-client');
 const Request = require('request');
-const { Readable } = "stream";
+// const { Readable } = "stream";
 
 const URL_UPLOAD = process.env.IRIS_URL || 'https://gateway.chotot.org/v1/internal/images/upload'
 
@@ -8,9 +8,8 @@ Router.route('/iris/image-upload', {where: 'server'}).post(function () {
   var request = this.request;
   var response = this.response;
   const uploader = new Uploader(URL_UPLOAD);
-  const { image } = this.request.query;
-  console.log('this.request.query', this.request.query);
-  const readable = new Readable();
+  const { image } = this.request.body;
+  console.log('this.request.query', this.request.body);
   // var chototUploadImage = Request.post(URL_UPLOAD)
   request.pipe(uploader.upload(image, { type: 'admincentre' }));
   uploader.pipe(response);
