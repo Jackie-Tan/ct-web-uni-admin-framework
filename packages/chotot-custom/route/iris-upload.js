@@ -19,12 +19,13 @@ const UploadIris = function () {
   var chototUploadImage = Request.post({ method: 'POST', uri: URL_UPLOAD, headers: headers });
   request.pipe(chototUploadImage);
   chototUploadImage.on('response', function (resp) {
+    console.log('resp', resp);
     response.writeHead(200, { "Content-Type": "application/json" });
     response.end(JSON.stringify(resp))
   }).on('error', function (err) {
-    console.error(err)
+    console.error(err);
     response.writeHead(400, { "Content-Type": "application/json" });
-    response.end(JSON.stringify({ error: err.message }))
+    response.end(JSON.stringify({ error: err.message }));
   });
 }
 
