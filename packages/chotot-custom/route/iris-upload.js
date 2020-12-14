@@ -1,6 +1,6 @@
 const { Uploader } = require('ct-iris-client');
 const Request = require('request');
-const { Readable } = "stream";
+const { Readable } = require("stream");
 
 const URL_UPLOAD = process.env.IRIS_URL || 'https://gateway.chotot.org/v1/internal/images/upload'
 
