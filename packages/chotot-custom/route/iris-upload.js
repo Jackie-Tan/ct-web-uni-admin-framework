@@ -1,5 +1,6 @@
 const Request = require('request');
 const fs = require('fs');
+const { Readable } = require('stream');
 const { Uploader } = require("ct-iris-client");
 
 const URL_UPLOAD = process.env.IRIS_URL || 'https://gateway.chotot.org/v1/internal/images/upload'
@@ -36,16 +37,15 @@ const UploadIris = function () {
 Router.route('/iris/image-upload', {where: 'server'}).post(function () {
   var request = this.request;
   var response = this.response;
-  let bufs = [];
+  const readable = new Readable();
   request
     .on('data', data => {
-      bufs.push(data);
+      readable.push(data);
     })
     .on('end', () => {
-      bufs.push(null);
-      var image = Buffer.concat(bufs);
+      readable.push(null);
       uploader
-        .upload(image, { type: 'admincentre' })
+        .upload(readable, { type: 'admincentre' })
         .then(data => {
           console.log('resp from iris', data);
         })
