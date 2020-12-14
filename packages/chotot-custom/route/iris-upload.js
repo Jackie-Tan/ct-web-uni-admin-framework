@@ -1,29 +1,38 @@
-const { Uploader } = require('ct-iris-client');
 const Request = require('request');
-const { Readable } = require("stream");
 
 const URL_UPLOAD = process.env.IRIS_URL || 'https://gateway.chotot.org/v1/internal/images/upload'
 
-Router.route('/iris/image-upload', {where: 'server'}).post(function () {
+const FWRequrest = function () {
+  // var request = this.request;
+  //TODO refactor headers
+  // let file_name = `${FOLDER}_${new Date().getTime()}.jpg`;
+  UploadIris.call(this);
+}
+
+const UploadIris = function () {
   var request = this.request;
   var response = this.response;
-  const uploader = new Uploader(URL_UPLOAD);
-  const readable = new Readable();
-  readable._read = () => {};
-  request.on("data", (data) => {
-    readable.push(data);
-  })
-  request.on("end", () => {
-    readable.push(null);
-    uploader.upload(readable, { type: 'admincentre' })
-      .then((res) => res.json())
-      .then((res) => {
-        response.writeHead(200, { "Content-Type": "application/json" });
-        response.end(JSON.stringify(res));
-      })
-      .catch((err) => {
-        response.writeHead(400, { "Content-Type": "application/json" });
-        response.end(JSON.stringify(err));
-      });
+  //TODO refactor headers
+  let headers = {};
+  headers['content-type'] = 'image/jpeg';
+  headers['Tenant-Namespace'] = 'chotot';
+  var chototUploadImage = Request.post({ method: 'POST', uri: URL_UPLOAD, headers: headers });
+  request.pipe(chototUploadImage);
+  chototUploadImage.on('response', function (resp) {
+    response.writeHead(200, { "Content-Type": "application/json" });
+    response.end(JSON.stringify(resp))
+  }).on('error', function (err) {
+    console.error(err)
+    response.writeHead(400, { "Content-Type": "application/json" });
+    response.end(JSON.stringify({ error: err.message }))
   });
+}
+
+Router.route('/iris/image-upload', {where: 'server'}).post(function () {
+  // var request = this.request;
+  // var response = this.response;
+  // var chototUploadImage = Request.post(URL_UPLOAD);
+  // request.pipe(chototUploadImage);
+  // chototUploadImage.pipe(response);
+  FWRequrest.call(this);
 });
