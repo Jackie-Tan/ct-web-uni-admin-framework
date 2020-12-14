@@ -18,15 +18,16 @@ const UploadIris = function () {
   headers['Tenant-Namespace'] = 'chotot';
   var chototUploadImage = Request.post(URL_UPLOAD);
   request.pipe(chototUploadImage);
-  chototUploadImage.on('response', function (resp) {
-    console.log('resp', resp.body);
-    response.writeHead(200, { "Content-Type": "application/json" });
-    response.end(JSON.stringify(resp.body));
-  }).on('error', function (err) {
-    console.error('err', err);
-    response.writeHead(400, { "Content-Type": "application/json" });
-    response.end(JSON.stringify({ error: err.message }));
-  });
+  chototUploadImage.pipe(response);
+  // chototUploadImage.on('response', function (resp) {
+  //   console.log('resp', resp.body);
+  //   response.writeHead(200, { "Content-Type": "application/json" });
+  //   response.end(JSON.stringify(resp.body));
+  // }).on('error', function (err) {
+  //   console.error('err', err);
+  //   response.writeHead(400, { "Content-Type": "application/json" });
+  //   response.end(JSON.stringify({ error: err.message }));
+  // });
 }
 
 Router.route('/iris/image-upload', {where: 'server'}).post(function () {
