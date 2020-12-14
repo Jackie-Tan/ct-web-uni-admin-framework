@@ -24,6 +24,23 @@ var Images = {
       return req;
     });
   },
+  irisUpload: function (file, opt) {
+    return new Promise((resolve, reject) => {
+      var req = new XMLHttpRequest();
+      req.open("PUT", opt.url, true);
+      //Add all the headers
+      req.onreadystatechange = function () {
+        if (req.readyState == 4) {
+          if (req.response) {
+            return resolve(JSON.parse(req.response));
+          }
+          return resolve("");
+        }
+      };
+      req.send(file);
+      return req;
+    });
+  },
   sendFile: function (form_data, opt) {
     return new Promise((resolve, reject) => {
       $.ajax({

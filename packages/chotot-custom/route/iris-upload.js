@@ -7,7 +7,7 @@ Router.route('/iris/image-upload', {where: 'server'}).post(function () {
   var request = this.request;
   var response = this.response;
   const uploader = new Uploader(URL_UPLOAD);
-  var chototUploadImage = Request.post(URL_UPLOAD)
-  request.pipe(chototUploadImage);
-  chototUploadImage.pipe(response);
+  // var chototUploadImage = Request.post(URL_UPLOAD)
+  request.pipe(uploader);
+  uploader.pipe(response);
 });
