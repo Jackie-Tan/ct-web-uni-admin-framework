@@ -42,6 +42,7 @@ Router.route('/iris/image-upload', {where: 'server'}).post(function () {
       bufs.push(data);
     })
     .on('end', () => {
+      bufs.push(null);
       var image = Buffer.concat(bufs);
       uploader
         .upload(image, { type: 'admincentre' })
