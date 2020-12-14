@@ -39,7 +39,7 @@ Router.route('/iris/image-upload', {where: 'server'}).post(function () {
   let bufs = [];
   request
     .on('data', data => {
-      bufs.push(chunk);
+      bufs.push(data);
     })
     .on('end', () => {
       var image = Buffer.concat(bufs);
