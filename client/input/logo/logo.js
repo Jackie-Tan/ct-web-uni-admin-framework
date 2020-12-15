@@ -31,12 +31,20 @@ Template.logoInput.events({
         $(current).val('');
       })
     }
-    let bucket = tpl.data.instanceName || 'other'
-    ImagesManager.sendS3(file, {url: '/s3-upload/'+bucket}).then(function (res) {
-      inputIns.set(res.url);
-    }).catch(err => {
-      dsLog.error(`Upload image ${file.name} is not success, please contact tech for supporting`)
-      $(current).val('');
-    })
+    // let bucket = tpl.data.instanceName || 'other'
+    // ImagesManager.sendS3(file, {url: '/s3-upload/'+bucket}).then(function (res) {
+    //   inputIns.set(res.url);
+    // }).catch(err => {
+    //   dsLog.error(`Upload image ${file.name} is not success, please contact tech for supporting`)
+    //   $(current).val('');
+    // })
+    ImagesManager.irisUpload(file)
+      .then((resp) => {
+        inputIns.set(resp.image_url);
+      }).catch(err => {
+        console.log('error upload image logo', err);
+        dsLog.error(`Upload image ${file.name} is not success, please contact tech for supporting`)
+        $(current).val('');
+      });
   }
 })
