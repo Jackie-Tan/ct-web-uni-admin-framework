@@ -24,14 +24,14 @@ var Images = {
       return req;
     });
   },
-  irisUpload: function (file) {
+  irisUpload: function (file, isKeepName = false) {
     var form_data = new FormData();
     const opt = {
       url: '/iris/image-upload'
     };
     form_data.append("image", file);
     form_data.append("type", 'admincentre');
-    if (file.type === 'image/png' || file.type === 'image/gif') {
+    if (file.type === 'image/png' || file.type === 'image/gif' || isKeepName) {
       const imageName = `${new Date().getTime()}_${file.name}`;
       form_data.append('name', imageName);
     }
