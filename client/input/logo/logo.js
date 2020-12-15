@@ -38,7 +38,8 @@ Template.logoInput.events({
     //   dsLog.error(`Upload image ${file.name} is not success, please contact tech for supporting`)
     //   $(current).val('');
     // })
-    ImagesManager.irisUpload(file)
+    const isKeepName = tpl.data.input.isKeepName;
+    ImagesManager.irisUpload(file, isKeepName)
       .then((resp) => {
         inputIns.set(resp.image_url);
       }).catch(err => {
