@@ -33,6 +33,5 @@ Router.route('/iris/image-upload', {where: 'server'}).post(function () {
           response.writeHead(400, { "Content-Type": "application/json" });
           response.end(JSON.stringify({ error: err.message }));
         });
-      console.log('end');
     });
 });
