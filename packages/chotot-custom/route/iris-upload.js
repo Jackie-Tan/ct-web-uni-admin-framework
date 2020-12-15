@@ -1,4 +1,3 @@
-const { Readable } = require('stream');
 const fetch = require('node-fetch');
 
 const URL_UPLOAD = process.env.IRIS_URL || 'https://gateway.chotot.org/v1/internal/images/upload'
@@ -6,19 +5,15 @@ const URL_UPLOAD = process.env.IRIS_URL || 'https://gateway.chotot.org/v1/intern
 Router.route('/iris/image-upload', {where: 'server'}).post(function () {
   var request = this.request;
   var response = this.response;
-  const readable = new Readable();
-  readable._read = () => {};
   let body = [];
   request
     .on('error', (err) => {
       console.error(err);
     })
     .on('data', data => {
-      // readable.push(data);
       body.push(data);
     })
     .on('end', () => {
-      // readable.push(null);
       body = Buffer.concat(body);
       fetch(URL_UPLOAD, {
         body: body,
