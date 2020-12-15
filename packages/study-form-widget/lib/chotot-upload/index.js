@@ -24,6 +24,19 @@ var Images = {
       return req;
     });
   },
+  irisUpload: function (file) {
+    var form_data = new FormData();
+    const opt = {
+      url: '/iris/image-upload'
+    };
+    form_data.append("image", file);
+    form_data.append("type", 'admincentre');
+    if (file.type === 'image/png' || file.type === 'image/gif') {
+      const imageName = `${new Date().getTime()}_${file.name}`;
+      form_data.append('name', imageName);
+    }
+    return Images.sendFile(form_data, opt);
+  },
   sendFile: function (form_data, opt) {
     return new Promise((resolve, reject) => {
       $.ajax({
