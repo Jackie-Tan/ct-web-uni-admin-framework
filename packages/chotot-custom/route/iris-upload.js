@@ -19,7 +19,7 @@ Router.route('/iris/image-upload', {where: 'server'}).post(function () {
     })
     .on('end', () => {
       // readable.push(null);
-      body = Buffer.concat(body).toString();
+      body = Buffer.concat(body);
       fetch(URL_UPLOAD, {
         body: body,
         headers: {
