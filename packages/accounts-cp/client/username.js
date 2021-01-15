@@ -29,14 +29,13 @@ Meteor.loginWithPassword = function (user, password, cb) {
   if (user.indexOf("@") != -1) {
     // return oldLoginSystem.apply(Meteor, arguments);
     return oldLoginSystem(user, password, function(err) {
-      if (!err) {
-        const salt = generateSalt(16);
-        const hashObj = hash(Meteor.user()._id, salt);
-        const tokenizer = hashObj.hashedStr + "_" + hashObj.salt;
-
-        setCookie('s', tokenizer, 3600, getDomain(meteorEnv.NODE_ENV));
-      }
       cb(err);
+      const salt = generateSalt(16);
+      const hashObj = hash(Meteor.user()._id, salt);
+      hashObj.platform = 'admin-centre';
+      const tokenizer = JSON.stringify(hashObj) + "_" + hashObj.salt;
+
+      setCookie('__token', tokenizer, 3600, getDomain(meteorEnv.NODE_ENV));
     });
   }
   isCPLoggingIn.set(true);
