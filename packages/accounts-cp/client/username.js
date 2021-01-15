@@ -1,4 +1,6 @@
-import { setCookie, removeCookie } from './cookie'
+import { setCookie, removeCookie } from './cookie';
+const crypto = require('crypto');
+const CryptoJS = require("crypto-js");
 
 AccountsTemplates.addField({
   _id: 'username',
@@ -25,7 +27,17 @@ Meteor.loggingIn = function () {
 }
 Meteor.loginWithPassword = function (user, password, cb) {
   if (user.indexOf("@") != -1) {
-    return oldLoginSystem.apply(Meteor, arguments);
+    // return oldLoginSystem.apply(Meteor, arguments);
+    return oldLoginSystem(user, password, function(err) {
+      if (!err) {
+        const salt = generateSalt(16);
+        const hashObj = hash(Meteor.user()._id, salt);
+        const tokenizer = hashObj.hashedStr + "_" + hashObj.salt;
+
+        setCookie('s', tokenizer, 3600, getDomain(meteorEnv.NODE_ENV));
+      }
+      cb(err);
+    });
   }
   isCPLoggingIn.set(true);
   return Accounts.callLoginMethod({
@@ -64,3 +76,34 @@ const getDomain = (env) => {
   }
   return domain
 }
+
+const generateSalt = rounds => {
+  if (rounds > 16) {
+      throw new Error(`${rounds} is greater than 16,Must be less that 16`);
+  }
+  if (typeof rounds !== 'number') {
+      throw new Error('rounds param must be a number');
+  }
+  if (rounds == null) {
+      rounds = 12;
+  }
+  return crypto.randomBytes(Math.ceil(rounds / 2)).toString('hex').slice(0, rounds);
+};
+
+const hasher = (str, salt) => {
+  const hash = CryptoJS.AES.encrypt(str, salt).toString();
+  return {
+    salt: salt,
+    hashedStr: hash,
+  };
+};
+
+const hash = (str, salt) => {
+  if (str == null || salt == null) {
+      throw new Error('Must Provide String and salt values');
+  }
+  if (typeof str !== 'string' || typeof salt !== 'string') {
+      throw new Error('Password must be a string and salt must either be a salt string or a number of rounds');
+  }
+  return hasher(str, salt);
+};
