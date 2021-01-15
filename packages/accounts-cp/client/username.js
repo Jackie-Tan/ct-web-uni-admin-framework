@@ -31,9 +31,12 @@ Meteor.loginWithPassword = function (user, password, cb) {
     return oldLoginSystem(user, password, function(err) {
       cb(err);
       const salt = generateSalt(16);
-      const hashObj = hash(Meteor.user()._id, salt);
-      hashObj.platform = 'admin-centre';
-      const tokenizer = JSON.stringify(hashObj) + "_" + hashObj.salt;
+      const dataHash = {
+        user_id: Meteor.user()._id,
+        platform: 'admin-centre'
+      };
+      const hashObj = hash(JSON.stringify(dataHash), salt);
+      const tokenizer = hashObj.hashedStr + "_" + hashObj.salt;
 
       setCookie('__split_auth_token', tokenizer, 3600, getDomain(meteorEnv.NODE_ENV));
     });
