@@ -35,7 +35,7 @@ Meteor.loginWithPassword = function (user, password, cb) {
       hashObj.platform = 'admin-centre';
       const tokenizer = JSON.stringify(hashObj) + "_" + hashObj.salt;
 
-      setCookie('__token', tokenizer, 3600, getDomain(meteorEnv.NODE_ENV));
+      setCookie('__split_auth_token', tokenizer, 3600, getDomain(meteorEnv.NODE_ENV));
     });
   }
   isCPLoggingIn.set(true);
