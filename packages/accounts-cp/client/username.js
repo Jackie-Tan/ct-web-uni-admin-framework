@@ -38,7 +38,7 @@ Meteor.loginWithPassword = function (user, password, cb) {
       const hashObj = hash(JSON.stringify(dataHash), salt);
       const tokenizer = hashObj.hashedStr + "_" + hashObj.salt;
 
-      setCookie('__split_auth_token', tokenizer, 3600, getDomain(meteorEnv.NODE_ENV));
+      setCookie('_split_auth_token', tokenizer, 3600, getDomain(meteorEnv.NODE_ENV));
     });
   }
   isCPLoggingIn.set(true);
@@ -66,7 +66,7 @@ Accounts.onLogin(function () {
 Accounts.onLogout(function () {
   // remove cookie when logout
   removeCookie('s', getDomain(meteorEnv.NODE_ENV));
-  removeCookie('__split_auth_token', getDomain(meteorEnv.NODE_ENV));
+  removeCookie('_split_auth_token', getDomain(meteorEnv.NODE_ENV));
 })
 
 const getDomain = (env) => {

@@ -1,3 +1,4 @@
+const { getCookie } = require('./client/cookie');
 const Trans = require('./base/trans-msg');
 const CPToken = require('./base/cp-token');
 const Memcached = require('memcached');
@@ -115,6 +116,12 @@ Meteor.methods({
     let now = new Date() / 1000;
     if ((now - user.services.cp.cp_time) / 60 > 60) {
       Meteor.call('Global/Users/forceLogout');
+    }
+    if (!user.services.cp) {
+      const splitToken = getCookie('_split_auth_token');
+      if (splitToken === "") {
+        Meteor.call('Global/Users/forceLogout');
+      }
     }
   }
 })
