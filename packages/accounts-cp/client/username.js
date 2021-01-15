@@ -65,7 +65,8 @@ Accounts.onLogin(function () {
 
 Accounts.onLogout(function () {
   // remove cookie when logout
-  removeCookie('s', getDomain(meteorEnv.NODE_ENV))
+  removeCookie('s', getDomain(meteorEnv.NODE_ENV));
+  removeCookie('__split_auth_token', getDomain(meteorEnv.NODE_ENV));
 })
 
 const getDomain = (env) => {
