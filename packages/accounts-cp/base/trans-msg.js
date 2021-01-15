@@ -9,7 +9,9 @@ class TransClient {
     let query = ""
     let queries = []
     this.time = new Date();
+    console.log('===> call api');
     if (cmd != 'admin/login') {
+      console.log('===> khong phai login bang spine');
       let user = Meteor.users.findOne({_id: Meteor.userId()});
       if (!user.services || !user.services.cp) {
         throw new Meteor.Error('Bạn không có quyền truy cập CP')
