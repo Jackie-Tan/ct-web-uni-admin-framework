@@ -481,6 +481,29 @@ class BaseModel {
     })
   }
 
+  bulkInsert(data, opt = {}) {
+    this.extendRole(data, opt);
+    let self = this;
+    return new Promise(function(resolve, reject) {
+      run(function *(){
+        try {
+          //hook before insert
+          yield self.hook('bulkInsert', 'before', {data: data, opt: opt});
+          //extend role
+          self.extendRole(data);
+          opt.col_id = self.colID()
+          var res = yield self.postgres.bulkInsert(self.table, data, opt);
+        } catch(error){
+          return reject(error)
+        }
+        yield self.hook('bulkInsert', 'after', {res: res});
+        resolve(res);
+      }).catch((err) => {
+        reject(err)
+      });
+    })
+  }
+
   update(data, opt = {}){
     let list = Object.keys(data.set);
     list.push('updated_at');
