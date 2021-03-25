@@ -73,6 +73,14 @@ class Methods {
             throw new Meteor.Error(e.message);
           }
         }),
+        [this.method+'/BulkInsert']: (async function(data){
+          try {
+            return await self.model.bulkInsert(data, {});
+          } catch (e){
+            logger.trace(e);
+            throw new Meteor.Error(e.message);
+          }
+        }),
         [this.method+'/Update']: (async function(query, set, opt = {}){
           try {
             if (!Object.keys(set).length) {
