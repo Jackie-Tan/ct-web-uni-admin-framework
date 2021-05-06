@@ -28,19 +28,21 @@ Meteor.loggingIn = function () {
 Meteor.loginWithPassword = function (user, password, cb) {
   if (user.indexOf("@") != -1) {
     // return oldLoginSystem.apply(Meteor, arguments);
+    // Login by email or google auth
     return oldLoginSystem(user, password, function(err) {
-      cb(err);
+      cb && cb(err);
       const salt = generateSalt(16);
       const dataHash = {
         user_id: Meteor.user()._id,
-        platform: 'admin-centre'
+        platform: process.env.APP
       };
       const hashObj = hash(JSON.stringify(dataHash), salt);
       const tokenizer = hashObj.hashedStr + "_" + hashObj.salt;
 
-      setCookie('_split_auth_token', tokenizer, 3600, getDomain(meteorEnv.NODE_ENV));
+      setCookie('split_auth_token', tokenizer, 14400, getDomain(meteorEnv.NODE_ENV));
     });
   }
+  // Login by username and have default email *.cp.chotot.org
   isCPLoggingIn.set(true);
   return Accounts.callLoginMethod({
     methodArguments: [{ cp: { username: user, password: Meteor.hashCPPassowrd(password) } }],
@@ -66,7 +68,7 @@ Accounts.onLogin(function () {
 Accounts.onLogout(function () {
   // remove cookie when logout
   removeCookie('s', getDomain(meteorEnv.NODE_ENV));
-  removeCookie('_split_auth_token', getDomain(meteorEnv.NODE_ENV));
+  removeCookie('split_auth_token', getDomain(meteorEnv.NODE_ENV));
 })
 
 const getDomain = (env) => {
