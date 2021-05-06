@@ -119,7 +119,9 @@ Meteor.methods({
       Meteor.call('Global/Users/forceLogout');
     }
     // New code for check other services (not CP)
+    console.log('truoc services not cp', user);
     if (!user.services.cp) {
+      console.log('vao services not cp');
       const splitToken = getCookie('split_auth_token');
       if (splitToken === "") {
         Meteor.call('Global/Users/forceLogout');
