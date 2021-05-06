@@ -302,6 +302,44 @@ class Postgres {
 
   }
 
+  bulkInsert(table, rows, opt = {}){
+    const self = this;
+    return new Promise((resolve, reject) => {
+      const keys = Object.keys(rows[0]);
+      const values = rows.map(rowData => {
+        const row = [];
+        for (let i = 0; i < keys.length; i++) {
+          const key = keys[i];
+          let colValue = typeof rowData[key] !== 'undefined' ? rowData[key] : null;
+          if (typeof colValue === 'string') {
+            colValue = `'${colValue.replace("'", "''")}'`;
+          }
+          row.push(colValue);
+        }
+        return `(${row.join(', ')})`;
+      }).join(', ');
+      const queryString = `INSERT INTO "${table}"(${keys.join(', ')}) values${values} ${(opt && opt.notReturnId)?'':`RETURNING ${self.getID(opt)}`}`;
+      logger.debug(queryString);
+      self.getClient(function(client) {
+        const startTime = new Date();
+        client.query(queryString, [], function (error, result) {
+          const durationTime = new Date() - startTime;
+          if (error){
+            logger.error(queryString);
+            logger.graylogError(`Postgres Error: <query>${queryString}</query> <errorContent>${error}</errorContent> with <responseTime>${durationTime}</responseTime>`);
+            reject(error);
+          }
+          if (durationTime > parseInt(process.env.POSTGRES_SLOW_TIME, 10)) {
+            logger.graylogWarning(`Postgres Slow: <query>${queryString}</query> in <responseTime>${durationTime}</responseTime>, over ${parseInt(process.env.POSTGRES_SLOW_TIME, 10)}ms`);
+          } else {
+            logger.graylogInfo(`Postgres OK: <query>${queryString}</query> in <responseTime>${durationTime}</responseTime>`);
+          }
+          logger.trace(result);
+          resolve(result);
+        });
+      });
+    });
+  }
 }
 
 module.exports = Postgres;

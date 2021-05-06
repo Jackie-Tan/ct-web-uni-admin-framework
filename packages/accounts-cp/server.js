@@ -111,14 +111,16 @@ Meteor.methods({
   },
   'Global/User/VerifyToken': function () {
     let user = Meteor.user();
-    if (!user || !user.services.cp)
+    // if (!user || !user.services.cp)
+    if (!user)
       return;
     let now = new Date() / 1000;
     if ((now - user.services.cp.cp_time) / 60 > 60) {
       Meteor.call('Global/Users/forceLogout');
     }
+    // New code for check other services (not CP)
     if (!user.services.cp) {
-      const splitToken = getCookie('_split_auth_token');
+      const splitToken = getCookie('split_auth_token');
       if (splitToken === "") {
         Meteor.call('Global/Users/forceLogout');
       }
