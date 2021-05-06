@@ -1,4 +1,4 @@
-import { setCookie, removeCookie } from './cookie';
+import { setCookie, getCookie, removeCookie } from './cookie';
 const crypto = require('crypto');
 const CryptoJS = require("crypto-js");
 
@@ -62,6 +62,15 @@ Meteor.loginWithPassword = function (user, password, cb) {
 }
 
 Accounts.onLogin(function () {
+  let user = Meteor.user();
+  // New code for check other services (not CP)
+  console.log('user', user);
+  if (!user.services.cp) {
+    const splitToken = getCookie('split_auth_token');
+    if (splitToken === "") {
+      Meteor.call('Global/Users/forceLogout');
+    }
+  }
   Meteor.call('Global/User/VerifyToken');
 })
 
