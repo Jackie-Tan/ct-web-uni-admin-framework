@@ -38,11 +38,10 @@ Meteor.loginWithPassword = function (user, password, cb) {
       };
       const hashObj = hash(JSON.stringify(dataHash), salt);
       const tokenizer = hashObj.hashedStr + "_" + hashObj.salt;
-
       setCookie('split_auth_token', tokenizer, 14400, getDomain(meteorEnv.NODE_ENV));
     });
   }
-  // Login by username and have default email *.cp.chotot.org
+  // Login by username and have default email *@cp.chotot.org
   isCPLoggingIn.set(true);
   return Accounts.callLoginMethod({
     methodArguments: [{ cp: { username: user, password: Meteor.hashCPPassowrd(password) } }],
@@ -62,15 +61,14 @@ Meteor.loginWithPassword = function (user, password, cb) {
 }
 
 Accounts.onLogin(function () {
-  let user = Meteor.user();
   // New code for check other services (not CP)
-  console.log('user', user);
-  if (!user.services.cp) {
-    const splitToken = getCookie('split_auth_token');
-    if (splitToken === "") {
-      Meteor.call('Global/Users/forceLogout');
-    }
-  }
+  // if (!user.services.cp) {
+  //   const splitToken = getCookie('split_auth_token');
+  //   console.log('splitToken', splitToken);
+  //   if (splitToken === "") {
+  //     // Meteor.call('Global/Users/forceLogout');
+  //   }
+  // }
   Meteor.call('Global/User/VerifyToken');
 })
 
@@ -83,7 +81,7 @@ Accounts.onLogout(function () {
 const getDomain = (env) => {
   let domain = '.dev.com'
   if (env === 'development') {
-    domain = '.chotot.org'
+    domain = 'localhost'
   }
   if (env === 'production') {
     domain = '.chotot.com'
