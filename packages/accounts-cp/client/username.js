@@ -81,7 +81,7 @@ Accounts.onLogout(function () {
 const getDomain = (env) => {
   let domain = '.dev.com'
   if (env === 'development') {
-    domain = 'localhost'
+    domain = '.chotot.org'
   }
   if (env === 'production') {
     domain = '.chotot.com'
