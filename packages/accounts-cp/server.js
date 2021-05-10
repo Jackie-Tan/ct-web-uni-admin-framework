@@ -1,4 +1,3 @@
-const { getCookie } = require('./client/cookie');
 const Trans = require('./base/trans-msg');
 const CPToken = require('./base/cp-token');
 const Memcached = require('memcached');
@@ -91,7 +90,7 @@ Accounts.registerLoginHandler('cp', function (options) {
 
 Accounts.onLogout(function (user) {
   // console.log(`data when logout: \n ${JSON.stringify(user)} \n`)
-  if (user && user.user && user.user.services) {
+  if (user && user.user && user.user.services && user.user.services.cp) {
     removeUserInfoAndPrivsFromMemcache(user.user.services.cp.token)
   }
 })
@@ -111,20 +110,16 @@ Meteor.methods({
   },
   'Global/User/VerifyToken': function () {
     let user = Meteor.user();
-    // if (!user || !user.services.cp)
-    if (!user)
+    if (!user || !user.services.cp)
       return;
     let now = new Date() / 1000;
     if ((now - user.services.cp.cp_time) / 60 > 60) {
       Meteor.call('Global/Users/forceLogout');
     }
-    // New code for check other services (not CP)
-    if (!user.services.cp) {
-      const splitToken = getCookie('split_auth_token');
-      if (splitToken === "") {
-        Meteor.call('Global/Users/forceLogout');
-      }
-    }
+  },
+  'Global/Env/GetApp': function() {
+    var  app = process.env.APP;
+    return app;
   }
 })
 

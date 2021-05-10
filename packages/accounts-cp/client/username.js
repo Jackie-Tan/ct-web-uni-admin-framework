@@ -1,4 +1,4 @@
-import { setCookie, removeCookie } from './cookie';
+import { setCookie, getCookie, removeCookie } from './cookie';
 const crypto = require('crypto');
 const CryptoJS = require("crypto-js");
 
@@ -32,17 +32,18 @@ Meteor.loginWithPassword = function (user, password, cb) {
     return oldLoginSystem(user, password, function(err) {
       cb && cb(err);
       const salt = generateSalt(16);
-      const dataHash = {
-        user_id: Meteor.user()._id,
-        platform: process.env.APP
-      };
-      const hashObj = hash(JSON.stringify(dataHash), salt);
-      const tokenizer = hashObj.hashedStr + "_" + hashObj.salt;
-
-      setCookie('split_auth_token', tokenizer, 14400, getDomain(meteorEnv.NODE_ENV));
+      Meteor.call('Global/Env/GetApp', function(err, appName) {
+        const dataHash = {
+          user_id: Meteor.user()._id,
+          platform: appName
+        };
+        const hashObj = hash(JSON.stringify(dataHash), salt);
+        const tokenizer = hashObj.hashedStr + "_" + hashObj.salt;
+        setCookie('split_auth_token', tokenizer, 14400, getDomain(meteorEnv.NODE_ENV));
+      });
     });
   }
-  // Login by username and have default email *.cp.chotot.org
+  // Login by username and have default email *@cp.chotot.org
   isCPLoggingIn.set(true);
   return Accounts.callLoginMethod({
     methodArguments: [{ cp: { username: user, password: Meteor.hashCPPassowrd(password) } }],
@@ -62,6 +63,14 @@ Meteor.loginWithPassword = function (user, password, cb) {
 }
 
 Accounts.onLogin(function () {
+  // New code for check other services (not CP)
+  // if (!user.services.cp) {
+  //   const splitToken = getCookie('split_auth_token');
+  //   console.log('splitToken', splitToken);
+  //   if (splitToken === "") {
+  //     // Meteor.call('Global/Users/forceLogout');
+  //   }
+  // }
   Meteor.call('Global/User/VerifyToken');
 })
 
