@@ -116,6 +116,10 @@ Meteor.methods({
     if ((now - user.services.cp.cp_time) / 60 > 60) {
       Meteor.call('Global/Users/forceLogout');
     }
+  },
+  'Global/Env/GetApp': function() {
+    var  app = process.env.APP;
+    return app;
   }
 })
 

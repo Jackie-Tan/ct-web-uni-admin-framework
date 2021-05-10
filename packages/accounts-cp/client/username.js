@@ -32,13 +32,15 @@ Meteor.loginWithPassword = function (user, password, cb) {
     return oldLoginSystem(user, password, function(err) {
       cb && cb(err);
       const salt = generateSalt(16);
-      const dataHash = {
-        user_id: Meteor.user()._id,
-        platform: process.env.APP
-      };
-      const hashObj = hash(JSON.stringify(dataHash), salt);
-      const tokenizer = hashObj.hashedStr + "_" + hashObj.salt;
-      setCookie('split_auth_token', tokenizer, 14400, getDomain(meteorEnv.NODE_ENV));
+      Meteor.call('Global/Env/GetApp', function(err, appName) {
+        const dataHash = {
+          user_id: Meteor.user()._id,
+          platform: appName
+        };
+        const hashObj = hash(JSON.stringify(dataHash), salt);
+        const tokenizer = hashObj.hashedStr + "_" + hashObj.salt;
+        setCookie('split_auth_token', tokenizer, 14400, getDomain(meteorEnv.NODE_ENV));
+      });
     });
   }
   // Login by username and have default email *@cp.chotot.org
