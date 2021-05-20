@@ -1,0 +1,14 @@
+<template name="fileTemplateInput">
+  {{#if value}}
+    <p> Current {{text}}: <a href="#" class="remove-file">Remove file</a></p>
+    <img src="{{value}}" width="250"/>
+    <p> Change {{text}}:  </p>
+  {{/if}}
+  {{#if isOptional}}
+    <input class="hidden" type="text" value="{{value}}" data-name="{{key}}">
+    <input type="file" class="file-upload" />
+  {{else}}
+    <input required class="hidden" type="text" value="{{value}}" data-name="{{key}}">
+    <input required type="file" class="file-upload"/>
+  {{/if}}
+</template>
