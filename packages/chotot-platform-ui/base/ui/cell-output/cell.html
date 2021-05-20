@@ -23,9 +23,9 @@
 <template name='logoCellOutput'>
 <img height="{{height}}" src={{value}} class="logo-cell-output">
 </template>
-<template name='fileCellOutput'>
+<template name='fileTemplateCellOutput'>
   {{#if value}}
-    <a href="{{value}}">Preview file</a>
+    <a href="{{value}}">{{title}}</a>
   {{/if}}
 </template>
 <template name='checkboxCellOutput'>
