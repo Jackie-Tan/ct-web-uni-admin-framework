@@ -1,5 +1,6 @@
 const { Storage } = require('@google-cloud/storage');
 const formidable = require('formidable');
+const STATIC_DOMAIN = 'https://st-test.chotot.org';
 const BUCKET_NAME = 'static-chotot-cm';
 const CREDENTIALS = {
   "type": "service_account",
@@ -19,17 +20,27 @@ Router.route('/gcs/upload', {where: 'server'}).post(function () {
   const response = this.response;
   const form = new formidable.IncomingForm();
   form.parse(request, function(err, fields, files) {
+    if (err) {
+      response.writeHead(400, { "Content-Type": "application/json" });
+      response.end(JSON.stringify({ error: err }));
+    }
+    const fileSize = Number((files.file.size / 1024) / 1024);
+    if (fileSize > 3) { // If file size > 3mb
+      response.writeHead(400, { "Content-Type": "application/json" });
+      response.end(JSON.stringify({ error: "File too large" }));
+    }
     const storage = new Storage({ credentials: CREDENTIALS });
+    const timeStamp = new Date().getTime();
+    const fileName = `${timeStamp}_${files.file.name}`
     storage
       .bucket(BUCKET_NAME)
       .upload(files.file.path, {
-        destination: `promotion/${files.file.name}`,
+        destination: `promotion/${fileName}`,
       })
-      .then((uploadResp) => {
-        console.log('uploadResp', uploadResp);
+      .then(() => {
         const result = {
-          fileName: `promotion/${file.name}`,
-          status: uploadResp[0],
+          file_url: `${STATIC_DOMAIN}/promotion/${fileName}`,
+          status: 200,
         }
         response.writeHead(200, { "Content-Type": "application/json" });
         response.end(JSON.stringify(result));
