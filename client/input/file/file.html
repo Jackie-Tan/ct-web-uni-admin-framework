@@ -1,6 +1,6 @@
 <template name="fileTemplateInput">
   {{#if value}}
-    <p> Current {{text}}: <a href="#" class="remove-file">Remove file</a></p>
+    <p> Current <a href="{{value}}">{{text}}</a>: <a href="#" class="remove-file">Remove file</a></p>
   {{/if}}
   {{#if isOptional}}
     <input class="hidden" type="text" value="{{value}}" data-name="{{key}}">
