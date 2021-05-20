@@ -36,6 +36,9 @@ Template.logoCellOutput.helpers({
   }
 })
 
+Template.fileCellOutput.helpers({
+});
+
 const getAction = function(context){
   if (!context.action)
     return 'value';

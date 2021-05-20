@@ -126,6 +126,14 @@ var Images = {
     theBlob.name = fileName;
     return theBlob;
   },
+  gcsUpload: function (file) {
+    var form_data = new FormData();
+    const opt = {
+      url: '/gcs/upload'
+    };
+    form_data.append("file", file);
+    return Images.sendFile(form_data, opt);
+  },
 };
 
 module.exports = Images;
