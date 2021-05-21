@@ -31,16 +31,7 @@ Meteor.loginWithPassword = function (user, password, cb) {
     // Login by email or google auth
     return oldLoginSystem(user, password, function(err) {
       cb && cb(err);
-      const salt = generateSalt(16);
-      Meteor.call('Global/Env/GetApp', function(err, appName) {
-        const dataHash = {
-          user_id: Meteor.user()._id,
-          platform: appName
-        };
-        const hashObj = hash(JSON.stringify(dataHash), salt);
-        const tokenizer = hashObj.hashedStr + "_" + hashObj.salt;
-        setCookie('split_auth_token', tokenizer, 14400, getDomain(meteorEnv.NODE_ENV));
-      });
+      setTokenForSplit();
     });
   }
   // Login by username and have default email *@cp.chotot.org
@@ -64,13 +55,13 @@ Meteor.loginWithPassword = function (user, password, cb) {
 
 Accounts.onLogin(function () {
   // New code for check other services (not CP)
-  // if (!user.services.cp) {
-  //   const splitToken = getCookie('split_auth_token');
-  //   console.log('splitToken', splitToken);
-  //   if (splitToken === "") {
-  //     // Meteor.call('Global/Users/forceLogout');
-  //   }
-  // }
+  let user = Meteor.user();
+  if (!user.services.cp) {
+    const splitToken = getCookie('split_auth_token');
+    if (splitToken === "") {
+      setTokenForSplit();
+    }
+  }
   Meteor.call('Global/User/VerifyToken');
 })
 
@@ -120,4 +111,17 @@ const hash = (str, salt) => {
       throw new Error('Password must be a string and salt must either be a salt string or a number of rounds');
   }
   return hasher(str, salt);
+};
+
+const setTokenForSplit = () => {
+  const salt = generateSalt(16);
+  Meteor.call('Global/Env/GetApp', function(err, appName) {
+    const dataHash = {
+      user_id: Meteor.user()._id,
+      platform: appName
+    };
+    const hashObj = hash(JSON.stringify(dataHash), salt);
+    const tokenizer = hashObj.hashedStr + "_" + hashObj.salt;
+    setCookie('split_auth_token', tokenizer, 14400, getDomain(meteorEnv.NODE_ENV));
+  });
 };
