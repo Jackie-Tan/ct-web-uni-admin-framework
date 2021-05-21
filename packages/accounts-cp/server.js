@@ -89,7 +89,7 @@ Accounts.registerLoginHandler('cp', function (options) {
 
 Accounts.onLogout(function (user) {
   // console.log(`data when logout: \n ${JSON.stringify(user)} \n`)
-  if (user && user.user && user.user.services) {
+  if (user && user.user && user.user.services && user.user.services.cp) {
     removeUserInfoAndPrivsFromMemcache(user.user.services.cp.token)
   }
 })
@@ -115,6 +115,10 @@ Meteor.methods({
     if ((now - user.services.cp.cp_time) / 60 > 60) {
       Meteor.call('Global/Users/forceLogout');
     }
+  },
+  'Global/Env/GetApp': function() {
+    var  app = process.env.APP;
+    return app;
   }
 })
 
