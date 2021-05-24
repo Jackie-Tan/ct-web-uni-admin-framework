@@ -44,7 +44,6 @@ Accounts.registerLoginHandler('cp', function (options) {
     if (!options || !options.cp)
       return
     options = options.cp;
-    console.log('options', options);
     let data = Trans.of().send('admin/login', 'POST', { username: options.username, passwd: options.password, remote_addr: '127.0.0.1', commit: '1' })
     data.id = data.admin_id;
     delete data.admin_id;
