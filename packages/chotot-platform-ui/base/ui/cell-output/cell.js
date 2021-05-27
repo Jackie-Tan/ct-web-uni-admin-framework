@@ -36,6 +36,20 @@ Template.logoCellOutput.helpers({
   }
 })
 
+Template.fileTemplateCellOutput.helpers({
+  'title': function() {
+    if (this.value) {
+      const valueArr = this.value.split('/');
+      const fileName = valueArr[valueArr.length - 1];
+      if (fileName.length > 13) {
+        return fileName.substring(13, fileName.length);
+      }
+      return fileName;
+    }
+    return '';
+  }
+});
+
 const getAction = function(context){
   if (!context.action)
     return 'value';
