@@ -30,7 +30,7 @@ Template.baseImportData.events({
           dsLog.error(error.message);
           return;
         }
-        if (result.error){
+        if (result && result.error){
           dsLog.error('[CALL][IMPORT] '+result.error.type);
           result.error.data.map(function(err){
             dsLog.error(JSON.stringify(err));
