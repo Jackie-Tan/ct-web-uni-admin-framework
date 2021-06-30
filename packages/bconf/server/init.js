@@ -298,7 +298,7 @@ module.exports = {
     'bconfS': {
       cmd: 'unify-all',
       key: 'dataS',
-      address: `${process.env.CCONF_HOST}/v1/internal/chapy-pro`,
+      address: `${process.env.CHAPY_PRO_HOST}:${process.env.CHAPY_PRO_PORT}/api/v1/internal/chapy-pro`,
       addons: cachingStatic,
     }
   },
