@@ -1,4 +1,6 @@
 const TIME_REFRESH = 1000 * 60 * 60;
+const BCONFS_REFRESH_INTERVAL = 600000;
+
 
 function getBconfD(cb) {
   Meteor.call('Global/Trans/Bconf', function (err, res) {
@@ -19,8 +21,21 @@ function getBconfS(cb) {
       return;
     }
     delete res.data;
-    localStorage.setItem('BconfS', JSON.stringify(res))
+    // localStorage.setItem('BconfS', JSON.stringify(res))
     _.extend(Bconf, res);
+    cb && cb();
+  })
+}
+
+function refreshBconfS(cb) {
+  Meteor.call('Global/Trans/BconfS/Refresh', function (err, res) {
+    if (err) {
+      dsLog.error(err.message || err.reason);
+      return;
+    }
+    // localStorage.setItem('BconfS', JSON.stringify(res))
+    delete res.data;
+    _.merge(Bconf, res);
     cb && cb();
   })
 }
@@ -34,13 +49,13 @@ Bconf = {
   dataS: null,
   init: function () {
     Bconf.versions.bconf.set(localStorage.getItem('BconfDVersion'));
-    Bconf.versions.bconfS.set(localStorage.getItem('BconfSVersion'));
+    // Bconf.versions.bconfS.set(localStorage.getItem('BconfSVersion'));
     if (lbconfD = localStorage.getItem('BconfD')) {
       Bconf.data = JSON.parse(lbconfD);
     }
-    if (lbconfS = localStorage.getItem('BconfS')) {
-      _.extend(Bconf, JSON.parse(lbconfS));
-    }
+    // if (lbconfS = localStorage.getItem('BconfS')) {
+    //   _.extend(Bconf, JSON.parse(lbconfS));
+    // }
     console.log('---loading dynamic config----');
     if (!Bconf.data) {
       console.log('----from server----');
@@ -75,28 +90,11 @@ Bconf = {
         this.stop();
       });
     });
-    Tracker.autorun(function () {
-      Meteor.subscribe('conf', function () {
-        let conf = Confs.find({id: 'bconfS'}).fetch()[0];
-        if (!conf)
-          return;
-        if (!Bconf.versions.bconfS.curValue) {
-          Bconf.versions.bconfS.set(conf.version)
-          localStorage.setItem('BconfSVersion', "" + conf.version);
-          return;
-        }
-        if (Bconf.versions.bconfS.curValue == conf.version) {
-          return;
-        }
-        console.log('---reloading static config----');
-        getBconfS(function () {
-          Bconf.versions.bconfS.set(conf.version);
-          localStorage.setItem('BconfSVersion', "" + conf.version);
-          document.location.reload(true);
-        })
-        this.stop();
-      });
-    });
+    setInterval(function() {
+      console.log('---reloading static config----');
+      refreshBconfS()
+      this.stop();
+    }, BCONFS_REFRESH_INTERVAL);
   },
   baseGet: function (bKey, data) {
     let keys = ("" + bKey).split('.');
