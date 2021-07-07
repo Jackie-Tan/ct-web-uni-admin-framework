@@ -1,5 +1,5 @@
 const TIME_REFRESH = 1000 * 60 * 60;
-const BCONFS_REFRESH_INTERVAL = 600000;
+const BCONFS_REFRESH_INTERVAL = 60000;
 
 
 function getBconfD(cb) {
