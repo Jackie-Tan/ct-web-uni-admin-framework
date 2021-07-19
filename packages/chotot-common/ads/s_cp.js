@@ -119,6 +119,9 @@ let func = {
     }
     return data.new_images = (data.ad_image_changes || data.images)
   },
+  initComapnyLogo: function (data) {
+    return data.company_logo = [data.company_logo];
+  },
   formatVietnamZone: function (timestamp) {
     return timestamp.replace("Z", "+07:00");
   },
@@ -382,6 +385,12 @@ let func = {
     }
     // IMAGES
     func.initImage(data)
+
+    // COMAPNY LOGO FOR JOB
+    if (data.ad.category === '13010') {
+      func.initComapnyLogo(data)
+    }
+
     if (data.new_images && data.new_images.length) {
       data.ad.ad_has_images = true;
     }
