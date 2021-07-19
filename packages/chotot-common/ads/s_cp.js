@@ -120,13 +120,7 @@ let func = {
     return data.new_images = (data.ad_image_changes || data.images)
   },
   initComapnyLogo: function (data) {
-    return data.company_logo = [{
-      "name": "2727157929529710688.jpg",
-      "id": "2727157929529710688",
-      "seq_no": 0,
-      "hide": false,
-      "digest": "3730e7cb442b52cdf13d7038b4c53266"
-    }];
+    return data.company_logo = [data.company_logo];
   },
   formatVietnamZone: function (timestamp) {
     return timestamp.replace("Z", "+07:00");
@@ -389,13 +383,14 @@ let func = {
 
       }
     }
-    console.log('category day', data.ad.category);
     // IMAGES
     func.initImage(data)
+
     // COMAPNY LOGO FOR JOB
-    if (data.ad.category * 1 === 13010) {
+    if (data.ad.category === '13010') {
       func.initComapnyLogo(data)
     }
+
     if (data.new_images && data.new_images.length) {
       data.ad.ad_has_images = true;
     }
