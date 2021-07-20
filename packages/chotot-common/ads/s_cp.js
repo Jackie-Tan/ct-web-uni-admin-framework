@@ -120,7 +120,7 @@ let func = {
     return data.new_images = (data.ad_image_changes || data.images)
   },
   initComapnyLogo: function (data) {
-    return data.company_logo = [data.company_logo];
+    return data.company_logo = data.company_logo && data.company_logo.name ? [data.company_logo] : [];
   },
   formatVietnamZone: function (timestamp) {
     return timestamp.replace("Z", "+07:00");
