@@ -217,10 +217,10 @@ module.exports = {
       address: `${process.env.CP_HOST}:${process.env.CP_PORT}/v1`,
     },
     'bconfS': {
-      cmd: 'unify-all',
-      key: 'dataS',
-      address: `${process.env.CHAPY_PRO_HOST}:${process.env.CHAPY_PRO_PORT}/api/v1/internal/chapy-pro`,
-      addons: cachingStatic,
+        cmd: 'all',
+        key: 'dataS',
+        address: `${process.env.CCONF_HOST}:${process.env.CCONF_PORT}`,
+        addons: cachingStatic,
     }
   },
 };
