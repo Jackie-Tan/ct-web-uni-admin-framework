@@ -53,6 +53,7 @@ base['_component.input'] = {
     subtype: ctpField.of(null, STRING).desc('if have type, its data is subtype type'),
     ref: ctpField.of(null, ARRAY, FUNCTION, OBJECT, STRING).desc('reference value. It depends on your component'), //ref is reference data for this input 
     placeHolder: ctpField.of(null, STRING),
+    isEndOfDay: ctpField.of(null, BOOLEAN),
     options: ctpField.of(null, ARRAY).desc('list {display:"", value:""} for select '), 
 
     map: ctpField.of(null, FUNCTION, OBJECT).desc("map value show in datatable"),

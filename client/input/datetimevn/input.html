@@ -1,5 +1,5 @@
 <template name="datetimevnInput">
-  <div class='input-group date datetimepickervn'>
+  <div class='input-group date datetimepickervn' isEndOfDay={{input.isEndOfDay}} >
     {{#if isOptional}}
       <input type="text" class="form-control" placeholder="{{input.placeHolder}}" data-name="{{key}}" data-type="date">
     {{else}}
