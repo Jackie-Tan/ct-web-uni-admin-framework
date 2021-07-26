@@ -144,6 +144,8 @@ Bconf = {
         if (Bconf.versions.bconf.curValue == conf.version) {
           return;
         }
+        console.log("BCONFD CURRENT: " + JSON.stringify(Bconf.versions.bconf))
+        console.log("BCONFD CONF: " + JSON.stringify(conf.version))
         console.log('---reloading dynamic config----');
         //dynamic bconf no need refresh
         getBconfD(function () {
@@ -162,7 +164,7 @@ Bconf = {
           return;
         if (!Bconf.versions.bconfS.curValue) {
           Bconf.versions.bconfS.set(conf.version);
-          setBconfValue("BconfSVersion", "" + conf.version);
+          setBconfValue('BconfSVersion', "" + conf.version);
           return;
         }
         if (Bconf.versions.bconfS.curValue == conf.version) {
@@ -171,8 +173,7 @@ Bconf = {
         console.log('---reloading static config----');
         getBconfS(function () {
           Bconf.versions.bconfS.set(conf.version);
-          setBconfValue("BconfSVersion", "" + conf.version);
-          document.location.reload(true);
+          setBconfValue('BconfSVersion', "" + conf.version);
         })
         this.stop();
       });

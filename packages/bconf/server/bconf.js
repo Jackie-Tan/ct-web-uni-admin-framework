@@ -7,6 +7,7 @@ var { confOpts, runBconf, Bconf } = require("./init");
 var updateVersion = function(id) {
   let newVersion = Math.round(new Date() / 1000);
   Confs.update({ id }, { $set: { version: newVersion } }, { upsert: true });
+  console.log(id + " UPDATED TO VERSION " + newVersion);
 };
 var getConf = function(id, { stopOnMissConf } = {}) {
   const { cmd, key, address, addons = [], deltaVersion } = confOpts[id];
@@ -16,7 +17,7 @@ var getConf = function(id, { stopOnMissConf } = {}) {
     for (let addon of addons) {
       addon(res);
     }
-    updateVersion("bconf", deltaVersion);
+    updateVersion(id, deltaVersion);
   } catch (e) {
     logger.error(e);
     if (stopOnMissConf) {
