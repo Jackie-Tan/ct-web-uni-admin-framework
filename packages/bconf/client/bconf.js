@@ -106,7 +106,6 @@ Bconf = {
 
     getBconfValue("BconfD", function (data) {
       if (data) {
-        console.log("BconfD data ");
         Bconf.data = JSON.parse(data);
       }
       console.log('---loading dynamic config----');
@@ -118,7 +117,6 @@ Bconf = {
 
     getBconfValue("BconfS", function (data) {
       if (data) {
-        console.log("BconfS data ");
         _.extend(Bconf, JSON.parse(data));
       }
       console.log('---loading static config----');
@@ -144,8 +142,6 @@ Bconf = {
         if (Bconf.versions.bconf.curValue == conf.version) {
           return;
         }
-        console.log("BCONFD CURRENT: " + JSON.stringify(Bconf.versions.bconf))
-        console.log("BCONFD CONF: " + JSON.stringify(conf.version))
         console.log('---reloading dynamic config----');
         //dynamic bconf no need refresh
         getBconfD(function () {
