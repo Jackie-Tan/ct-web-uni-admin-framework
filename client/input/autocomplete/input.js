@@ -28,7 +28,7 @@ var autocompleteInternal =  function (config, query, callback) {
     columnQuery: getColumnQuery(config, query)
   }
   BaseMethod.of(config.table).post('Get', options, {silent: true}, function(err, res) {
-    if (res.data)
+    if (res.data.length) {
       callback(res.data.map(function(resItem){
         let string = "";
         config.cols.map(function(item){
@@ -36,6 +36,9 @@ var autocompleteInternal =  function (config, query, callback) {
         })
         return { value: resItem[config.value], name: string};
       }));
+    } else if (query) {
+      callback([{value: query, name: `New data added ${query}`}]);
+    }
   })
 }
 Template.autocompleteInput.onRendered(function(){
