@@ -24,7 +24,7 @@ const SHOP_CATE = {
 
 };
 const mappingPtyCharacteristics = {
-  '1': { name: 'property_legal_document', value: '1' },
+  '1': { name: 'land_feature', value: '1' },
   '2': { name: 'property_road_condition', value: '1' },
   '3': {  name: 'property_back_condition', value: '1' },
 };
@@ -397,19 +397,27 @@ let func = {
     }
 
     // PTY CATEGORY: pty_characteristics
-    if (['1010', '1020', '1030', '1040', '1050'].includes(data.ad.category) &&
-      data.params && data.params.some(p => p.name === 'pty_characteristics')
-    ) {
-      const ptyCharacteristics = data.params.find(p => p.name === 'pty_characteristics');
-      const ptyCharacteristicsValue = ptyCharacteristics && ptyCharacteristics.value && ptyCharacteristics.value.split(',');
-      ptyCharacteristicsValue.forEach(c => {
-        if (mappingPtyCharacteristics[c]) {
-          const key = mappingPtyCharacteristics[c] && mappingPtyCharacteristics[c].name;
-          if (!data.params.some(p => p.name === key)) {
-            data.params.push(mappingPtyCharacteristics[c]);
-          }
+    if (['1010', '1020', '1030', '1040', '1050'].includes(data.ad.category)) {
+      const width = data.params.find(p => p.name === 'width');
+      const length = data.params.find(p => p.name === 'length');
+      const size = data.params.find(p => p.name === 'size');
+      data.params.forEach((p, i) => {
+        if (['width', 'length', 'size'].includes(p.name)) {
+          data.params[i].value = !isNaN(data.params[i].value) ? +data.params[i].value : data.params[i].value;
         }
-      });
+      })
+      if (data.params && data.params.some(p => p.name === 'pty_characteristics')) {
+        const ptyCharacteristics = data.params.find(p => p.name === 'pty_characteristics');
+        const ptyCharacteristicsValue = ptyCharacteristics && ptyCharacteristics.value && ptyCharacteristics.value.split(',');
+        ptyCharacteristicsValue.forEach(c => {
+          if (mappingPtyCharacteristics[c]) {
+            const key = mappingPtyCharacteristics[c] && mappingPtyCharacteristics[c].name;
+            if (!data.params.some(p => p.name === key)) {
+              data.params.push(mappingPtyCharacteristics[c]);
+            }
+          }
+        });
+      }
     }
 
     if (data.new_images && data.new_images.length) {
