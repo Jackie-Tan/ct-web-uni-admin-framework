@@ -74,6 +74,7 @@ let func = {
   },
   getCConfParams(category, type) {
     try {
+      console.log(Bconf.categoryParams[category]);
       return Bconf.categoryParams[category][type];
     } catch (e) {
       console.warn('missing config for ', category, type);
