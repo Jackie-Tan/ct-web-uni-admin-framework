@@ -29,8 +29,8 @@ var GetData = {
     let val = el.val();
     switch (el.attr("type")) {
       case "number":
-        if (!el.attr("step")) return parseInt(el.val());
-        return parseFloat(el.val());
+        const isFloat = !isNaN(el.val()) && el.val().toString().indexOf('.') != -1;
+        return isFloat ? parseFloat(el.val()) : parseInt(el.val());
       case "radio":
         if (Data.FUNC_LIST.indexOf(val) != -1) return val;
         if (el.prop("checked")) {
