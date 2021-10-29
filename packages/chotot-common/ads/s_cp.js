@@ -128,6 +128,42 @@ let func = {
   initComapnyLogo: function (data) {
     return data.company_logo = data.company_logo && data.company_logo.name ? [data.company_logo] : [];
   },
+  initPtyCharacteristics: function (data) {
+    if (data.params && data.params.some(p => p.name === 'pty_characteristics')) {
+      const ptyCharacteristics = data.params.find(p => p.name === 'pty_characteristics');
+      const ptyCharacteristicsValue = ptyCharacteristics && ptyCharacteristics.value && ptyCharacteristics.value.split(',');
+      ptyCharacteristicsValue.forEach(c => {
+        if (mappingPtyCharacteristics[c]) {
+          const key = mappingPtyCharacteristics[c] && mappingPtyCharacteristics[c].name;
+          if (!data.params.some(p => p.name === key)) {
+            data.params.push(mappingPtyCharacteristics[c]);
+          }
+        }
+      });
+    }
+    if (data.ad_change_params && data.ad_change_params.some(p => p.name === 'param_pty_characteristics')) {
+      const ptyCharacteristics = data.ad_change_params.find(p => p.name === 'param_pty_characteristics');
+      const ptyCharacteristicsValue = ptyCharacteristics && ptyCharacteristics.new_value && ptyCharacteristics.new_value.split(',');
+      let exceptKeys = [];
+      Object.keys(mappingPtyCharacteristics).forEach(k => {
+        if (ptyCharacteristicsValue.includes(k)) {
+          const key = mappingPtyCharacteristics[k] && mappingPtyCharacteristics[k].name;
+          if (!data.params.some(p => p.name === key)) {
+            data.params.push(mappingPtyCharacteristics[k]);
+          }
+        } else {
+          exceptKeys.push(mappingPtyCharacteristics[k] && mappingPtyCharacteristics[k].name);
+        }
+      });
+      exceptKeys.forEach(k => {
+        data.new_params[k] = '';
+        if (data.params.some(p => p.name === k)) {
+          data.params[i].value = '0';
+        }
+      });
+    }
+    return data;
+  },
   formatVietnamZone: function (timestamp) {
     return timestamp.replace("Z", "+07:00");
   },
@@ -399,26 +435,7 @@ let func = {
 
     // PTY CATEGORY: pty_characteristics
     if (['1010', '1020', '1030', '1040', '1050'].includes(data.ad.category)) {
-      const width = data.params.find(p => p.name === 'width');
-      const length = data.params.find(p => p.name === 'length');
-      const size = data.params.find(p => p.name === 'size');
-      data.params.forEach((p, i) => {
-        if (['width', 'length', 'size'].includes(p.name)) {
-          data.params[i].value = !isNaN(data.params[i].value) ? +data.params[i].value : data.params[i].value;
-        }
-      })
-      if (data.params && data.params.some(p => p.name === 'pty_characteristics')) {
-        const ptyCharacteristics = data.params.find(p => p.name === 'pty_characteristics');
-        const ptyCharacteristicsValue = ptyCharacteristics && ptyCharacteristics.value && ptyCharacteristics.value.split(',');
-        ptyCharacteristicsValue.forEach(c => {
-          if (mappingPtyCharacteristics[c]) {
-            const key = mappingPtyCharacteristics[c] && mappingPtyCharacteristics[c].name;
-            if (!data.params.some(p => p.name === key)) {
-              data.params.push(mappingPtyCharacteristics[c]);
-            }
-          }
-        });
-      }
+      func.initPtyCharacteristics(data);
     }
 
     if (data.new_images && data.new_images.length) {
