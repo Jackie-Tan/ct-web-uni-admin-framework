@@ -131,15 +131,22 @@ let func = {
   initPtyCharacteristics: function (data) {
     if (data.params && data.params.some(p => p.name === 'pty_characteristics')) {
       const ptyCharacteristics = data.params.find(p => p.name === 'pty_characteristics');
-      const ptyCharacteristicsValue = ptyCharacteristics && ptyCharacteristics.value && ptyCharacteristics.value.split(',');
-      ptyCharacteristicsValue.forEach(c => {
-        if (mappingPtyCharacteristics[c]) {
-          const key = mappingPtyCharacteristics[c] && mappingPtyCharacteristics[c].name;
-          if (!data.params.some(p => p.name === key)) {
-            data.params.push(mappingPtyCharacteristics[c]);
+      if (ptyCharacteristics && !ptyCharacteristics.value) {
+        Object.keys(mappingPtyCharacteristics).forEach(k => {
+          data.new_params[k] = '';
+          data.params.push({ [mappingPtyCharacteristics[k].name]: '0' });
+        });
+      } else {
+        const ptyCharacteristicsValue = ptyCharacteristics && ptyCharacteristics.value && ptyCharacteristics.value.split(',');
+        ptyCharacteristicsValue.forEach(c => {
+          if (mappingPtyCharacteristics[c]) {
+            const key = mappingPtyCharacteristics[c] && mappingPtyCharacteristics[c].name;
+            if (!data.params.some(p => p.name === key)) {
+              data.params.push(mappingPtyCharacteristics[c]);
+            }
           }
-        }
-      });
+        });
+      }
     }
     if (data.ad_change_params && data.ad_change_params.some(p => p.name === 'param_pty_characteristics')) {
       const ptyCharacteristics = data.ad_change_params.find(p => p.name === 'param_pty_characteristics');
