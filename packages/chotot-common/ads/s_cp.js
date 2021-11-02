@@ -165,7 +165,7 @@ let func = {
       exceptKeys.forEach(k => {
         data.new_params[k] = '';
         if (data.params.some(p => p.name === k)) {
-          data.params[i].value = '0';
+          data.params[k].value = '0';
         }
       });
     }
