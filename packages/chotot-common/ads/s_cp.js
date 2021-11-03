@@ -23,6 +23,11 @@ const SHOP_CATE = {
   "2000": "Xe cộ",
 
 };
+const mappingPtyCharacteristics = {
+  '1': { name: 'land_feature', value: '1' },
+  '2': { name: 'property_road_condition', value: '1' },
+  '3': {  name: 'property_back_condition', value: '1' },
+};
 let func = {
   shop_map_cate(cate) {
     return SHOP_CATE[cate];
@@ -122,6 +127,53 @@ let func = {
   },
   initComapnyLogo: function (data) {
     return data.company_logo = data.company_logo && data.company_logo.name ? [data.company_logo] : [];
+  },
+  initPtyCharacteristics: function (data) {
+    if (data.params && data.params.some(p => p.name === 'pty_characteristics')) {
+      const ptyCharacteristics = data.params.find(p => p.name === 'pty_characteristics');
+      if (ptyCharacteristics && !ptyCharacteristics.value) {
+        Object.keys(mappingPtyCharacteristics).forEach(k => {
+          data.new_params[k] = '';
+          data.params.push({ [mappingPtyCharacteristics[k].name]: '0' });
+        });
+      } else {
+        const ptyCharacteristicsValue = ptyCharacteristics && ptyCharacteristics.value && ptyCharacteristics.value.split(',');
+        ptyCharacteristicsValue.forEach(c => {
+          if (mappingPtyCharacteristics[c]) {
+            const key = mappingPtyCharacteristics[c] && mappingPtyCharacteristics[c].name;
+            if (!data.params.some(p => p.name === key)) {
+              data.params.push(mappingPtyCharacteristics[c]);
+            }
+          }
+        });
+      }
+    }
+    if (data.ad_change_params && data.ad_change_params.some(p => p.name === 'param_pty_characteristics')) {
+      const ptyCharacteristics = data.ad_change_params.find(p => p.name === 'param_pty_characteristics');
+      const ptyCharacteristicsValue = ptyCharacteristics && ptyCharacteristics.new_value && ptyCharacteristics.new_value.split(',');
+      let exceptKeys = [];
+      Object.keys(mappingPtyCharacteristics).forEach(k => {
+        if (ptyCharacteristicsValue.includes(k)) {
+          const key = mappingPtyCharacteristics[k] && mappingPtyCharacteristics[k].name;
+          if (!data.params.some(p => p.name === key)) {
+            data.params.push(mappingPtyCharacteristics[k]);
+          }
+        } else {
+          exceptKeys.push(mappingPtyCharacteristics[k] && mappingPtyCharacteristics[k].name);
+        }
+      });
+      exceptKeys.forEach(k => {
+        data.new_params[k] = '';
+        if (data.params.some(p => p.name === k)) {
+          data.params.forEach(idx => {
+            if (data.params[idx] && data.params[idx].name === k) {
+              data.params[idx].value = '0';
+            }
+          });
+        }
+      });
+    }
+    return data;
   },
   formatVietnamZone: function (timestamp) {
     return timestamp.replace("Z", "+07:00");
@@ -390,6 +442,11 @@ let func = {
     // COMAPNY LOGO FOR JOB
     if (data.ad.category === '13010') {
       func.initComapnyLogo(data)
+    }
+
+    // PTY CATEGORY: pty_characteristics
+    if (['1010', '1020', '1030', '1040', '1050'].includes(data.ad.category)) {
+      func.initPtyCharacteristics(data);
     }
 
     if (data.new_images && data.new_images.length) {
