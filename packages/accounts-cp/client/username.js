@@ -54,13 +54,9 @@ Meteor.loginWithPassword = function (user, password, cb) {
 }
 
 Accounts.onLogin(function () {
-  // New code for check other services (not CP)
-  let user = Meteor.user();
-  if (!user.services.cp) {
-    const splitToken = getCookie('split_auth_token');
-    if (splitToken === "") {
-      setTokenForSplit();
-    }
+  const splitToken = getCookie('split_auth_token');
+  if (splitToken === "") {
+    setTokenForSplit();
   }
   Meteor.call('Global/User/VerifyToken');
 })
