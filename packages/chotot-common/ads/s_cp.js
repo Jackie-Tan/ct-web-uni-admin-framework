@@ -153,7 +153,7 @@ let func = {
       const ptyCharacteristicsValue = ptyCharacteristics && ptyCharacteristics.new_value && ptyCharacteristics.new_value.split(',');
       let exceptKeys = [];
       Object.keys(mappingPtyCharacteristics).forEach(k => {
-        if (ptyCharacteristicsValue.includes(k)) {
+        if (ptyCharacteristicsValue && ptyCharacteristicsValue.includes(k)) {
           const key = mappingPtyCharacteristics[k] && mappingPtyCharacteristics[k].name;
           if (!data.params.some(p => p.name === key)) {
             data.params.push(mappingPtyCharacteristics[k]);
