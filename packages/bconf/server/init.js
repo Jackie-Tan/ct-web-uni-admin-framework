@@ -165,10 +165,12 @@ var cachingStatic = [
       }];
       let listArea = Bconf.getS(`common.region.${region}.municipality`)
       for (let area in listArea) {
-        areas[region].push({
-          "value": area,
-          "display": `${listArea[area].name.vi}`
-        })
+        if (listArea[area].name && listArea[area].name.vi && !listArea[area].name.vi.hidden) {
+          areas[region].push({
+            "value": area,
+            "display": `${listArea[area].name.vi}`
+          })
+        }
       }
     }
     Bconf.regions = regions;
@@ -192,20 +194,24 @@ var cachingStatic = [
       }];
       let listArea = Bconf.getS(`common.1.region_v2.${region}.municipality`)
       for (let area in listArea) {
-        areas_v2[region].push({
-          "value": area,
-          "display": `${listArea[area].name.vi}`
-        })
+        if (listArea[area].name && listArea[area].name.vi && !listArea[area].name.vi.hidden) {
+          areas_v2[region].push({
+            "value": area,
+            "display": `${listArea[area].name.vi}`
+          })
+        }
         wards[area] = [{
           "value": "",
           "display": "vui lòng chọn phường/xã"
         }];
         let listWard = Bconf.getS(`common.1.area_v2.${area}.ward`);
         for (let ward in listWard) {
-          wards[area].push({
-            "value": ward,
-            "display": `${listWard[ward].name.vi}`
-          })
+          if (listWard[ward].name && listWard[ward].name.vi && !listWard[ward].name.vi.hidden) {
+            wards[area].push({
+              "value": ward,
+              "display": `${listWard[ward].name.vi}`
+            })
+          }
         }
       }
     }
