@@ -174,6 +174,32 @@ class Postgres {
       });
     });
   }
+  removeAllData(table){
+    const self = this;
+    return new Promise((resolve, reject) => {
+      const queryString = `DELETE FROM "${table}"`;
+      logger.debug(queryString);
+      self.getClient(function(client) {
+        const startTime = new Date();
+        client.query(queryString,
+        {}, function (error, result) {
+          const durationTime = new Date() - startTime;
+          if (error) {
+            logger.error(queryString);
+            logger.graylogError(`Postgres Error: <query>${queryString}</query> <errorContent>${error}</errorContent> with <responseTime>${durationTime}</responseTime>`);
+            reject(error);
+          }
+          if (durationTime > parseInt(process.env.POSTGRES_SLOW_TIME, 10)) {
+            logger.graylogWarning(`Postgres Slow: <query>${queryString}</query> in <responseTime>${durationTime}</responseTime>, over ${parseInt(process.env.POSTGRES_SLOW_TIME, 10)}ms`);
+          } else {
+            logger.graylogInfo(`Postgres OK: <query>${queryString}</query> in <responseTime>${durationTime}</responseTime>`);
+          }
+          logger.trace(result)
+          resolve(result);
+        });
+      });
+    });
+  }
   get(queryString, data){
     const self = this;
     return new Promise((resolve, reject) => {
