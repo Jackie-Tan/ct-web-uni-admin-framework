@@ -65,6 +65,8 @@ Accounts.onLogout(function () {
   // remove cookie when logout
   removeCookie('s', getDomain(meteorEnv.NODE_ENV));
   removeCookie('split_auth_token', getDomain(meteorEnv.NODE_ENV));
+  removeCookie('split_platform', getDomain(meteorEnv.NODE_ENV));
+  removeCookie('split_email', getDomain(meteorEnv.NODE_ENV));
 })
 
 const getDomain = (env) => {
@@ -118,6 +120,10 @@ const setTokenForSplit = () => {
     };
     const hashObj = hash(JSON.stringify(dataHash), salt);
     const tokenizer = hashObj.hashedStr + "_" + hashObj.salt;
+    if (Meteor.user() && Meteor.user().emails && Meteor.user().emails[0] && Meteor.user().emails[0].address) {
+      setCookie('split_email', Meteor.user().emails[0].address, 14400, getDomain(meteorEnv.NODE_ENV));
+    }
     setCookie('split_auth_token', tokenizer, 14400, getDomain(meteorEnv.NODE_ENV));
+    setCookie('split_platform', appName, 14400, getDomain(meteorEnv.NODE_ENV));
   });
 };
