@@ -1,5 +1,5 @@
 {
-  "name": "admin-framework",
+  "name": "ct-web-uni-admin-framework",
   "private": true,
   "scripts": {
     "start": "meteor run"
