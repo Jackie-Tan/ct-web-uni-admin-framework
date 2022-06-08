@@ -299,7 +299,7 @@ module.exports = {
     'bconf': {
       cmd: 'conf',
       key: 'data',
-      address: `${process.env.CP_HOST}:${process.env.CP_PORT}/v1`,
+      address: `${process.env.SPINE_URL}/v1`,
     },
     'bconfS': {
       cmd: 'unify-all',
